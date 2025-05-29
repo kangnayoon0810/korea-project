@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'D2Coding';
+	src:
+		url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/D2Coding.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+html * {
+	font-family: 'D2Coding';
+}
+
+.topbar {
+	width: 100%;
+	border-bottom: 1px solid grey;
+}
+
+.topbar > .topbar-box {
+	margin: 20px auto;
+	width: 80%;
+	display: flex; 
+	
+}
+
+.topbar > .topbar-box > .topbar-start a {
+	padding: 10px;
+	font-size: 2rem;
+}
+
+.topbar .article-box {
+	display: flex;
+}
+
+.topbar .article-box a {
+	font-size: 1.5rem;
+}
+
+.topbar .sign-box {
+	display: flex;
+}
