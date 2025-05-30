@@ -27,19 +27,19 @@
 			</div>
 			<div class="topbar-center">
 				<ul class="article-box">
-					<li><a class="member-article" href="#">회원 커뮤니티</a></li>
-					<li><a class="trainer-article" href="#">트레이너 커뮤니티</a></li>
+					<li><a class="member-article" href="#">회원그램</a></li>
+					<li><a class="trainer-article" href="#">트레이너그램</a></li>
 				</ul>
 			</div>
 			<div class="topbar-end">
 				<ul class="sign-box">
 	<%-- 				<c:if test="${req.getLoginedMember().getId() == 0 }"> --%>
-						<li><a role="button" class="btn btn-ghost p-5 mr-5" href="#">로그인</a></li>
-						<li><a role="button" class="btn btn-ghost p-5 mr-5" href="#">회원가입</a></li>
-						<li><a role="button" class="btn btn-ghost p-5 mr-5" href="#">트레이너 회원가입</a></li>
+						<li><a class="login-button" href="#">로그인</a></li>
+						<li><a class="member-signup" href="#">회원가입</a></li>
+						<li><a class="tranier-signup" href="#">트레이너 회원가입</a></li>
 	<%-- 				</c:if> --%>
 	<%-- 				<c:if test="${req.getLoginedMember().getId() != 0 }"> --%>
-						<li><a role="button" class="btn btn-ghost p-5 mr-5" href="/usr/member/logout">Logout</a></li>
+						<li><a class="logout-button" href="/usr/member/logout">Logout</a></li>
 	<%-- 				</c:if> --%>
 				</ul>
 			</div>

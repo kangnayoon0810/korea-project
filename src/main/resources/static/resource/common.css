@@ -1,43 +1,80 @@
 @charset "UTF-8";
 
 @font-face {
-	font-family: 'D2Coding';
-	src:
-		url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/D2Coding.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'PyeojinGothic-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2504-1@1.0/PyeojinGothic-Bold.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Paperlogy-8ExtraBold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
 }
 
 html * {
-	font-family: 'D2Coding';
+	font-family: 'PyeojinGothic-Bold';
 }
 
 .topbar {
 	width: 100%;
-	border-bottom: 1px solid grey;
+	box-shadow: 0 2px 3px #A0ACAD;
+	display: flex;
 }
 
 .topbar > .topbar-box {
-	margin: 20px auto;
-	width: 80%;
-	display: flex; 
+	margin: 15px auto;
+	width: 70%;
+	display: flex;
+	align-items: center;
 	
 }
 
 .topbar > .topbar-box > .topbar-start a {
-	padding: 10px;
+	padding: 20px;
 	font-size: 2rem;
+	font-family: Paperlogy-8ExtraBold;
+	color: #1D2F6F;
 }
 
-.topbar .article-box {
+.topbar > .topbar-box > .topbar-center > .article-box {
+	margin: 0 20px;
 	display: flex;
 }
 
-.topbar .article-box a {
-	font-size: 1.5rem;
+.topbar > .topbar-box > .topbar-center > .article-box a {
+	font-size: 1.1rem;
+	display: block;
+	padding: 5px 20px;
 }
 
-.topbar .sign-box {
+.topbar > .topbar-box > .topbar-center > .article-box .member-article {
+	border-right: 2px solid #A0ACAD;
+}
+
+.topbar > .topbar-box > .topbar-end {
+	margin-left: auto;
+}
+
+.topbar > .topbar-box > .topbar-end > .sign-box {
 	display: flex;
+}
+
+.topbar > .topbar-box > .topbar-end > .sign-box a {
+	font-size: 1.1rem;
+	display: block;
+	padding: 5px 20px;
+}
+
+.topbar > .topbar-box > .topbar-end > .sign-box .login-button {
+	border-right: 2px solid #A0ACAD;
+}
+
+.topbar > .topbar-box > .topbar-end > .sign-box .tranier-signup {
+	background-color: #1D2F6F;
+	color: white;
+	border-radius: 7px;
+	margin-left: 10px;
 }
