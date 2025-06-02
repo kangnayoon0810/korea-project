@@ -1,21 +1,29 @@
 @charset "UTF-8";
 
 @font-face {
-    font-family: 'PyeojinGothic-Bold';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2504-1@1.0/PyeojinGothic-Bold.woff2') format('woff2');
-    font-weight: 300;
-    font-style: normal;
+	font-family: 'PyeojinGothic-Bold';
+	src:
+		url('https://fastly.jsdelivr.net/gh/projectnoonnu/2504-1@1.0/PyeojinGothic-Bold.woff2')
+		format('woff2');
+	font-weight: 300;
+	font-style: normal;
 }
 
 @font-face {
-    font-family: 'Paperlogy-8ExtraBold';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
-    font-weight: 800;
-    font-style: normal;
+	font-family: 'Paperlogy-8ExtraBold';
+	src:
+		url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2')
+		format('woff2');
+	font-weight: 800;
+	font-style: normal;
 }
 
 html * {
 	font-family: 'PyeojinGothic-Bold';
+}
+
+a {
+	white-space: nowrap;
 }
 
 .topbar {
@@ -24,57 +32,65 @@ html * {
 	display: flex;
 }
 
-.topbar > .topbar-box {
+.topbar>.topbar-box {
 	margin: 15px auto;
-	width: 70%;
+	width: 1150px;
 	display: flex;
 	align-items: center;
-	
 }
 
-.topbar > .topbar-box > .topbar-start a {
+.topbar>.topbar-box>.topbar-start a {
 	padding: 20px;
 	font-size: 2rem;
 	font-family: Paperlogy-8ExtraBold;
 	color: #1D2F6F;
 }
 
-.topbar > .topbar-box > .topbar-center > .article-box {
+.topbar>.topbar-box>.topbar-center>.article-box {
 	margin: 0 20px;
 	display: flex;
 }
 
-.topbar > .topbar-box > .topbar-center > .article-box a {
+.topbar>.topbar-box>.topbar-center>.article-box a {
 	font-size: 1.1rem;
 	display: block;
 	padding: 5px 20px;
 }
 
-.topbar > .topbar-box > .topbar-center > .article-box .member-article {
+.topbar>.topbar-box>.topbar-center>.article-box .member-article {
 	border-right: 2px solid #A0ACAD;
 }
 
-.topbar > .topbar-box > .topbar-end {
+.topbar>.topbar-box>.topbar-end {
 	margin-left: auto;
 }
 
-.topbar > .topbar-box > .topbar-end > .sign-box {
+.topbar>.topbar-box>.topbar-end>.sign-box {
 	display: flex;
 }
 
-.topbar > .topbar-box > .topbar-end > .sign-box a {
+.topbar>.topbar-box>.topbar-end>.sign-box a {
 	font-size: 1.1rem;
 	display: block;
-	padding: 5px 20px;
+	padding: 10px 20px;
 }
 
-.topbar > .topbar-box > .topbar-end > .sign-box .login-button {
+.topbar>.topbar-box>.topbar-end>.sign-box .login-button {
 	border-right: 2px solid #A0ACAD;
 }
 
-.topbar > .topbar-box > .topbar-end > .sign-box .tranier-signup {
+.topbar>.topbar-box>.topbar-end>.sign-box .tranier-signup {
 	background-color: #1D2F6F;
 	color: white;
 	border-radius: 7px;
 	margin-left: 10px;
+}
+
+.topbar>.topbar-box>.topbar-end>.sign-box .logout-button {
+	border-radius: 7px;
+}
+
+.topbar>.topbar-box>.topbar-end>.sign-box .logout-button:hover {
+	background-color: #1D2F6F;
+	color: white;
 }

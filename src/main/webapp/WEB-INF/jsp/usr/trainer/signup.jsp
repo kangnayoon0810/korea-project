@@ -5,13 +5,12 @@
 <c:set var="pageTitle" value="SignUp" />
 
 <%@ include file="/WEB-INF/jsp/common/header.jsp"%>
-<link rel="stylesheet" href="/resource/member.css" />
-<script src="/resource/member.js"></script>
+<link rel="stylesheet" href="/resource/trainer.css" />
+<script src="/resource/trainer.js"></script>
 
 <section class="signup-section">
 	<div class="signup-box">
-		<form action="doSignUp" method="POST"
-			onsubmit="return signupFormChk(this);">
+		<form action="doSignUp" method="POST" onsubmit="return signupFormChk(this);">
 			<fieldset class="signup-fieldset">
 				<legend class="fieldset-legend">회원가입</legend>
 
@@ -30,18 +29,13 @@
 					</div>
 				</div>
 
-				<div class="nickName-box">
-					<label>닉네임 <span id="nickNameDupChkMsg"></span></label> <input
-						type="text" name="nickName" onblur="nickNameDupChk(this);" />
-				</div>
-
 				<div class="phoneNumber-box">
-					<label>핸드폰 번호 <span id="phoneNumberDupChkMsg"></span></label> <input
+					<label>핸드폰 번호<span id="phoneNumberDupChkMsg"></span></label> <input
 						type="text" name="phoneNumber" onblur="phoneNumberDupChk(this);" />
 				</div>
 
 				<div class="id-box">
-					<label>아이디 <span id="loginIdDupChkMsg"></span></label> <input
+					<label>아이디<span id="loginIdDupChkMsg"></span></label> <input
 						type="text" name="loginId" onblur="loginIdDupChk(this);" />
 				</div>
 
@@ -56,18 +50,18 @@
 				</div>
 
 				<div class="email-box">
-					<label>이메일 <span id="eMailDupChkMsg"></span></label> <input
+					<label>이메일<span id="eMailDupChkMsg"></span></label> <input
 						type="email" name="eMail" onblur="eMailDupChk(this);" />
 				</div>
 
 				<div class="dosignup">
-					<a class="dosignup-btn" href="/usr/member/signup">회원가입</a>
+					<button class="dosignup-btn" type="submit">회원가입</button>
 				</div>
 
 				<div class="login-box">
 					<p>회원이신가요?</p>
 					<div class="login-btn">
-						<a class="dologin-btn" href="/usr/member/login">로그인</a>
+						<button class="dologin-btn" type="submit">로그인</button>
 					</div>
 				</div>
 			</fieldset>

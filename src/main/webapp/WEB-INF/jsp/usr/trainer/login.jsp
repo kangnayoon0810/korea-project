@@ -5,33 +5,32 @@
 <c:set var="pageTitle" value="Login" />
 
 <%@ include file="/WEB-INF/jsp/common/header.jsp"%>
-<link rel="stylesheet" href="/resource/member.css" />
-<script src="/resource/member.js"></script>
+<link rel="stylesheet" href="/resource/trainer.css" />
+<script src="/resource/trainer.js"></script>
 
-<section class="login-section">
-	<div class="dologin">
+<section class="login">
+	<div class="login-box">
 		<form action="doLogin" method="post"
 			onsubmit="return loginFormChk(this);">
-			<fieldset class="login-fieldset">
+			<fieldset class="fieldset">
 				<legend class="fieldset-legend">로그인</legend>
 
-				<div class="loginId">
+				<div class="name-box">
 					<label>아이디</label> <input type="text" name="loginId" />
 				</div>
 
-				<div class="pw">
+				<div class="pw-box">
 					<label>비밀번호</label> <input type="password" name="loginPw" />
 				</div>
 
-				<div class="dologin-box">
+				<div class="login-box">
 					<button type="submit">로그인</button>
 				</div>
 
-				<div class="dosignup-box">
+				<div class="dosignup">
 					<p>회원이 아니신가요?</p>
-					<div>
-						<a href="/usr/member/join">회원 가입</a> <a href="/usr/trainer/join">트레이너
-							가입</a>
+					<div class="dosignup-box">
+						<a href="/usr/member/join">회원가입</a> <a href="/usr/trainer/join">트레이너가입</a>
 					</div>
 				</div>
 			</fieldset>

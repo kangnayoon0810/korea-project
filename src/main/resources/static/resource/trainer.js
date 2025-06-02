@@ -1,4 +1,3 @@
-let validNickName = null;
 let validPhoneNumber = null;
 let validLoginId = null;
 let validEMail = null;
@@ -25,8 +24,6 @@ const loginFormChk = function(form) {
 const signupFormChk = function(form) {
 	form.name.value = form.name.value.trim();
 	form.sex.value = form.sex.value.trim();
-	form.nickName.value = form.nickName.value.trim();
-	form.nickNameChk.value = form.loginPwChk.value.trim();
 	form.phoneNumber.value = form.phoneNumber.value.trim();
 	form.phoneNumberChk.value = form.phoneNumberChk.value.trim();
 	form.loginId.value = form.loginId.value.trim();
@@ -44,19 +41,6 @@ const signupFormChk = function(form) {
 	if (form.sex.value.length == 0) {
 		alert('성별을 선택 해주세요');
 		form.sex.focus();
-		return false;
-	}
-
-	if (form.nickName.value.length == 0) {
-		alert('닉네임을 입력 해주세요');
-		form.nickName.focus();
-		return false;
-	}
-
-	if (form.nickName.value != validNickName) {
-		alert('[ ' + form.nickName.value + ' ] 은(는) 사용할 수 없는 닉네임입니다.');
-		form.nickName.value = '';
-		form.nickName.focus();
 		return false;
 	}
 
@@ -124,44 +108,6 @@ function selectSex(el, sex) {
 	el.classList.add('active');
 
 	document.getElementById('sexInput').value = sex;
-}
-
-const nickNameDupChk = function(el) {
-	el.value = el.value.trim();
-
-	let nickNameDupChkMsg = $('#nickNameDupChkMsg');
-
-	if (el.value.length == 0) {
-		nickNameDupChkMsg.removeClass('text-green-500');
-		nickNameDupChkMsg.addClass('text-red-500');
-		nickNameDupChkMsg.html('닉네임을 입력 해주세요');
-		return;
-	}
-
-	$.ajax({
-		url: '/usr/member/nickNameDupChk',
-		type: 'GET',
-		data: {
-			nickName: el.value
-		},
-		dataType: 'json',
-		success: function(data) {
-			if (data.success) {
-				nickNameDupChkMsg.removeClass('text-red-500');
-				nickNameDupChkMsg.addClass('text-green-500');
-				nickNameDupChkMsg.html(`${data.rsMsg}`);
-				validNickName = el.value;
-			} else {
-				nickNameDupChkMsg.removeClass('text-green-500');
-				nickNameDupChkMsg.addClass('text-red-500');
-				nickNameDupChkMsg.html(`${data.rsMsg}`);
-				validNickName = null;
-			}
-		},
-		error: function(_xhr, _status, error) {
-			console.log(error);
-		}
-	})
 }
 
 const phoneNumberDupChk = function(el) {

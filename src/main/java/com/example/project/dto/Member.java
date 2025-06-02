@@ -14,6 +14,7 @@ public class Member {
 	private String regDate;
 	private String updateDate;
 	private String name;
+	private int sex;
 	private String nickName;
 	private int phoneNumber;
 	private String loginId;

@@ -1,0 +1,206 @@
+@charset "UTF-8";
+
+.login-section {
+	margin-top: 50px;
+	display: flex;
+	justify-content: center;
+}
+
+.login-section > .dologin {
+	width: 380px;
+	display: flex;
+	justify-content: center;
+	border: 2px solid #A0ACAD;
+	border-radius: 10px;
+	height: 430px;
+}
+
+.login-section > .dologin .login-fieldset > .fieldset-legend {
+	font-family: Paperlogy-8ExtraBold;
+	font-size: 1.5rem;
+	color: #1D2F6F;
+	width: 300px;
+	border-bottom: 2px solid #A0ACAD;
+	padding: 10px;
+}
+
+.login-section > .dologin .login-fieldset .loginId {
+	margin-top: 15px;
+}
+
+.login-section > .dologin .login-fieldset div {
+	width: 260px;
+	margin: 0 auto;
+}
+
+.login-section > .dologin .login-fieldset label {
+	font-size: 1rem;
+	display: block;
+	padding: 7px 2px;
+}
+
+.login-section > .dologin .login-fieldset input {
+	width: 260px;
+	height: 35px;
+	border: 2px solid #A0ACAD;
+	border-radius: 3px;
+	display: block;
+	margin: 0 auto;
+}
+
+.login-section > .dologin .login-fieldset .dologin-box {
+	background-color: #1D2F6F;
+	border-radius: 3px;
+	margin: 10px auto;
+	width: 260px;
+	height: 40px;
+	text-align: center;
+}
+
+.login-section > .dologin .login-fieldset .dologin-box > button {
+	color: white;
+	font-size: 1rem;
+	line-height: 40px;
+}
+
+.login-section > .dologin .login-fieldset .dosignup-box {
+	margin-top: 25px;
+	width: 260px;
+}
+
+.login-section > .dologin .login-fieldset .dosignup-box > p {
+	font-size: 0.8rem;
+	margin-bottom: -2.5px;
+}
+
+.login-section>.dologin .login-fieldset .dosignup-box a {
+	width: 260px;
+	height: 40px;
+	color: white;
+	font-size: 1rem;
+	border-radius: 3px;
+	display: block;
+	background-color: #1D2F6F;
+	text-align: center;
+	line-height: 40px;
+	margin-bottom: 10px;
+}
+
+.signup-section {
+	display: flex;
+	justify-content: center;
+	margin-top: 120px;
+}
+
+.signup-section > .signup-box {
+	width: 380px;
+	display: flex;
+	justify-content: center;
+	border: 1px solid #A0ACAD;
+	border-radius: 15px;
+}
+
+.signup-section > .signup-box div {
+	margin: 0 auto;
+	z-index: 1;
+	width: 260px;
+}
+
+.signup-section > .signup-box .signup-fieldset > .fieldset-legend {
+	font-family: Paperlogy-8ExtraBold;
+	font-size: 1.1rem;
+	color: #1D2F6F;
+	width: 320px;
+	border-bottom: 2px solid rgba(0, 0, 0, 0.20);
+	padding-top: 20px;
+}
+
+.signup-section > .signup-box .signup-fieldset .name-box {
+	margin-top: 20px;
+}
+
+.signup-section > .signup-box .signup-fieldset > .sex-box .sex-select {
+	display: flex;
+	justify-content: space-between;
+	width: 260px;
+	color: #A0ACAD;
+}
+
+.signup-section > .signup-box .signup-fieldset > .sex-box .sex-btn {
+	width: 125px;
+	height: 30px;
+	border: 1px solid #A0ACAD;
+	border-radius: 3px;
+	cursor: pointer;
+	font-size: 0.9rem;
+}
+
+.signup-section > .signup-box .signup-fieldset > .sex-box .sex-btn.active {
+	background-color: #1D2F6F;
+	color: white;
+	border: none;
+}
+
+.signup-section > .signup-box div span {
+	font-size: 0.6rem;
+}
+
+.signup-section > .signup-box .signup-fieldset label {
+	font-size: 0.9rem;
+	padding: 5px 2px;
+	color: rgba(0, 0, 0, 0.50);
+}
+
+.signup-section > .signup-box .signup-fieldset input {
+	width: 260px;
+	height: 30px;
+	border: 1px solid #A0ACAD;
+	border-radius: 3px;
+	display: block;
+	margin: 0 auto 2px auto;
+}
+
+.signup-section > .signup-box .signup-fieldset .dosignup {
+	text-align: center;
+	margin-top: 10px;
+}
+
+.signup-section > .signup-box .signup-fieldset .dosignup > .dosignup-btn {
+	color: white;
+	font-size: 0.9rem;
+	background-color: #1D2F6F;
+	padding: 8px 104px;
+	border-radius: 5px;
+}
+
+.signup-section > .signup-box .signup-fieldset .dosignup:hover .dosignup-btn {
+	background-color: #1B9AAA;
+	cursor: pointer;
+}
+
+.signup-section > .signup-box .signup-fieldset .login-box {
+	margin: 0px auto 3px auto;
+	width: 260px;
+}
+
+.signup-section > .signup-box .signup-fieldset .login-box > p {
+	font-size: 0.7rem;
+	margin: 7px 0 3px 3px;
+}
+
+.signup-section > .signup-box .signup-fieldset .login-box > .login-btn {
+	text-align: center;
+	margin-bottom: 25px;
+}
+
+.signup-section > .signup-box .signup-fieldset .login-box > .login-btn > .dologin-btn {
+	color: white;
+	font-size: 0.9rem;
+	background-color: #1D2F6F;
+	padding: 8px 110px;
+	border-radius: 5px;
+}
+
+.signup-section > .signup-box .signup-fieldset .login-box > .login-btn > .dologin-btn:hover {
+	background-color: #1B9AAA;
+}

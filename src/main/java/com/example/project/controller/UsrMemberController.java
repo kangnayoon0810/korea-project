@@ -14,43 +14,31 @@ import com.example.project.service.MemberService;
 
 @Controller
 public class UsrMemberController {
-	
+
 	private MemberService memberService;
 	private Req req;
-	
+
 	public UsrMemberController(MemberService memberService, Req req) {
 		this.memberService = memberService;
 		this.req = req;
-		
+
 	}
-	
+
 	@GetMapping("/usr/member/signup")
 	public String signup() {
 		return "usr/member/signup";
 	}
-	
-	@PostMapping("/usr/member/doSignup")
-	@ResponseBody
-	public String doSignup(String name, String nickName, int phoneNumber, String loginId, String loginPw, String eMail) {
 
-		this.memberService.signupMember(name, nickName, phoneNumber, loginId, loginPw, eMail);
+	@PostMapping("/usr/member/doSignUp")
+	@ResponseBody
+	public String doSignUp(String name, int sex, String nickName, int phoneNumber, String loginId, String loginPw,
+			String eMail) {
+
+		this.memberService.signupMember(name, sex, nickName, phoneNumber, loginId, loginPw, eMail);
 
 		return Util.jsReplace(String.format("[ %s ] 님의 가입이 완료되었습니다", name), "/");
 	}
-	
-	@GetMapping("/usr/member/loginIdDupChk")
-	@ResponseBody
-	public ResultData loginIdDupChk(String loginId) {
 
-		Member member = this.memberService.getMemberByLoginId(loginId);
-
-		if (member != null) {
-			return ResultData.from("F-1", String.format("[ %s ] 은(는) 이미 사용중인 아이디입니다", loginId));
-		}
-
-		return ResultData.from("S-1", String.format("[ %s ] 은(는) 사용가능한 아이디입니다", loginId));
-	}
-	
 	@GetMapping("/usr/member/nickNameDupChk")
 	@ResponseBody
 	public ResultData nickNameDupChk(String nickName) {
@@ -64,11 +52,50 @@ public class UsrMemberController {
 		return ResultData.from("S-1", String.format("[ %s ] 은(는) 사용가능한 닉네임입니다", nickName));
 	}
 
+	@GetMapping("/usr/member/phoneNumberDupChk")
+	@ResponseBody
+	public ResultData phoneNumberDupChk(int phoneNumber) {
+
+		Member member = this.memberService.getMemberByPhoneNumber(phoneNumber);
+
+		if (member != null) {
+			return ResultData.from("F-1", String.format("[ %d ] 은(는) 이미 가입된 번호입니다", phoneNumber));
+		}
+
+		return ResultData.from("S-1", String.format("[ %d ] 은(는) 사용가능한 번호입니다", phoneNumber));
+	}
+
+	@GetMapping("/usr/member/loginIdDupChk")
+	@ResponseBody
+	public ResultData loginIdDupChk(String loginId) {
+
+		Member member = this.memberService.getMemberByLoginId(loginId);
+
+		if (member != null) {
+			return ResultData.from("F-1", String.format("[ %s ] 은(는) 이미 사용중인 아이디입니다", loginId));
+		}
+
+		return ResultData.from("S-1", String.format("[ %s ] 은(는) 사용가능한 아이디입니다", loginId));
+	}
+
+	@GetMapping("/usr/member/eMailDupChk")
+	@ResponseBody
+	public ResultData eMailDupChk(String eMail) {
+
+		Member member = this.memberService.getMemberByEMail(eMail);
+
+		if (member != null) {
+			return ResultData.from("F-1", String.format("[ %s ] 은(는) 이미 가입된 이메일입니다", eMail));
+		}
+
+		return ResultData.from("S-1", String.format("[ %s ] 은(는) 사용가능한 이메일입니다", eMail));
+	}
+
 	@GetMapping("/usr/member/login")
 	public String login() {
 		return "usr/member/login";
 	}
-	
+
 	@PostMapping("/usr/member/doLogin")
 	@ResponseBody
 	public String doLogin(String loginId, String loginPw) {
