@@ -17,7 +17,7 @@
 				<c:if test="${authLevel == 2 }">
 					<legend class="fieldset-legend">트레이너 가입</legend>
 				</c:if>
-
+ 
 				<div class="name-box">
 					<label>이름</label> 
 					<input type="text" name="name" />
