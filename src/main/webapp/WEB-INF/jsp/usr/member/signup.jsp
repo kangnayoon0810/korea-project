@@ -5,69 +5,79 @@
 <c:set var="pageTitle" value="SignUp" />
 
 <%@ include file="/WEB-INF/jsp/common/header.jsp"%>
-<link rel="stylesheet" href="/resource/member.css" />
-<script src="/resource/member.js"></script>
 
 <section class="signup-section">
 	<div class="signup-box">
-		<form action="doSignUp" method="POST"
-			onsubmit="return signupFormChk(this);">
+		<form action="doSignUp" method="POST" onsubmit="return signupFormChk(this);">
+			<input type="hidden" value="${category }" name="authLevel" />
 			<fieldset class="signup-fieldset">
-				<legend class="fieldset-legend">회원가입</legend>
+				<c:if test="${authLevel == 1 }">
+					<legend class="fieldset-legend">회원가입</legend>
+				</c:if>
+				<c:if test="${authLevel == 2 }">
+					<legend class="fieldset-legend">트레이너 가입</legend>
+				</c:if>
 
 				<div class="name-box">
-					<label>이름</label> <input type="text" name="name" />
+					<label>이름</label> 
+					<input type="text" name="name" />
 				</div>
 
 				<div class="sex-box">
 					<label>성별</label>
 					<div class="sex-select">
-						<button type="button" class="sex-btn"
-							onclick="selectSex(this, '0')">남자</button>
-						<button type="button" class="sex-btn"
-							onclick="selectSex(this, '1')">여자</button>
+						<button type="button" class="sex-btn" onclick="selectSex(this, '0')">남자</button>
+						<button type="button" class="sex-btn" onclick="selectSex(this, '1')">여자</button>
 						<input type="hidden" name="sex" id="sexInput" />
 					</div>
 				</div>
 
 				<div class="nickName-box">
-					<label>닉네임 <span id="nickNameDupChkMsg"></span></label> <input
-						type="text" name="nickName" onblur="nickNameDupChk(this);" />
+					<label>닉네임 <span id="nickNameDupChkMsg"></span></label> 
+					<input type="text" name="nickName" onblur="nickNameDupChk(this);" />
+					<input type="hidden" name="nickNameChk" />
 				</div>
 
 				<div class="phoneNumber-box">
-					<label>핸드폰 번호 <span id="phoneNumberDupChkMsg"></span></label> <input
-						type="text" name="phoneNumber" onblur="phoneNumberDupChk(this);" />
+					<label>핸드폰 번호 <span id="phoneNumberDupChkMsg"></span></label> 
+					<input type="text" name="phoneNumber" onblur="phoneNumberDupChk(this);" />
+					<input type="hidden" name="phoneNumberChk" />
 				</div>
 
 				<div class="id-box">
-					<label>아이디 <span id="loginIdDupChkMsg"></span></label> <input
-						type="text" name="loginId" onblur="loginIdDupChk(this);" />
+					<label>아이디 <span id="loginIdDupChkMsg"></span></label> 
+					<input type="text" name="loginId" onblur="loginIdDupChk(this);" />
 				</div>
 
 				<div class="pw-box">
-					<label>비밀번호</label> <input type="password" name="loginPw"
-						autocomplete="new-password off" />
+					<label>비밀번호</label> 
+					<input type="password" name="loginPw" />
 				</div>
 
 				<div class="pwchk-box">
-					<label>비밀번호 확인</label> <input type="password" name="loginPwChk"
-						autocomplete="new-password off" />
+					<label>비밀번호 확인</label> 
+					<input type="password" name="loginPwChk" />
 				</div>
 
 				<div class="email-box">
-					<label>이메일 <span id="eMailDupChkMsg"></span></label> <input
-						type="email" name="eMail" onblur="eMailDupChk(this);" />
+					<label>이메일 <span id="eMailDupChkMsg"></span></label> 
+					<input type="email" name="eMail" onblur="eMailDupChk(this);" />
+					<input type="hidden" name="eMailChk" />
 				</div>
 
 				<div class="dosignup">
-					<a class="dosignup-btn" href="/usr/member/signup">회원가입</a>
+					<button class="dosignup-btn">가입</button>
 				</div>
 
 				<div class="login-box">
-					<p>회원이신가요?</p>
+					<c:if test="${authLevel == 1 }">
+						<p>회원이신가요?</p>
+					</c:if>
+					<c:if test="${authLevel == 2 }">
+						<p>트레이너이신가요?</p>
+					</c:if>
 					<div class="login-btn">
-						<a class="dologin-btn" href="/usr/member/login">로그인</a>
+						<a class="dologin-btn" href="/usr/prompt/selectLogin">로그인</a>
 					</div>
 				</div>
 			</fieldset>

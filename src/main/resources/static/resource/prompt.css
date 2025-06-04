@@ -45,6 +45,10 @@
 	padding: 10px 40px;
 }
 
+/* .select-login>.select-box>.member-login a:hover { */
+/* 	background-color: #1B9AAA;; */
+/* } */
+
 .select-login>.select-box>.trainer-login {
 	border: 0.3px solid #A0ACAD;
 	border-radius: 15px;

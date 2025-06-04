@@ -19,7 +19,7 @@
 		<ul class="trainer-login">
 			<li>
 				<p>트레이너이신가요?</p> <i class="fa-solid fa-clipboard-user"></i> 
-				<a class="login-button" href="/usr/trainer/login">트레이너 로그인</a>
+				<a class="login-button" href="/usr/member/login">트레이너 로그인</a>
 			</li>
 		</ul>
 	</div>

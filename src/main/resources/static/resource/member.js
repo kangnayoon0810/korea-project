@@ -37,11 +37,11 @@ const signupFormChk = function(form) {
 
 	if (form.name.value.length == 0) {
 		alert('이름을 입력 해주세요');
-		form.nickName.focus();
+		form.name.focus();
 		return false;
 	}
 
-	if (form.sex.value.length == 0) {
+	if (form.sex.value !== '0' && form.sex.value !== '1') {
 		alert('성별을 선택 해주세요');
 		form.sex.focus();
 		return false;
@@ -253,7 +253,7 @@ const eMailDupChk = function(el) {
 	}
 
 	$.ajax({
-		url: '/usr/member/eMailDupChkMsg',
+		url: '/usr/member/eMailDupChk',
 		type: 'GET',
 		data: {
 			eMail: el.value

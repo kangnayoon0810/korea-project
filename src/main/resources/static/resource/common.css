@@ -22,6 +22,12 @@ html * {
 	font-family: 'PyeojinGothic-Bold';
 }
 
+body {
+	width: 100%;
+	height: 100vh;
+	margin: 0 auto;
+}
+
 a {
 	white-space: nowrap;
 }
@@ -72,7 +78,7 @@ a {
 .topbar>.topbar-box>.topbar-end>.sign-box a {
 	font-size: 1.1rem;
 	display: block;
-	padding: 10px 20px;
+	padding: 5px 20px;
 }
 
 .topbar>.topbar-box>.topbar-end>.sign-box .login-button {
@@ -86,11 +92,16 @@ a {
 	margin-left: 10px;
 }
 
+.topbar>.topbar-box>.topbar-end>.sign-box .tranier-signup:hover {
+	background-color: #1B9AAA;
+}
+
 .topbar>.topbar-box>.topbar-end>.sign-box .logout-button {
 	border-radius: 7px;
+	background-color: #1D2F6F;
+	color: white;
 }
 
 .topbar>.topbar-box>.topbar-end>.sign-box .logout-button:hover {
-	background-color: #1D2F6F;
-	color: white;
+	background-color: #1B9AAA;
 }

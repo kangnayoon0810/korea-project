@@ -6,25 +6,26 @@
 
 <%@ include file="/WEB-INF/jsp/common/header.jsp"%>
 
-<%-- <section class="mt-8">
-	<div class="container mx-auto">
-		<div class="flex w-2/3 mx-auto place-content-between place-items-center mb-3 mt-3">
-			<div class="theme">
-				<div><span>${board.getBoardName() }</span><span> ( ${articlesCnt } )</span></div>
+<section class="list-section">
+	<div class="list-row">
+		<input type="hidden" value="${memberCategory }" name="memberCategory" />
+		<div class="list-box">
+			<div class="memberCategory">
+				<c:if test="${memberCategory == 1 }">
+					<div><span>회원 커뮤니티</span><span> ( ${articlesCnt } )</span></div>
+				</c:if>
+				<c:if test="${memberCategory == 2 }">
+					<div><span>트레이너 커뮤니티</span><span> ( ${articlesCnt } )</span></div>
+				</c:if>
 			</div>
 			<form action="list" method="get">
-				<div class="join">
+				<div class="search-bar">
 					<div>
-						<div>
+						<c:if test="${searchType == 'titleContent' }">
 							<input type="hidden" name="boardId" value="${board.getId() }"/>
-							<input name="keyWord" value="${keyWord }" class="input join-item w-50" placeholder="Search" />
-						</div>
+							<input name="keyWord" value="${keyWord }" class="input" placeholder="Search" />
+						</c:if>
 					</div>
-					<select class="select join-item" name="searchType">
-						<option value="titleContent" <c:if test="${searchType == 'titleContent' }">selected</c:if>>Post</option>
-						<option value="title" <c:if test="${searchType == 'title' }">selected</c:if>>Title</option>
-						<option value="content" <c:if test="${searchType == 'content' }">selected</c:if>>Content</option>
-					</select>
 					<div class="indicator">
 						<button class="btn join-item"><i class="fa-solid fa-magnifying-glass"></i></button>
 					</div>
@@ -32,27 +33,23 @@
 			</form>
 		</div>
 		<div class="table-box">
-			<div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 w-2/3 mx-auto">
-				<table class="table">
-					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>작성일</th>
-						<th>좋아요</th>
-						<th>조회수</th>
-					</tr>
+			<div>
+				<c:if test="${memberCategory == 1 }">
 					<c:forEach items="${articles }" var="article">
-						<tr>
-							<td>${article.getId() }</td>
-							<td class="hover:underline underline-offset-4"><a href="detail?id=${article.getId() }">${article.getTitle() }</a></td>
-							<td>${article.getLoginId() }</td>
-							<td>${article.getRegDate().substring(2, 16) }</td>
-							<td>${article.getLikeCnt() }</td>
-							<td>${article.getViewCnt() }</td>
-						</tr>
+						<div class="writerName">${member.getNickName() }</div>
+						<div class="date">${article.getRegDate().substring(2, 16) }</div>
+						<div class="like">${article.getLikeCnt() }</div>
+						<div class="views">${article.getViewCnt() }</div>
 					</c:forEach>
-				</table>
+				</c:if>
+				<c:if test="${memberCategory == 2 }">
+					<c:forEach items="${articles }" var="article">
+						<div class="writerName">${member.getNickName() }</div>
+						<div class="date">${article.getRegDate().substring(2, 16) }</div>
+						<div class="like">${article.getLikeCnt() }</div>
+						<div class="views">${article.getViewCnt() }</div>
+					</c:forEach>
+				</c:if>
 			</div>
 		</div>
 		
@@ -95,6 +92,6 @@
 			</div>
 		</div>
 	</div>
-</section> --%>
+</section>
 
 <%@ include file="/WEB-INF/jsp/common/footer.jsp"%>

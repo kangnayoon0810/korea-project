@@ -7,14 +7,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Trainer {
+public class Comments {
 	private int id;
 	private String regDate;
 	private String updateDate;
-	private String name;
-	private int sex;
-	private int phoneNumber;
+	private int memberId;
+	private String relTypeCode;
+	private int relId;
+	private String comment;
 	private String loginId;
-	private String loginPw;
-	private String eMail;
 }

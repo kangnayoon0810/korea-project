@@ -1,5 +1,5 @@
 package com.example.project.dto;
 
-public class TrainerArticle {
+public class Article {
 
 }

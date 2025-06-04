@@ -5,38 +5,37 @@
 <c:set var="pageTitle" value="Login" />
 
 <%@ include file="/WEB-INF/jsp/common/header.jsp"%>
-<link rel="stylesheet" href="/resource/member.css" />
-<script src="/resource/member.js"></script>
 
-<section class="login-section">
-	<div class="dologin">
-		<form action="doLogin" method="post"
-			onsubmit="return loginFormChk(this);">
-			<fieldset class="login-fieldset">
-				<legend class="fieldset-legend">로그인</legend>
-
-				<div class="loginId">
-					<label>아이디</label> <input type="text" name="loginId" />
-				</div>
-
-				<div class="pw">
-					<label>비밀번호</label> <input type="password" name="loginPw" />
-				</div>
-
-				<div class="dologin-box">
-					<button type="submit">로그인</button>
-				</div>
-
-				<div class="dosignup-box">
-					<p>회원이 아니신가요?</p>
-					<div>
-						<a href="/usr/member/join">회원 가입</a> <a href="/usr/trainer/join">트레이너
-							가입</a>
+<div>
+	<section class="login-section">
+		<div class="dologin">
+			<form action="doLogin" method="post"
+				onsubmit="return loginFormChk(this);">
+				<fieldset class="login-fieldset">
+					<legend class="fieldset-legend">로그인</legend>
+	
+					<div class="loginId">
+						<label>아이디</label> <input type="text" name="loginId" />
 					</div>
-				</div>
-			</fieldset>
-		</form>
-	</div>
-</section>
+	
+					<div class="pw">
+						<label>비밀번호</label> <input type="password" name="loginPw" />
+					</div>
+	
+					<div class="dologin-box">
+						<button type="submit">로그인</button>
+					</div>
+	
+					<div class="dosignup-box">
+						<p>회원이 아니신가요?</p>
+						<div>
+							<a href="/usr/member/signup">회원 가입</a>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</section>
+</div>
 
 <%@ include file="/WEB-INF/jsp/common/footer.jsp"%>

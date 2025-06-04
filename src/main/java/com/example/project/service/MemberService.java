@@ -14,9 +14,8 @@ public class MemberService {
 		this.memberDao = memberDao;
 	}
 
-	public void signupMember(String name, int sex, String nickName, int phoneNumber, String loginId, String loginPw,
-			String eMail) {
-		this.memberDao.signupMember(name, sex, nickName, phoneNumber, loginId, loginPw, eMail);
+	public void signupMember(String name, int sex, String nickName, int phoneNumber, String loginId, String loginPw, String eMail, int authLevel) {
+		this.memberDao.signupMember(name, sex, nickName, phoneNumber, loginId, loginPw, eMail, authLevel);
 	}
 
 	public Member getMemberByNickName(String nickName) {
@@ -34,9 +33,13 @@ public class MemberService {
 	public Member getMemberByEMail(String eMail) {
 		return this.memberDao.getMemberByEMail(eMail);
 	}
+	
+	public String getLoginId(int id) {
+		return this.memberDao.getLoginId(id);
+	}
 
-	public Member loginedMemberId(String loginId, String loginPw) {
-		return this.memberDao.loginedMemberId(loginId, loginPw);
+	public Member getMemberByAuthLevel(int authLevel) {
+		return this.memberDao.getMemberByAuthLevel(authLevel);
 	}
 
 }

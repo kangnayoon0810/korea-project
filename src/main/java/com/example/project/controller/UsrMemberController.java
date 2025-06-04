@@ -1,16 +1,17 @@
 package com.example.project.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.project.util.Util;
 import com.example.project.dto.LoginedMember;
 import com.example.project.dto.Member;
-import com.example.project.dto.ResultData;
 import com.example.project.dto.Req;
+import com.example.project.dto.ResultData;
 import com.example.project.service.MemberService;
+import com.example.project.util.Util;
 
 @Controller
 public class UsrMemberController {
@@ -25,18 +26,24 @@ public class UsrMemberController {
 	}
 
 	@GetMapping("/usr/member/signup")
-	public String signup() {
+	public String signup(Model model, int category) {
+		
+		model.addAttribute("category", category);
+		
 		return "usr/member/signup";
 	}
 
 	@PostMapping("/usr/member/doSignUp")
 	@ResponseBody
-	public String doSignUp(String name, int sex, String nickName, int phoneNumber, String loginId, String loginPw,
-			String eMail) {
+	public String doSignUp(String name, int sex, String nickName, int phoneNumber, String loginId, String loginPw, String eMail, int authLevel) {
 
-		this.memberService.signupMember(name, sex, nickName, phoneNumber, loginId, loginPw, eMail);
+		this.memberService.signupMember(name, sex, nickName, phoneNumber, loginId, loginPw, eMail, authLevel);
+		
+		if (authLevel == 2) {
+			return Util.jsReplace(String.format("[ %s ] 님의 트레이너 가입이 완료되었습니다", name), "/");
+		}
 
-		return Util.jsReplace(String.format("[ %s ] 님의 가입이 완료되었습니다", name), "/");
+		return Util.jsReplace(String.format("[ %s ] 님의 회원 가입이 완료되었습니다", name), "/");
 	}
 
 	@GetMapping("/usr/member/nickNameDupChk")
@@ -112,7 +119,7 @@ public class UsrMemberController {
 
 		this.req.login(new LoginedMember(member.getId(), member.getAuthLevel()));
 
-		return Util.jsReplace(String.format("[ %s ] 님 환영합니다", member.getNickName()), "/");
+		return Util.jsReplace(String.format("[ %s ] 님 환영합니다", member.getLoginId()), "/");
 	}
 
 	@GetMapping("/usr/member/logout")
