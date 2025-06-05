@@ -66,4 +66,11 @@ public interface MemberDao {
 			""")
 	Member getMemberByAuthLevel(int authLevel);
 
+	@Select("""
+			SELECT nickName
+				FROM `member`
+				WHERE nickName = #{nickName}
+			""")
+	String getNickName(String nickName);
+
 }

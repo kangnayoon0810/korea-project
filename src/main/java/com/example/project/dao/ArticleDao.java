@@ -9,7 +9,6 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.example.project.dto.Article;
-import com.example.project.dto.Member;
 
 @Mapper
 public interface ArticleDao {
@@ -20,40 +19,33 @@ public interface ArticleDao {
 			        , boardId = #{boardId}
 			        , updateDate = NOW()
 			        , memberId = #{loginedMemberId}
-			        , title = #{title}
 			        , content = #{content}
 			        , memberCategory = #{memberCategory}
 			""")
-	public void writeArticle(String title, String content, int loginedMemberId, int boardId, int memberCategory);
+	public void writeArticle(String content, int loginedMemberId, int boardId, int memberCategory);
 
 	@Select("""
 			<script>
-			SELECT a.*, m.loginId
+			SELECT a.*, m.nickName
 			    FROM article a
 			    INNER JOIN `member` m
 			    ON a.memberId = m.id
 			    WHERE boardId = #{boardId}
 			    <if test="keyWord != ''">
-			    	<choose>
-			    		<when test="searchType == 'title'">
-				    		AND a.title LIKE CONCAT('%', #{keyWord}, '%')
-			    		</when>
-					    <when test="searchType == 'content'">
-					    	AND a.content LIKE CONCAT('%', #{keyWord}, '%')
-					    </when>
-					    <otherwise>
-					    	AND (
-					    		a.title LIKE CONCAT('%', #{keyWord}, '%')
-					    		OR a.content LIKE CONCAT('%', #{keyWord}, '%')
-					    	)
-					    </otherwise>
-			    	</choose>
+		    	<choose>
+		    		<when test="searchType == 'area'">
+			    		AND a.area LIKE CONCAT('%', #{keyWord}, '%')
+		    		</when>
+				    <when test="searchType == 'content'">
+				    	AND a.content LIKE CONCAT('%', #{keyWord}, '%')
+				    </when>
+		    	</choose>
 			    </if>
 				ORDER BY a.id DESC
 				LIMIT #{limitFrom}, #{articlesInPage}
 				</script>
 			""")
-	public List<Article> getArticles(String keyWord, String searchType, int boardId, int articlesInPage, int limitFrom);
+	public List<Article> getArticles(String keyWord, String searchType, int boardId, String area, int articlesInPage, int limitFrom);
 
 	@Select("""
 			<script>
@@ -62,23 +54,17 @@ public interface ArticleDao {
 				WHERE boardId = #{boardId}
 				<if test="keyWord != ''">
 		    	<choose>
-		    		<when test="searchType == 'title'">
-			    		AND a.title LIKE CONCAT('%', #{keyWord}, '%')
+		    		<when test="searchType == 'area'">
+			    		AND a.area LIKE CONCAT('%', #{keyWord}, '%')
 		    		</when>
 				    <when test="searchType == 'content'">
 				    	AND a.content LIKE CONCAT('%', #{keyWord}, '%')
 				    </when>
-				    <otherwise>
-				    	AND (
-				    		a.title LIKE CONCAT('%', #{keyWord}, '%')
-				    		OR a.content LIKE CONCAT('%', #{keyWord}, '%')
-				    	)
-				    </otherwise>
 		    	</choose>
 			    </if>
 	    	</script>
 			""")
-	public int getArticlesCnt(int boardId, String keyWord, String searchType);
+	public int getArticlesCnt(int boardId, String area, String keyWord, String searchType);
 	
 	@Select("""
 			SELECT a.*, m.loginId
@@ -92,11 +78,10 @@ public interface ArticleDao {
 	@Update("""
 			UPDATE article
 			    SET updateDate = NOW()
-			        , title = #{title}
 			        , content = #{content}
 			    WHERE id = #{id}
 			""")
-	public void modifyArticle(int id, String title, String content);
+	public void modifyArticle(int id, String content);
 
 	@Delete("""
 			DELETE FROM article
@@ -115,12 +100,12 @@ public interface ArticleDao {
 				WHERE id = #{id}
 			""")
 	public void increaseViewCnt(int id);
-
+	
 	@Select("""
 			SELECT *
 				FROM article
 				WHERE memberCategory = #{memberCategory}
 			""")
-	public Member getMemberByMemberCategory(int memberCategory);
+	public Article getArticleByMemberCategory(int memberCategory);
 
 }

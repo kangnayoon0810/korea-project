@@ -14,7 +14,10 @@
 <!-- 공용 CSS -->
 <link rel="stylesheet" href="/resource/common.css" />
 <link rel="stylesheet" href="/resource/member.css" />
+<link rel="stylesheet" href="/resource/article.css" />
 <script src="/resource/member.js"></script>
+<script src="/resource/article.js"></script>
+
 <meta charset="UTF-8">
 <title>${pageTitle }</title>
 <link rel="shortcut icon" href="/resource/images/favicon.ico" />
@@ -30,14 +33,14 @@
 			</div>
 			<div class="topbar-center">
 				<ul class="article-box">
-					<li><a class="member-article" href="/usr/member/signup?memberCategory=1">회원그램</a></li>
-					<li><a class="trainer-article" href="/usr/member/signup?memberCategory=2">트레이너그램</a></li>
+					<li><a class="member-article" href="/usr/article/list?boardId=1&&memberCategory=1">회원그램</a></li>
+					<li><a class="trainer-article" href="/usr/article/list?boardId=2&memberCategory=2">트레이너그램</a></li>
 				</ul>
 			</div>
 			<div class="topbar-end">
 				<ul class="sign-box">
 					<c:if test="${req.getLoginedMember().getId() == 0 }">
-						<li><a class="login-button" href="/usr/prompt/selectLogin">로그인</a></li>
+						<li><a class="login-button" href="/usr/member/login">로그인</a></li>
 						<li><a class="member-signup" href="/usr/member/signup?authLevel=1">회원가입</a></li>
 						<li><a class="tranier-signup" href="/usr/member/signup?authLevel=2">트레이너 가입</a></li>
 					</c:if>

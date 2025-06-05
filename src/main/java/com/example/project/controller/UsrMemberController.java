@@ -26,9 +26,9 @@ public class UsrMemberController {
 	}
 
 	@GetMapping("/usr/member/signup")
-	public String signup(Model model, int category) {
+	public String signup(Model model, int authLevel) {
 		
-		model.addAttribute("category", category);
+		model.addAttribute("authLevel", authLevel);
 		
 		return "usr/member/signup";
 	}

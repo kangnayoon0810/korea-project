@@ -42,4 +42,8 @@ public class MemberService {
 		return this.memberDao.getMemberByAuthLevel(authLevel);
 	}
 
+	public String getNickName(String nickName) {
+		return this.memberDao.getNickName(nickName);
+	}
+
 }

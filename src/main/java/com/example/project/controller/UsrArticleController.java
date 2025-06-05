@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.project.dto.Article;
 import com.example.project.dto.Board;
+import com.example.project.dto.Member;
 import com.example.project.dto.Req;
 import com.example.project.service.ArticleService;
 import com.example.project.service.BoardService;
+import com.example.project.service.MemberService;
 import com.example.project.util.Util;
 
 import jakarta.servlet.http.Cookie;
@@ -24,11 +26,13 @@ import jakarta.servlet.http.HttpServletResponse;
 public class UsrArticleController {
 
 	private ArticleService articleService;
+	private MemberService memberService;
 	private BoardService boardService;
 	private Req req;
 
-	public UsrArticleController(ArticleService articleService, BoardService boardService, Req req) {
+	public UsrArticleController(ArticleService articleService, MemberService memberService, BoardService boardService, Req req) {
 		this.articleService = articleService;
+		this.memberService = memberService;
 		this.boardService = boardService;
 		this.req = req;
 	}
@@ -40,9 +44,9 @@ public class UsrArticleController {
 
 	@PostMapping("/usr/article/doWrite")
 	@ResponseBody
-	public String doWrite(String title, String content, int boardId, int memberCategory) {
+	public String doWrite(String content, int boardId, int memberCategory) {
 
-		this.articleService.writeArticle(title, content, this.req.getLoginedMember().getId(), boardId, memberCategory);
+		this.articleService.writeArticle(content, this.req.getLoginedMember().getId(), boardId, memberCategory);
 
 		int id = this.articleService.getLastArticleId();
 
@@ -50,12 +54,12 @@ public class UsrArticleController {
 	}
 
 	@GetMapping("/usr/article/list")
-	public String list(Model model, int boardId, @RequestParam(defaultValue = "1") int cPage, @RequestParam(defaultValue = "") String keyWord, @RequestParam(defaultValue = "") String searchType) {
+	public String list(Model model, int boardId, String area, @RequestParam int memberCategory, @RequestParam(defaultValue = "1") int cPage, @RequestParam(defaultValue = "") String keyWord, @RequestParam(defaultValue = "") String searchType) {
 		
 		int articlesInPage = 10;
 		int limitFrom = (cPage - 1) * articlesInPage;
 		
-		int articlesCnt = this.articleService.getArticlesCnt(boardId, keyWord, searchType);
+		int articlesCnt = this.articleService.getArticlesCnt(boardId, area, keyWord, searchType);
 		
 		int pagesCnt = (int) Math.ceil(articlesCnt / (double) articlesInPage);
 		
@@ -66,15 +70,18 @@ public class UsrArticleController {
 			endPage = pagesCnt;
 		}
 		
+//		Member member = this.memberService.getNickName(nickName);
 		Board board = this.boardService.getBoard(boardId);
-		List<Article> articles = this.articleService.getArticles(keyWord, searchType, boardId, articlesInPage, limitFrom);
+		List<Article> articles = this.articleService.getArticles(keyWord, searchType, boardId, area, articlesInPage, limitFrom);
 
-		model.addAttribute("keyWord", keyWord);
+		model.addAttribute("memberCategory", memberCategory);
 		model.addAttribute("searchType", searchType);
+		model.addAttribute("keyWord", keyWord);
 		model.addAttribute("cPage", cPage);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("articles", articles);
+//		model.addAttribute("member", member);
 		model.addAttribute("board", board);
 		model.addAttribute("articlesCnt", articlesCnt);
 		model.addAttribute("pagesCnt", pagesCnt);
@@ -122,9 +129,9 @@ public class UsrArticleController {
 
 	@PostMapping("/usr/article/doModify")
 	@ResponseBody
-	public String doModify(int id, String title, String content) {
+	public String doModify(int id, String content) {
 
-		this.articleService.modifyArticle(id, title, content);
+		this.articleService.modifyArticle(id, content);
 
 		return Util.jsReplace(String.format("%d번 게시물이 수정되었습니다", id), String.format("detail?id=%d", id));
 	}

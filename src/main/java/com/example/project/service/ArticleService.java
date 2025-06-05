@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.project.dao.ArticleDao;
 import com.example.project.dto.Article;
-import com.example.project.dto.Member;
 
 @Service
 public class ArticleService {
@@ -17,20 +16,20 @@ public class ArticleService {
 		this.articleDao = articleDao;
 	}
 
-	public void writeArticle(String title, String content, int loginedMemberId, int boardId, int memberCategory) {
-		this.articleDao.writeArticle(title, content, loginedMemberId, boardId, memberCategory);
+	public void writeArticle(String content, int loginedMemberId, int boardId, int memberCategory) {
+		this.articleDao.writeArticle(content, loginedMemberId, boardId, memberCategory);
 	}
 
-	public List<Article> getArticles(String keyWord, String searchType, int boardId, int articlesInPage, int limitFrom) {
-		return this.articleDao.getArticles(keyWord, searchType, boardId, articlesInPage, limitFrom);
+	public List<Article> getArticles(String keyWord, String searchType, int boardId, String area, int articlesInPage, int limitFrom) {
+		return this.articleDao.getArticles(keyWord, searchType, boardId, area, articlesInPage, limitFrom);
 	}
 	
 	public Article getArticleById(int id) {
 		return this.articleDao.getArticleById(id);
 	}
 
-	public void modifyArticle(int id, String title, String content) {
-		this.articleDao.modifyArticle(id, title, content);
+	public void modifyArticle(int id, String content) {
+		this.articleDao.modifyArticle(id, content);
 	}
 
 	public void deleteArticle(int id) {
@@ -41,16 +40,16 @@ public class ArticleService {
 		return this.articleDao.getLastArticleId();
 	}
 	
-	public int getArticlesCnt(int boardId, String keyWord, String searchType) {
-		return this.articleDao.getArticlesCnt(boardId, keyWord, searchType);
+	public int getArticlesCnt(int boardId, String area, String keyWord, String searchType) {
+		return this.articleDao.getArticlesCnt(boardId, area, keyWord, searchType);
 	}
 
 	public void increaseViewCnt(int id) {
 		this.articleDao.increaseViewCnt(id);
 	}
 	
-	public Member getMemberByMemberCategory(int memberCategory) {
-		return this.articleDao.getMemberByMemberCategory(memberCategory);
+	public Article getArticleByMemberCategory(int memberCategory) {
+		return this.articleDao.getArticleByMemberCategory(memberCategory);
 	}
 
 }

@@ -13,7 +13,7 @@
 	display: flex;
 	justify-content: center;
 	border: 1px solid #A0ACAD;
-	border-radius: 15px;
+	border-radius: 30px;
 }
 
 .login-section > .dologin .login-fieldset > .fieldset-legend {
@@ -59,7 +59,7 @@
 .login-section > .dologin .login-fieldset .dologin-box > button {
 	background-color: #1D2F6F;
 	color: white;
-	font-size: 1rem;
+	font-size: 0.95rem;
 	border-radius: 5px;
 	width: 260px;
 	height: 40px;
@@ -80,7 +80,7 @@
 }
 
 .login-section>.dologin .login-fieldset .dosignup-box {
-	margin-bottom: 40px;
+	margin-bottom: 35px;
 }
 
 .login-section>.dologin .login-fieldset .dosignup-box a {
@@ -88,11 +88,12 @@
 	width: 260px;
 	height: 40px;
 	color: white;
-	font-size: 1rem;
+	font-size: 0.95rem;
 	border-radius: 5px;
 	display: block;
 	background-color: #1D2F6F;
 	line-height: 40px;
+	margin-bottom: 5px;
 }
 
 .login-section>.dologin .login-fieldset .dosignup-box a:hover {
@@ -112,7 +113,7 @@
 	display: flex;
 	justify-content: center;
 	border: 1px solid #A0ACAD;
-	border-radius: 15px;
+	border-radius: 30px;
 }
 
 .signup-section > .signup-box div {
@@ -139,6 +140,7 @@
 	justify-content: space-between;
 	width: 260px;
 	color: #A0ACAD;
+	margin-bottom: 5px;
 }
 
 .signup-section > .signup-box .signup-fieldset > .sex-box .sex-btn {
@@ -161,8 +163,7 @@
 }
 
 .signup-section > .signup-box .signup-fieldset label {
-	font-size: 0.9rem;
-	padding: 5px 2px;
+	font-size: 0.95rem;
 	color: rgba(0, 0, 0, 0.50);
 }
 
@@ -172,7 +173,9 @@
 	border: 1px solid #A0ACAD;
 	border-radius: 3px;
 	display: block;
-	margin: 0 auto 2px auto;
+	margin: 0 auto 5px auto;
+	font-size: 0.9rem;
+	color: rgba(0, 0, 0, 0.45);
 }
 
 .signup-section > .signup-box .signup-fieldset .dosignup {

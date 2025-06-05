@@ -7,44 +7,63 @@
 <%@ include file="/WEB-INF/jsp/common/header.jsp"%>
 
 <section class="list-section">
-	<div class="list-row">
-		<input type="hidden" value="${memberCategory }" name="memberCategory" />
-		<div class="list-box">
+	<div class="list-box">
+		<div class="search-box">
 			<div class="memberCategory">
 				<c:if test="${memberCategory == 1 }">
-					<div><span>회원 커뮤니티</span><span> ( ${articlesCnt } )</span></div>
+					<div>회원 커뮤니티</div>
 				</c:if>
 				<c:if test="${memberCategory == 2 }">
-					<div><span>트레이너 커뮤니티</span><span> ( ${articlesCnt } )</span></div>
+					<div>트레이너 커뮤니티</div>
 				</c:if>
 			</div>
 			<form action="list" method="get">
 				<div class="search-bar">
-					<div>
-						<c:if test="${searchType == 'titleContent' }">
-							<input type="hidden" name="boardId" value="${board.getId() }"/>
-							<input name="keyWord" value="${keyWord }" class="input" placeholder="Search" />
-						</c:if>
+					<div class="search">
+						<div>
+							<div>
+								<input type="hidden" name="boardId" value="${board.getId() }"/>
+								<input type="text" name="keyWord" value="${keyWord }" placeholder="검색어를 입력하세요" />
+							</div>
+						</div>
 					</div>
-					<div class="indicator">
-						<button class="btn join-item"><i class="fa-solid fa-magnifying-glass"></i></button>
+					<div class="search-btn">
+						<button><i class="fa-solid fa-magnifying-glass"></i></button>
 					</div>
 				</div>
 			</form>
 		</div>
 		<div class="table-box">
-			<div>
+			<div class="article-box">
 				<c:if test="${memberCategory == 1 }">
 					<c:forEach items="${articles }" var="article">
-						<div class="writerName">${member.getNickName() }</div>
-						<div class="date">${article.getRegDate().substring(2, 16) }</div>
-						<div class="like">${article.getLikeCnt() }</div>
-						<div class="views">${article.getViewCnt() }</div>
+						<div class="profile-box">
+							<div><img alt="😉"/></div>
+							<div class="nickname">${article.getNickName() }</div>
+						</div>
+						<div class="content-box">
+							<div class="content">${article.getContent() }</div>
+						</div>
+						<div class="cnt-box">
+							<div class="like">
+								<c:if test="${req.getLoginedMember().getId() != 0 }">
+									<button onclick="clickLikePoint();">
+										<span id="likePointBtn"></span>
+										${article.getLikeCnt() }
+									</button>
+								</c:if>
+							</div>
+							<div class="views">${article.getViewCnt() }</div>
+						</div>
+						<div class="date-box">
+							<div class="date">${article.getRegDate().substring(2, 16) }</div>
+						</div>
 					</c:forEach>
 				</c:if>
 				<c:if test="${memberCategory == 2 }">
 					<c:forEach items="${articles }" var="article">
 						<div class="writerName">${member.getNickName() }</div>
+						<div class="content">${article.getContent() }</div>
 						<div class="date">${article.getRegDate().substring(2, 16) }</div>
 						<div class="like">${article.getLikeCnt() }</div>
 						<div class="views">${article.getViewCnt() }</div>
@@ -54,7 +73,7 @@
 		</div>
 		
 		<div class="bt-bar">
-			<div class="mt-3 text-sm btns w-2/3 mx-auto">
+			<div class="">
 				<c:if test="${req.getLoginedMember().getId() != 0 }">
 					<c:choose>
 						<c:when test="${req.getLoginedMember().getAuthLevel() == 0 }">
@@ -73,7 +92,7 @@
 				</c:if>
 			</div>
 			
-			<div class="mb-8 mt-4 w-2/3 mx-auto text-center">
+			<%-- <div class="mb-8 mt-4 w-2/3 mx-auto text-center">
 				<div class="join">
 					<c:set var="queryString" value="?boardId=${board.getId() }&keyWord=${keyWord }&searchType=${searchType }" />
 					
@@ -89,7 +108,7 @@
 						<a class="join-item btn btn-sm" href="${queryString }&cPage=${pagesCnt }"><i class="fa-solid fa-angles-right"></i></a>
 					</c:if>
 				</div>
-			</div>
+			</div> --%>
 		</div>
 	</div>
 </section>

@@ -32,6 +32,14 @@ a {
 	white-space: nowrap;
 }
 
+input {
+  padding: 8px 20px;
+}
+
+input:focus {
+  outline: none;
+}
+
 .topbar {
 	width: 100%;
 	box-shadow: 0 2px 3px #A0ACAD;
@@ -64,7 +72,7 @@ a {
 }
 
 .topbar>.topbar-box>.topbar-center>.article-box .member-article {
-	border-right: 2px solid #A0ACAD;
+	border-right: 2px solid rgba(0, 0, 0, 0.20);
 }
 
 .topbar>.topbar-box>.topbar-end {
@@ -82,7 +90,7 @@ a {
 }
 
 .topbar>.topbar-box>.topbar-end>.sign-box .login-button {
-	border-right: 2px solid #A0ACAD;
+	border-right: 2px solid rgba(0, 0, 0, 0.20);
 }
 
 .topbar>.topbar-box>.topbar-end>.sign-box .tranier-signup {

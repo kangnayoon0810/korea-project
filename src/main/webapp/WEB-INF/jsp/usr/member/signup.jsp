@@ -9,7 +9,7 @@
 <section class="signup-section">
 	<div class="signup-box">
 		<form action="doSignUp" method="POST" onsubmit="return signupFormChk(this);">
-			<input type="hidden" value="${category }" name="authLevel" />
+			<input type="hidden" value="${authLevel }" name="authLevel" />
 			<fieldset class="signup-fieldset">
 				<c:if test="${authLevel == 1 }">
 					<legend class="fieldset-legend">회원가입</legend>
@@ -20,7 +20,7 @@
  
 				<div class="name-box">
 					<label>이름</label> 
-					<input type="text" name="name" />
+					<input type="text" name="name" placeholder="이름(실명)" />
 				</div>
 
 				<div class="sex-box">
@@ -34,34 +34,34 @@
 
 				<div class="nickName-box">
 					<label>닉네임 <span id="nickNameDupChkMsg"></span></label> 
-					<input type="text" name="nickName" onblur="nickNameDupChk(this);" />
+					<input type="text" name="nickName" onblur="nickNameDupChk(this);" placeholder="닉네임" />
 					<input type="hidden" name="nickNameChk" />
 				</div>
 
 				<div class="phoneNumber-box">
 					<label>핸드폰 번호 <span id="phoneNumberDupChkMsg"></span></label> 
-					<input type="text" name="phoneNumber" onblur="phoneNumberDupChk(this);" />
+					<input type="text" name="phoneNumber" onblur="phoneNumberDupChk(this);" placeholder="ex) 01012341234" />
 					<input type="hidden" name="phoneNumberChk" />
 				</div>
 
 				<div class="id-box">
 					<label>아이디 <span id="loginIdDupChkMsg"></span></label> 
-					<input type="text" name="loginId" onblur="loginIdDupChk(this);" />
+					<input type="text" name="loginId" onblur="loginIdDupChk(this);" placeholder="아이디" />
 				</div>
 
 				<div class="pw-box">
 					<label>비밀번호</label> 
-					<input type="password" name="loginPw" />
+					<input type="password" name="loginPw" placeholder="비밀번호" />
 				</div>
 
 				<div class="pwchk-box">
 					<label>비밀번호 확인</label> 
-					<input type="password" name="loginPwChk" />
+					<input type="password" name="loginPwChk" placeholder="비밀번호 확인" />
 				</div>
 
 				<div class="email-box">
 					<label>이메일 <span id="eMailDupChkMsg"></span></label> 
-					<input type="email" name="eMail" onblur="eMailDupChk(this);" />
+					<input type="email" name="eMail" onblur="eMailDupChk(this);" placeholder="ex) example@designfit.com" />
 					<input type="hidden" name="eMailChk" />
 				</div>
 
@@ -77,7 +77,7 @@
 						<p>트레이너이신가요?</p>
 					</c:if>
 					<div class="login-btn">
-						<a class="dologin-btn" href="/usr/prompt/selectLogin">로그인</a>
+						<a class="dologin-btn" href="/usr/member/login">로그인</a>
 					</div>
 				</div>
 			</fieldset>
