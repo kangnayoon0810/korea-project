@@ -6,6 +6,8 @@
 
 <%@ include file="/WEB-INF/jsp/common/header.jsp"%>
 
+<script src="/resource/article.js"></script>
+
 <section class="list-section">
 	<div class="list-box">
 		<div class="search-box">
@@ -38,7 +40,7 @@
 				<c:if test="${memberCategory == 1 }">
 					<c:forEach items="${articles }" var="article">
 						<div class="profile-box">
-							<div><img alt="😉"/></div>
+							<div><img src="https://www.studiopeople.kr/common/img/default_profile.png"/></div>
 							<div class="nickname">${article.getNickName() }</div>
 						</div>
 						<div class="content-box">
@@ -46,14 +48,14 @@
 						</div>
 						<div class="cnt-box">
 							<div class="like">
-								<c:if test="${req.getLoginedMember().getId() != 0 }">
-									<button onclick="clickLikePoint();">
-										<span id="likePointBtn"></span>
-										${article.getLikeCnt() }
-									</button>
-								</c:if>
+								<button onclick="clickLikePoint();">
+									<i class="fa-regular fa-heart"></i>
+									<span id="likePointCnt"></span>
+									${article.getLikeCnt() }
+								</button>
 							</div>
-							<div class="views">${article.getViewCnt() }</div>
+							<a class="comments" href="/usr/article/detail?id=${article.getId() }"><i class="fa-regular fa-comment"></i> ${article.getCommentsCnt() }</a>
+							<div class="views">조회수 ${article.getViewCnt() }</div>
 						</div>
 						<div class="date-box">
 							<div class="date">${article.getRegDate().substring(2, 16) }</div>
@@ -62,11 +64,27 @@
 				</c:if>
 				<c:if test="${memberCategory == 2 }">
 					<c:forEach items="${articles }" var="article">
-						<div class="writerName">${member.getNickName() }</div>
-						<div class="content">${article.getContent() }</div>
-						<div class="date">${article.getRegDate().substring(2, 16) }</div>
-						<div class="like">${article.getLikeCnt() }</div>
-						<div class="views">${article.getViewCnt() }</div>
+						<div class="profile-box">
+							<div><img src="https://www.studiopeople.kr/common/img/default_profile.png"/></div>
+							<div class="nickname">${article.getNickName() }</div>
+						</div>
+						<div class="content-box">
+							<div class="content">${article.getContent() }</div>
+						</div>
+						<div class="cnt-box">
+							<div class="like">
+								<button onclick="clickLikePoint();">
+									<i class="fa-regular fa-heart"></i>
+									<span id="likePointCnt"></span>
+									${article.getLikeCnt() }
+								</button>
+							</div>
+							<a class="comments" href="/usr/article/detail?id=${article.getId() }"><i class="fa-regular fa-comment"></i> ${article.getCommentsCnt() }</a>
+							<div class="views">조회수 ${article.getViewCnt() }</div>
+						</div>
+						<div class="date-box">
+							<div class="date">${article.getRegDate().substring(2, 16) }</div>
+						</div>
 					</c:forEach>
 				</c:if>
 			</div>

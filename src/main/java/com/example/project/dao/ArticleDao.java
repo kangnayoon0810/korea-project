@@ -67,7 +67,7 @@ public interface ArticleDao {
 	public int getArticlesCnt(int boardId, String area, String keyWord, String searchType);
 	
 	@Select("""
-			SELECT a.*, m.loginId
+			SELECT a.*, m.nickName
 			 	FROM article a
 			 	INNER JOIN `member` m
 			 	ON a.memberId = m.id

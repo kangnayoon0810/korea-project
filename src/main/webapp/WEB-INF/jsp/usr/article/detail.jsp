@@ -122,90 +122,90 @@
 		    listComment();
 		});
 		
-	</script>
+	</script> --%>
 
-<section class="mt-8">
-	<div class="container mx-auto">
-		<div class="table-box">
-			<div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 w-2/3 mx-auto">
-				<table class="table">
-					<tr>
-						<th>번호</th>
-						<td>${article.getId() }</td>
-						
-						<th>작성자</th>
-						<td>${article.getMemberId() }</td>
-					</tr>
-					<tr>
-						<th>작성일</th>
-						<td>${article.getRegDate().substring(2, 16) }</td>
-						
-						<th>수정일</th>
-						<td>${article.getUpdateDate().substring(2, 16) }</td>
-					</tr>
-					<tr>
-						<th>좋아요</th>
-						<td><span id="likePointCnt"></span></td>
-						
-						<th>조회수</th>
-						<td>${article.getViewCnt() }</td>
-					</tr>
-					<tr>
-						<th>제목</th>
-						<td>${article.getTitle() }</td>
-					</tr>
-					<tr>
-						<th>내용</th>
-						<td>${article.getContent() }</td>
-					</tr>
-				</table>
+<section class="detail-section">
+	<div class="detail-box">
+		<div class="table-detailbox">
+			<div class="article-detailbox">
+				<div class="profile-detailbox">
+					<div class="profile-detailbox2">
+						<div><img src="https://www.studiopeople.kr/common/img/default_profile.png"/></div>
+						<div class="nickname">${article.getNickName() }</div>
+					</div>
+					<div class="detail-modify">
+						<ul>
+							<li>
+								<button><i class="fa-solid fa-ellipsis"></i></button>
+								<ul>
+									<li><a href="/usr/article/modify">수정</a></li>
+									<li><a href="/usr/article/delete">삭제</a></li>
+								</ul>
+							</li>						
+						</ul>
+					</div>
+				</div>
+				<div class="content-detailbox">
+					<div class="content">${article.getContent() }</div>
+				</div>
+				<div class="cnt-detailbox">
+					<div class="like">
+						<button onclick="clickLikePoint();">
+							<i class="fa-regular fa-heart"></i>
+							<span id="likePointBtn"></span>
+							${article.getLikeCnt() }
+						</button>
+					</div>
+					<a class="comments" href="/usr/article/detail?id=${article.getId() }"><i class="fa-regular fa-comment"></i> ${article.getCommentsCnt() }</a>
+					<div class="views">조회수 ${article.getViewCnt() }</div>
+				</div>
+				<div class="date-detailbox">
+					<div class="date">${article.getRegDate().substring(2, 16) }</div>
+				</div>
 			</div>
 		</div>
 
-		<div class="mt-3 text-sm btns flex justify-between w-2/3 mx-auto">
-			<div class="flex">
-				<button class="btn btn-ghost" onclick="history.back();">뒤로가기</button>
-				<c:if test="${article.getMemberId() == req.getLoginedMember().getId() }">
-					<div class="mx-2"><a class="btn btn-ghost" href="modify?id=${article.getId() }">수정</a></div>
-					<div><a class="btn btn-ghost" href="delete?id=${article.getId() }" onclick="if(confirm('게시물을 삭제하시겠습니까?') == false) return false;">삭제</a></div>
-				</c:if>
-			</div>
-			<div class="flex">
-				<c:if test="${req.getLoginedMember().getId() != 0 }">
-					<button class="btn btn-ghost" onclick="clickLikePoint();">
-						<span id="likePointBtn"></span>
-						LIKE
-					</button>
-				</c:if>
-			</div>
-		</div>
+<!-- 		<div class="mt-3 text-sm btns flex justify-between w-2/3 mx-auto"> -->
+<!-- 			<div class="flex"> -->
+<!-- 				<button class="btn btn-ghost" onclick="history.back();">뒤로가기</button> -->
+<%-- 				<c:if test="${article.getMemberId() == req.getLoginedMember().getId() }"> --%>
+<%-- 					<div class="mx-2"><a class="btn btn-ghost" href="modify?id=${article.getId() }">수정</a></div> --%>
+<%-- 					<div><a class="btn btn-ghost" href="delete?id=${article.getId() }" onclick="if(confirm('게시물을 삭제하시겠습니까?') == false) return false;">삭제</a></div> --%>
+<%-- 				</c:if> --%>
+<!-- 			</div> -->
+<!-- 			<div class="flex"> -->
+<%-- 				<c:if test="${req.getLoginedMember().getId() != 0 }"> --%>
+<!-- 					<button class="btn btn-ghost" onclick="clickLikePoint();"> -->
+<!-- 						<span id="likePointBtn"></span> -->
+<!-- 						LIKE -->
+<!-- 					</button> -->
+<%-- 				</c:if> --%>
+<!-- 			</div> -->
+<!-- 		</div> -->
 		
 	</div>
 </section>
 
-<section class="mt-5">
-	<div class="container mx-auto">
+<section class="comment-section">
+	<div class="comment-box">
 		<div id="comment-area">
-			<ul id="comment-list" class="list rounded-box border border-base-content/5 bg-base-100 w-2/3 mx-auto">
-				<li class="p-4 pb-2 text-sm opacity-60 tracking-wide">Comments</li>
-  
+			<ul id="comment-list">
+				<li>댓글</li>
 			</ul>
 		</div>
 		
-		<div class="mt-5">
-			<c:if test="${req.getLoginedMember().getId() != 0 }">		
-				<div class="card card-xs border border-base-content/5 bg-base-100 w-2/3 mx-auto">
-					<div class="card-body">
-				    	<h2 class="card-title">${req.getLoginedMember().getId() }</h2>
-						<textarea id="comment" class="textarea h-20 w-full" placeholder="Comment"></textarea>
-				    	<div class="justify-end card-actions">
-				    		<button class="btn btn-ghost" onclick="writeComment();">등록</button>
-						</div>
+		<div class="comment-write">		
+			<div class="">
+				<div class="card-body">
+			    	<h2 class="card-title">${req.getLoginedMember().getId() }</h2>
+					<textarea id="comment" class="textarea h-20 w-full" placeholder="Comment"></textarea>
+			    	<div class="justify-end card-actions">
+			    		<button class="btn btn-ghost" onclick="writeComment();"><i class="fa-solid fa-arrow-up"></i></button>
 					</div>
 				</div>
-			</c:if>
+			</div>
 		</div>
 	</div>
-</section>		 --%>
+</section>
 
 <%@ include file="/WEB-INF/jsp/common/footer.jsp"%>

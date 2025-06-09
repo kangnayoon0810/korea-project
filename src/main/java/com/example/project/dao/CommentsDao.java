@@ -63,5 +63,22 @@ public interface CommentsDao {
 					WHERE id = #{id}
 			""")
 	public void modifyComment(int id, String comment);
+	
+	@Select("""
+			SELECT *
+				FROM comments
+				WHERE memberId = #{id}
+				AND relTypeCode = #{relTypeCode}
+				AND relId = #{relId}
+			""")
+	public Comment getComment(int id, String relTypeCode, int relId);
 
+	@Select("""
+			SELECT COUNT(*)
+				FROM comments
+				WHERE relTypeCode = #{relTypeCode}
+				AND relId = #{relId}
+			""")
+	public int getCommentsCnt(String relTypeCode, int relId);
+	
 }

@@ -41,4 +41,12 @@ public class CommentsService {
 		this.commentsDao.modifyComment(id, comment);
 	}
 
+	public Comment getComment(int id, String relTypeCode, int relId) {
+		return this.commentsDao.getComment(id, relTypeCode, relId);
+	}
+
+	public int getCommentsCnt(String relTypeCode, int relId) {
+		return this.commentsDao.getCommentsCnt(relTypeCode, relId);
+	}
+
 }

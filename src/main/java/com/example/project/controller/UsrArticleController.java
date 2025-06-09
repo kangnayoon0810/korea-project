@@ -70,7 +70,6 @@ public class UsrArticleController {
 			endPage = pagesCnt;
 		}
 		
-//		Member member = this.memberService.getNickName(nickName);
 		Board board = this.boardService.getBoard(boardId);
 		List<Article> articles = this.articleService.getArticles(keyWord, searchType, boardId, area, articlesInPage, limitFrom);
 
@@ -81,13 +80,13 @@ public class UsrArticleController {
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("articles", articles);
-//		model.addAttribute("member", member);
 		model.addAttribute("board", board);
 		model.addAttribute("articlesCnt", articlesCnt);
 		model.addAttribute("pagesCnt", pagesCnt);
 
 		return "usr/article/list";
 	}
+	
 	@GetMapping("/usr/article/detail")
 	public Object detail(HttpServletRequest request, HttpServletResponse response, Model model, int id) {
 

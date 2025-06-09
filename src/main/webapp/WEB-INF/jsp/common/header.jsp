@@ -16,7 +16,6 @@
 <link rel="stylesheet" href="/resource/member.css" />
 <link rel="stylesheet" href="/resource/article.css" />
 <script src="/resource/member.js"></script>
-<script src="/resource/article.js"></script>
 
 <meta charset="UTF-8">
 <title>${pageTitle }</title>

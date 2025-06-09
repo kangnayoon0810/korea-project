@@ -20,5 +20,6 @@ public class Article {
 	private int memberCategory;
 	private String loginId;
 	private int likeCnt;
+	private int commentsCnt;
 	private String nickName;
 }

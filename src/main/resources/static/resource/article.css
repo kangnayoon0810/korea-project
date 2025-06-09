@@ -5,15 +5,14 @@
 	justify-content: center;
 	width: 100%;
 	min-height: 100vh;
-	margin-top: 30px;
+	margin-top: 10px;
 }
 
-.list-section > .list-box {
+.list-box {
 	width: 1000px;
-	border: 1px solid red;
 }
 
-.list-section > .list-box .search-box {
+.search-box {
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
@@ -21,18 +20,18 @@
 	height: 50px;
 }
 
-.list-section > .list-box .memberCategory div {
+.memberCategory div {
 	font-family: Paperlogy-8ExtraBold;
 	font-size: 1.5rem;
 	color: #1D2F6F;
 }
 
-.list-section > .list-box form .search-bar {
+.search-bar {
 	display: flex;
 	align-items: center;
 }
 
-.list-section > .list-box form .search-bar .search input {
+.search input {
 	width: 280px;
 	height: 40px;
 	display: flex;
@@ -40,19 +39,18 @@
 	border-radius: 50px
 }
 
-.list-section > .list-box form .search-bar .search-btn button {
+.search-bar button {
 	padding: 0 10px;
 	font-size: 1.5rem;
 	color: #1D2F6F;
 }
 
-.list-section > .list-box form .search-bar .search-btn button:hover {
+.search-bar button:hover {
 	color: #1B9AAA;
 	cursor: pointer;
 }
 
-.list-section > .list-box .table-box {
-	border: 1px solid blue;
+.table-box {
 	width: 500px;
 	margin: 0 auto;
 	margin-top: 30px;
@@ -60,36 +58,176 @@
 	justify-content: center;
 }
 
-.list-section > .list-box .table-box .profile-box {
+.profile-box {
 	display: flex;
 	align-items: center;
 	margin: 15px 10px;
 }
 
-.list-section > .list-box .table-box img {
-	border: 1px solid black;
+.profile-box img {
+	width: 45px;
+	height: 45px;
+	border-radius: 50px;
+}
+
+.nickname {
+	margin-left: 10px;
+}
+
+.content-box {
+	width: 480px;
+	margin-top: 10px;
+}
+
+.content {
+	display: flex;
+	justify-content: conter;
+	border: 1px solid rgba(0, 0, 0, 0.40);
+	border-radius: 5px;
+	padding: 10px;
+	font-family: none;
+	font-size: 0.9rem;
+}
+
+.cnt-box {
+	display: flex;
+	margin-top: 5px;
+	margin-left: 5px;
+	font-size: 0.95rem
+}
+
+.like > button {
+	font-family: none;
+}
+
+.like i:hover {
+	cursor: pointer;
+}
+
+.comments {
+	margin-left: 10px;
+	font-family: none;
+}
+
+.views {
+	margin-left: 10px;
+	font-family: none;
+}
+
+.date {
+	padding-bottom: 5px;
+	font-family: none;
+	font-size: 0.9rem;
+	color: rgba(0, 0, 0, 0.50);
+	margin-left: 5px;
+}
+
+.detail-section {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	margin-top: 10px;
+}
+
+.detail-box {
+	width: 1000px;
+}
+
+.table-detailbox {
+	width: 600px;
+	margin: 0 auto;
+	margin-top: 30px;
+	display: flex;
+	justify-content: center;
+}
+
+.profile-detailbox {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 15px 10px;
+}
+
+.profile-detailbox2 {
+	display: flex;
+	align-items: center;
+}
+
+.detail-modify > ul {
+	display: inline-block;
+}
+
+.detail-modify > ul > li {
+	display: inline-block;
+}
+
+.detail-modify > ul > li > button {
+	font-size: 1.15rem;
+	color: #1D2F6F;
+}
+
+.detail-modify > ul > li > button > i {
+	padding: 5px 6px;
+	border-radius: 10px;
+	border: 1px solid rgba(0, 0, 0, 0.50);
+	
+}
+
+.detail-modify > ul > li > button:hover > i {
+	cursor: pointer;
+	color: #DDDBCB;
+}
+
+.detail-modify > ul ul {
+	position: absolute;
+	display: none;
+	width: 80px;
+}
+
+.detail-modify > ul ul > li {
+	display: flex;
+	justify-content: center;
+}
+
+.detail-modify > ul > li > ul {
+	top: -70%;
+	left: auto;
+	right: 100%;
+}
+
+.detail-modify > ul > li:hover > ul {
+	display: block;
+}
+
+.detail-modify > ul > li {
+	position: relative;
+}
+
+.detail-modify ul > li > a {
+	display: block;
+	padding: 5px 15px;
+}
+
+.detail-modify > ul > li > ul > li:hover > a {
+	cursor: pointer;
+	color: #DDDBCB;
+	
+}
+
+.profile-detailbox img {
 	width: 50px;
 	height: 50px;
 	border-radius: 50px;
 }
 
-.list-section > .list-box .table-box .nickname {
-	margin-left: 10px;
+.content-detailbox {
+	width: 580px;
+	margin-top: 10px;
 }
 
-.list-section > .list-box .table-box .content-box {
-	width: 450px;
-	margin-top: 20px;
-}
-
-.list-section > .list-box .table-box .content {
+.cnt-detailbox {
 	display: flex;
-	justify-content: conter;
-	border: 1px solid rgba(0, 0, 0, 0.40);
-	border-radius: 5px;
-	justify-content: center;
-	padding: 10px;
-	font-family: none;
-	font-size: 0.9rem;
-	
+	margin-top: 5px;
+	margin-left: 5px;
+	font-size: 0.95rem
 }
