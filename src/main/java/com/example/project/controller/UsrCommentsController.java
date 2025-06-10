@@ -32,9 +32,9 @@ public class UsrCommentsController {
 
 	@PostMapping("/usr/comments/doWrite")
 	@ResponseBody
-	public String doWrite(@RequestParam int relId, @RequestParam String relTypeCode, @RequestParam String comment) {
+	public String doWrite(@RequestParam int relId, @RequestParam String relTypeCode, @RequestParam String content) {
 
-		this.commentsService.writeComment(comment, relTypeCode, this.req.getLoginedMember().getId(), relId);
+		this.commentsService.writeComment(relTypeCode, this.req.getLoginedMember().getId(), relId, content);
 
 		return "댓글이 등록되었습니다";
 	}
@@ -45,26 +45,12 @@ public class UsrCommentsController {
 		return this.commentsService.getCommentById(id);
 	}
 
-	@GetMapping("/usr/comments/getComments")
-	@ResponseBody
-	public ResultData<Integer> getComments(String relTypeCode, int relId) {
-
-		Comment comment = this.commentsService.getComment(this.req.getLoginedMember().getId(), relTypeCode, relId);
-		int commentsCnt = this.commentsService.getCommentsCnt(relTypeCode, relId);
-
-		if (comment == null) {
-			return ResultData.from("F-1", "댓글 정보 조회 실패", commentsCnt);
-		}
-
-		return ResultData.from("S-1", "댓글 정보 조회 성공", commentsCnt);
-	}
-
 	@GetMapping("/usr/comments/list")
 	@ResponseBody
 	public List<Comments> list(Model model, @RequestParam int relId, @RequestParam String relTypeCode) {
 
 		List<Comments> comments = this.commentsService.getComments(relId, relTypeCode);
-
+		
 		return comments;
 	}
 

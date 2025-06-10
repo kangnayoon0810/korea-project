@@ -17,8 +17,8 @@ public class CommentsService {
 		this.commentsDao = commentsDao;
 	}
 	
-	public void writeComment(String comment, String relTypeCode, int loginedMemberId, int relId) {
-		this.commentsDao.writeComment(comment, relTypeCode, loginedMemberId, relId);
+	public void writeComment(String relTypeCode, int loginedMemberId, int relId, String content) {
+		this.commentsDao.writeComment(relTypeCode, loginedMemberId, relId, content);
 	}
 	
 	public List<Comments> getComments(int relId, String relTypeCode) {
@@ -37,16 +37,8 @@ public class CommentsService {
 		this.commentsDao.deleteComment(id);
 	}
 
-	public void modifyComment(int id, String comment) {
-		this.commentsDao.modifyComment(id, comment);
-	}
-
-	public Comment getComment(int id, String relTypeCode, int relId) {
-		return this.commentsDao.getComment(id, relTypeCode, relId);
-	}
-
-	public int getCommentsCnt(String relTypeCode, int relId) {
-		return this.commentsDao.getCommentsCnt(relTypeCode, relId);
+	public void modifyComment(int id, String content) {
+		this.commentsDao.modifyComment(id, content);
 	}
 
 }

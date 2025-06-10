@@ -40,10 +40,10 @@ public class UsrMemberController {
 		this.memberService.signupMember(name, sex, nickName, phoneNumber, loginId, loginPw, eMail, authLevel);
 		
 		if (authLevel == 2) {
-			return Util.jsReplace(String.format("[ %s ] 님의 트레이너 가입이 완료되었습니다", name), "/");
+			return Util.jsReplace(String.format("[ %s ] 님의 트레이너 가입이 완료되었습니다", nickName), "/");
 		}
 
-		return Util.jsReplace(String.format("[ %s ] 님의 회원 가입이 완료되었습니다", name), "/");
+		return Util.jsReplace(String.format("[ %s ] 님의 회원 가입이 완료되었습니다", nickName), "/");
 	}
 
 	@GetMapping("/usr/member/nickNameDupChk")
@@ -117,9 +117,9 @@ public class UsrMemberController {
 			return Util.jsReplace("비밀번호가 일치하지 않습니다", "login");
 		}
 
-		this.req.login(new LoginedMember(member.getId(), member.getAuthLevel()));
+		this.req.login(new LoginedMember(member.getId(), member.getAuthLevel(), member.getNickName()));
 
-		return Util.jsReplace(String.format("[ %s ] 님 환영합니다", member.getLoginId()), "/");
+		return Util.jsReplace(String.format("[ %s ] 님 환영합니다", member.getNickName()), "/");
 	}
 
 	@GetMapping("/usr/member/logout")
@@ -129,5 +129,11 @@ public class UsrMemberController {
 		this.req.logout();
 
 		return Util.jsReplace("로그아웃 되었습니다", "/");
+	}
+	
+	@GetMapping("/usr/member/getLoginId")
+	@ResponseBody
+	public String getLoginId() {
+		return this.memberService.getLoginId(this.req.getLoginedMember().getId());
 	}
 }

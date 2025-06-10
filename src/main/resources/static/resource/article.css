@@ -83,7 +83,7 @@
 	display: flex;
 	justify-content: conter;
 	border: 1px solid rgba(0, 0, 0, 0.40);
-	border-radius: 5px;
+	border-radius: 15px;
 	padding: 10px;
 	font-family: none;
 	font-size: 0.9rem;
@@ -106,6 +106,13 @@
 
 .comments {
 	margin-left: 10px;
+}
+
+#likePointCnt {
+	font-family: none;
+}
+
+#commentCnt {
 	font-family: none;
 }
 
@@ -163,25 +170,26 @@
 
 .detail-modify > ul > li > button {
 	font-size: 1.15rem;
-	color: #1D2F6F;
+	color: white;
 }
 
 .detail-modify > ul > li > button > i {
 	padding: 5px 6px;
 	border-radius: 10px;
-	border: 1px solid rgba(0, 0, 0, 0.50);
+	background-color: #1B9AAA;
 	
 }
 
 .detail-modify > ul > li > button:hover > i {
 	cursor: pointer;
-	color: #DDDBCB;
+	color: white;
+	background-color: #1D2F6F;
 }
 
 .detail-modify > ul ul {
 	position: absolute;
 	display: none;
-	width: 80px;
+	width: 100px;
 }
 
 .detail-modify > ul ul > li {
@@ -195,8 +203,12 @@
 	right: 100%;
 }
 
-.detail-modify > ul > li:hover > ul {
-	display: block;
+.detail-modify > ul ul{
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 15px;
+	margin-right:10px;
+	display: none;
+	
 }
 
 .detail-modify > ul > li {
@@ -205,12 +217,12 @@
 
 .detail-modify ul > li > a {
 	display: block;
-	padding: 5px 15px;
+	padding: 5px 30px;
 }
 
 .detail-modify > ul > li > ul > li:hover > a {
 	cursor: pointer;
-	color: #DDDBCB;
+	color: #1B9AAA;
 	
 }
 
@@ -229,5 +241,112 @@
 	display: flex;
 	margin-top: 5px;
 	margin-left: 5px;
-	font-size: 0.95rem
+	font-size: 0.95rem;
+}
+
+.comment-section {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	margin-top: 20px;
+	margin-bottom: 0;
+}
+
+.comment-box {
+	width: 600px;
+	border-top: 1px solid rgba(0, 0, 0, 0.4);
+	border: 1px solid blue;
+}
+
+#commentArea {
+	padding-bottom: 250px;
+}
+
+.cm-window {
+	display: block;
+	width: 100%;
+}
+
+.cm-header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.cm-header img {
+	width: 35px;
+	height: 35px;
+}
+
+.cm-writer {
+	display: flex;
+	width: 580px;
+}
+
+.cm-setting > ul {
+	display: none;
+}
+
+.cm-footer {
+	display: block;
+	width: 600px;
+}
+
+.cm-text {
+	display: block;
+	text-align: center;
+	margin-top: 10px;
+	color: rgba(0, 0, 0, 0.7);
+}
+
+.cm-write {
+	display: flex;
+}
+
+.cm-writebox {
+	position: fixed;
+	bottom: 0;
+	left: 50%; /* 화면의 가로 중간 기준 */
+	transform: translateX(-50%); /* 박스 너비의 절반만큼 왼쪽으로 당겨서 정확히 가운데 */
+	width: 600px;
+	background-color: white; /* 배경색 지정 필수 (안 그러면 투명함) */
+	padding: 1rem 1rem 4rem 1rem;
+	border-top: 1px solid rgba(0, 0, 0, 0.4);
+	z-index: 10; /* 다른 요소 위로 올라오게 */
+}
+
+.cm-loginedm {
+	margin: -5px 0 10px 10px;
+	color: rgba(0, 0, 0, 0.7);
+}
+
+.cm-dowrite {
+	display: flex;
+	align-items: center;
+}
+
+#comment {
+	border: 1px solid #A0ACAD;
+	width: 500px;
+	height: 50px;
+	border-radius: 15px;
+	font-family: none;
+}
+
+.click-btn {
+	color: white;
+}
+
+.cm-writebtn {
+	display: block;
+	font-size: 1.25rem;
+	padding: 1px 8.5px;
+	margin-left: 10px;
+	background-color: #1B9AAA;
+	border-radius: 10px;
+}
+
+.cm-writebtn:hover {
+	background-color: #1D2F6F;
+	cursor: pointer;
 }

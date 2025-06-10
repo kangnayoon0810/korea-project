@@ -20,8 +20,8 @@ public class ArticleService {
 		this.articleDao.writeArticle(content, loginedMemberId, boardId, memberCategory);
 	}
 
-	public List<Article> getArticles(String keyWord, String searchType, int boardId, String area, int articlesInPage, int limitFrom) {
-		return this.articleDao.getArticles(keyWord, searchType, boardId, area, articlesInPage, limitFrom);
+	public List<Article> getArticles(String keyWord, int boardId, int articlesInPage, int limitFrom) {
+		return this.articleDao.getArticles(keyWord, boardId, articlesInPage, limitFrom);
 	}
 	
 	public Article getArticleById(int id) {
@@ -40,8 +40,8 @@ public class ArticleService {
 		return this.articleDao.getLastArticleId();
 	}
 	
-	public int getArticlesCnt(int boardId, String area, String keyWord, String searchType) {
-		return this.articleDao.getArticlesCnt(boardId, area, keyWord, searchType);
+	public int getArticlesCnt(int boardId, String keyWord) {
+		return this.articleDao.getArticlesCnt(boardId, keyWord);
 	}
 
 	public void increaseViewCnt(int id) {
@@ -51,5 +51,6 @@ public class ArticleService {
 	public Article getArticleByMemberCategory(int memberCategory) {
 		return this.articleDao.getArticleByMemberCategory(memberCategory);
 	}
+
 
 }

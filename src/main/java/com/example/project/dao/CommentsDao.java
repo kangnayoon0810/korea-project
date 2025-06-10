@@ -22,12 +22,12 @@ public interface CommentsDao {
 			     	, memberId = #{loginedMemberId}
 			     	, relTypeCode = #{relTypeCode}
 			     	, relId = #{relId}
-			     	, comment = #{comment}
+			     	, content = #{content}
 			""")
-	public void writeComment(String comment, String relTypeCode, int loginedMemberId, int relId);
+	public void writeComment(String relTypeCode, int loginedMemberId, int relId, String content);
 	
 	@Select("""
-			SELECT c.*, m.loginId
+			SELECT c.*, m.nickName
 			FROM comments c
 			INNER JOIN `member` m
 			ON c.memberId = m.id
@@ -59,26 +59,9 @@ public interface CommentsDao {
 	@Update("""
 			UPDATE comments
 				SET updateDate = NOW()
-					, comment = #{comment}
+					, content = #{content}
 					WHERE id = #{id}
 			""")
-	public void modifyComment(int id, String comment);
-	
-	@Select("""
-			SELECT *
-				FROM comments
-				WHERE memberId = #{id}
-				AND relTypeCode = #{relTypeCode}
-				AND relId = #{relId}
-			""")
-	public Comment getComment(int id, String relTypeCode, int relId);
-
-	@Select("""
-			SELECT COUNT(*)
-				FROM comments
-				WHERE relTypeCode = #{relTypeCode}
-				AND relId = #{relId}
-			""")
-	public int getCommentsCnt(String relTypeCode, int relId);
+	public void modifyComment(int id, String content);
 	
 }

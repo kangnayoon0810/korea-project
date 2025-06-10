@@ -14,6 +14,7 @@ public class Comments {
 	private int memberId;
 	private String relTypeCode;
 	private int relId;
-	private String comment;
-	private String loginId;
+	private String content;
+	private String nickName;
+	
 }

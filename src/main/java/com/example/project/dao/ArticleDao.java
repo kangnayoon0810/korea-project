@@ -25,52 +25,37 @@ public interface ArticleDao {
 	public void writeArticle(String content, int loginedMemberId, int boardId, int memberCategory);
 
 	@Select("""
-			<script>
-			SELECT a.*, m.nickName
+			SELECT a.*, m.nickName, COUNT(c.id) `commentCnt`
 			    FROM article a
 			    INNER JOIN `member` m
 			    ON a.memberId = m.id
+			    LEFT JOIN comments c
+			 	ON a.id = c.relId
+			 	AND c.relTypeCode = 'article'
 			    WHERE boardId = #{boardId}
-			    <if test="keyWord != ''">
-		    	<choose>
-		    		<when test="searchType == 'area'">
-			    		AND a.area LIKE CONCAT('%', #{keyWord}, '%')
-		    		</when>
-				    <when test="searchType == 'content'">
-				    	AND a.content LIKE CONCAT('%', #{keyWord}, '%')
-				    </when>
-		    	</choose>
-			    </if>
+				AND a.content LIKE CONCAT('%', #{keyWord}, '%')
+				GROUP BY a.id
 				ORDER BY a.id DESC
 				LIMIT #{limitFrom}, #{articlesInPage}
-				</script>
 			""")
-	public List<Article> getArticles(String keyWord, String searchType, int boardId, String area, int articlesInPage, int limitFrom);
+	public List<Article> getArticles(String keyWord, int boardId, int articlesInPage, int limitFrom);
 
 	@Select("""
-			<script>
 			SELECT COUNT(id)
 				FROM article
 				WHERE boardId = #{boardId}
-				<if test="keyWord != ''">
-		    	<choose>
-		    		<when test="searchType == 'area'">
-			    		AND a.area LIKE CONCAT('%', #{keyWord}, '%')
-		    		</when>
-				    <when test="searchType == 'content'">
-				    	AND a.content LIKE CONCAT('%', #{keyWord}, '%')
-				    </when>
-		    	</choose>
-			    </if>
-	    	</script>
+				AND content LIKE CONCAT('%', #{keyWord}, '%')
 			""")
-	public int getArticlesCnt(int boardId, String area, String keyWord, String searchType);
+	public int getArticlesCnt(int boardId, String keyWord);
 	
 	@Select("""
-			SELECT a.*, m.nickName
+			SELECT a.*, m.nickName, COUNT(c.id) `commentCnt`
 			 	FROM article a
 			 	INNER JOIN `member` m
 			 	ON a.memberId = m.id
+			 	LEFT JOIN comments c
+			 	ON a.id = c.relId
+			 	AND c.relTypeCode = 'article'
 			 	WHERE a.id = #{id}
 			""")
 	public Article getArticleById(int id);
@@ -107,5 +92,6 @@ public interface ArticleDao {
 				WHERE memberCategory = #{memberCategory}
 			""")
 	public Article getArticleByMemberCategory(int memberCategory);
+
 
 }

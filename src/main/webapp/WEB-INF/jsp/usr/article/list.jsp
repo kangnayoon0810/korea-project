@@ -54,7 +54,8 @@
 									${article.getLikeCnt() }
 								</button>
 							</div>
-							<a class="comments" href="/usr/article/detail?id=${article.getId() }"><i class="fa-regular fa-comment"></i> ${article.getCommentsCnt() }</a>
+							<a class="comments" href="/usr/article/detail?id=${article.getId() }"><i class="fa-regular fa-comment"></i></a>
+							<span id="commentCnt">&nbsp;${article.getCommentCnt() }</span>
 							<div class="views">조회수 ${article.getViewCnt() }</div>
 						</div>
 						<div class="date-box">
@@ -79,7 +80,8 @@
 									${article.getLikeCnt() }
 								</button>
 							</div>
-							<a class="comments" href="/usr/article/detail?id=${article.getId() }"><i class="fa-regular fa-comment"></i> ${article.getCommentsCnt() }</a>
+							<a class="comments" href="/usr/article/detail?id=${article.getId() }"><i class="fa-regular fa-comment"></i></a>
+							<span id="commentCnt">&nbsp;${article.getCommentCnt() }</span>
 							<div class="views">조회수 ${article.getViewCnt() }</div>
 						</div>
 						<div class="date-box">
