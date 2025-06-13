@@ -53,7 +53,7 @@ public interface MemberDao {
 	Member getMemberByEMail(String eMail);
 
 	@Select("""
-			SELECT loginId
+			SELECT nickName
 				FROM `member`
 				WHERE id = #{id}
 			""")

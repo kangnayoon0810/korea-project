@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.project.dto.Article;
 import com.example.project.dto.Board;
-import com.example.project.dto.Member;
 import com.example.project.dto.Req;
 import com.example.project.service.ArticleService;
 import com.example.project.service.BoardService;
+import com.example.project.service.FileService;
 import com.example.project.service.MemberService;
 import com.example.project.util.Util;
 
@@ -38,7 +38,9 @@ public class UsrArticleController {
 	}
 
 	@GetMapping("/usr/article/write")
-	public String write() {
+	public String write(Model model, int boardId, int memberCategory) {
+		model.addAttribute("boardId", boardId);
+		model.addAttribute("memberCategory", memberCategory);
 		return "usr/article/write";
 	}
 
@@ -52,7 +54,8 @@ public class UsrArticleController {
 
 		return Util.jsReplace("게시물이 등록되었습니다", String.format("detail?id=%d", id));
 	}
-
+	
+	
 	@GetMapping("/usr/article/list")
 	public String list(Model model, int boardId, @RequestParam int memberCategory, @RequestParam(defaultValue = "1") int cPage, @RequestParam(defaultValue = "") String keyWord) {
 		
@@ -87,7 +90,7 @@ public class UsrArticleController {
 	}
 	
 	@GetMapping("/usr/article/detail")
-	public Object detail(HttpServletRequest request, HttpServletResponse response, Model model, int id) {
+	public String detail(HttpServletRequest request, HttpServletResponse response, Model model, int id) {
 
 		Cookie[] cookies = request.getCookies();
 		boolean isViewed = false;
@@ -136,10 +139,10 @@ public class UsrArticleController {
 
 	@GetMapping("/usr/article/delete")
 	@ResponseBody
-	public String delete(int id) {
+	public String delete(int id, int boardId, int memberCategory) {
 
 		this.articleService.deleteArticle(id);
 
-		return Util.jsReplace(String.format("%d번 게시물이 삭제되었습니다", id), "list");
+		return Util.jsReplace(String.format("%d번 게시물이 삭제되었습니다", id), String.format("list?boardId=%d&memberCategory=%d", boardId, memberCategory));
 	}
 }

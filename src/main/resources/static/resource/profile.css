@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+.myprofile-section {
+	width: 100%;
+	margin-top: 50px;
+	min-height: 100hv;
+}
+
+.start-greetings {
+	width: 60%;
+	height: 50px;
+	margin: 0 auto;
+	border: 1px solid pink;
+	margin-bottom: 10px;
+	text-align: center;
+	font-family: Paperlogy-8ExtraBold;
+	color: #1B9AAA;
+	font-size: 1.6rem;
+	line-height: 50px;
+	word-spacing: 10px
+}
+.start-greetings > span {
+	color: black;
+}
+
+.myprofile-box {
+	width: 60%;
+	height: 700px;
+	border: 1px solid red;
+	margin: 0 auto;
+}
+
+.chg-profile {
+	width: 30%;
+	border: 1px solid blue;
+	margin: 40px 30px 20px 30px;
+}
+
+.my-img img {
+	border-radius: 50%;
+	width: 250px;
+	height: 250px;
+	margin: 20px auto;
+}

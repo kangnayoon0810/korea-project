@@ -2,8 +2,6 @@ package com.example.project.dao;
 
 import java.util.List;
 
-import javax.xml.stream.events.Comment;
-
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -42,13 +40,13 @@ public interface CommentsDao {
 	int getLastInsertCommentId();
 	
 	@Select("""
-			SELECT c.*, m.loginId
+			SELECT c.*, m.nickName
 				FROM comments c
 			    INNER JOIN `member` m
 			    ON c.memberId = m.id
 				WHERE c.id = #{id}
 			""")
-	Comment getCommentById(int id);
+	Comments getCommentById(int id);
 
 	@Delete("""
 			DELETE FROM comments

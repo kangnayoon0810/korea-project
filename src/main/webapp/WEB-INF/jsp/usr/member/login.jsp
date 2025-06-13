@@ -6,13 +6,12 @@
 
 <%@ include file="/WEB-INF/jsp/common/header.jsp"%>
 
-<div>
 	<section class="login-section">
 		<div class="dologin">
 			<form action="doLogin" method="post"
 				onsubmit="return loginFormChk(this);">
 				<fieldset class="login-fieldset">
-					<legend class="fieldset-legend">로그인</legend>
+					<div class="fieldset-legend">로그인</div>
 	
 					<div class="loginId">
 						<label>아이디</label> <input type="text" name="loginId" />
@@ -29,14 +28,13 @@
 					<div class="dosignup-box">
 						<p>회원이 아니신가요?</p>
 						<div>
-							<a href="/usr/member/signup?authLevel=1">회원 가입</a>
-							<a href="/usr/member/signup?authLevel=2">트레이너 가입</a>
+							<a class="members-signup" href="/usr/member/signup?authLevel=1">회원 가입</a>
+							<a class="trainers-signup" href="/usr/member/signup?authLevel=2">트레이너 가입</a>
 						</div>
 					</div>
 				</fieldset>
 			</form>
 		</div>
 	</section>
-</div>
 
 <%@ include file="/WEB-INF/jsp/common/footer.jsp"%>

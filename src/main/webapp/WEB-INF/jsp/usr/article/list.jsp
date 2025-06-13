@@ -36,19 +36,25 @@
 			</form>
 		</div>
 		<div class="table-box">
-			<div class="article-box">
+			<div class="article-box2">
 				<c:if test="${memberCategory == 1 }">
 					<c:forEach items="${articles }" var="article">
 						<div class="profile-box">
-							<div><img src="https://www.studiopeople.kr/common/img/default_profile.png"/></div>
+							<div><img src="/resource/images/userprofile.jpg"/></div>
 							<div class="nickname">${article.getNickName() }</div>
 						</div>
+						<style>
+							p > img {
+								width: 200px;
+								height: 200px;
+							}
+						</style>
 						<div class="content-box">
 							<div class="content">${article.getContent() }</div>
 						</div>
 						<div class="cnt-box">
 							<div class="like">
-								<button onclick="clickLikePoint();">
+								<button>
 									<i class="fa-regular fa-heart"></i>
 									<span id="likePointCnt"></span>
 									${article.getLikeCnt() }
@@ -66,7 +72,7 @@
 				<c:if test="${memberCategory == 2 }">
 					<c:forEach items="${articles }" var="article">
 						<div class="profile-box">
-							<div><img src="https://www.studiopeople.kr/common/img/default_profile.png"/></div>
+							<div><img src="/resource/images/userprofile.jpg"/></div>
 							<div class="nickname">${article.getNickName() }</div>
 						</div>
 						<div class="content-box">
@@ -74,7 +80,7 @@
 						</div>
 						<div class="cnt-box">
 							<div class="like">
-								<button onclick="clickLikePoint();">
+								<button>
 									<i class="fa-regular fa-heart"></i>
 									<span id="likePointCnt"></span>
 									${article.getLikeCnt() }
@@ -89,29 +95,21 @@
 						</div>
 					</c:forEach>
 				</c:if>
+				
+			<div class="bt-bar">
+				<c:if test="${req.getLoginedMember().getAuthLevel() == 1 && board.getId() != 2 }">
+					  <!-- 회원이 트레이너 커뮤니티가 아닐 때만 -->
+					  <a href="/usr/article/write?boardId=${board.getId() }&memberCategory=${memberCategory }" class="write-btn-fixed"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;글쓰기</a>
+				</c:if>
+				<c:if test="${req.getLoginedMember().getAuthLevel() == 2 && board.getId() != 1 }">
+					  <!-- 트레이너가 회원 커뮤니티가 아닐 때만 -->
+					  <a href="/usr/article/write?boardId=${board.getId() }&memberCategory=${memberCategory }" class="write-btn-fixed"><i class="fa-solid fa-pen"></i>&nbsp;&nbsp;글쓰기</a>
+				</c:if>
+			</div>
+				
 			</div>
 		</div>
 		
-		<div class="bt-bar">
-			<div class="">
-				<c:if test="${req.getLoginedMember().getId() != 0 }">
-					<c:choose>
-						<c:when test="${req.getLoginedMember().getAuthLevel() == 0 }">
-							<div>
-								<a class="btn btn-ghost" href="write">글쓰기</a>
-							</div>
-						</c:when>
-						<c:otherwise>
-							<c:if test="${board.getId() != 1 }">
-								<div>
-									<a class="btn btn-ghost" href="write">글쓰기</a>
-								</div>
-							</c:if>
-						</c:otherwise>
-					</c:choose>
-				</c:if>
-			</div>
-			
 			<%-- <div class="mb-8 mt-4 w-2/3 mx-auto text-center">
 				<div class="join">
 					<c:set var="queryString" value="?boardId=${board.getId() }&keyWord=${keyWord }&searchType=${searchType }" />
@@ -129,8 +127,9 @@
 					</c:if>
 				</div>
 			</div> --%>
-		</div>
+		
 	</div>
 </section>
+
 
 <%@ include file="/WEB-INF/jsp/common/footer.jsp"%>

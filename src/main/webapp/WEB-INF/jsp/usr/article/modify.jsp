@@ -4,49 +4,121 @@
 
 <c:set var="pageTitle" value="Modify" />
 
+<!-- TOAST UI Editor 스타일 및 스크립트 (CDN) -->
+<link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+
 <%@ include file="/WEB-INF/jsp/common/header.jsp"%>
 
-<%-- <section class="mt-8">
-	<div class="container mx-auto">
-		<div class="table-box">
-			<div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 w-2/3 mx-auto">
-				<form action="doModify" method="post">
-					<input name="id" type="hidden" value="${article.getId() }" />
-						<table class="table">
-							<tr>
-								<th>번호</th>
-								<td>${article.getId() }</td>
-							</tr>
-							<tr>
-								<th>작성일</th>
-								<td>${article.getRegDate().substring(2, 16) }</td>
-							</tr>
-							<tr>
-								<th>수정일</th>
-								<td>${article.getUpdateDate().substring(2, 16) }</td>
-							</tr>
-							<tr>
-								<th>제목</th>
-								<td><input type="text" class="input" name="title" value="${article.getTitle() }"/></td>
-							</tr>
-							<tr>
-								<th>내용</th>
-								<td><textarea class="textarea textarea-md" name="content">${article.getContent() }</textarea></td>
-							</tr>
-							<tr>
-								<td colspan="2"><button class="btn btn-ghost">수정</button></td>
-							</tr>
-						</table>
-					</div>
-				</form>
-			</div>
+<style>
+    /* OK 버튼 */
+	.toastui-editor-popup .te-ok-button,
+	.toastui-editor-popup .toastui-editor-ok-button {
+	  background-color: #1D2F6F !important;
+	  border-color: #1D2F6F !important;
+	  color: white !important;
+	}
+	.toastui-editor-popup .te-ok-button:hover,
+	.toastui-editor-popup .toastui-editor-ok-button:hover {
+	  background-color: #1B9AAA !important;
+	}
+	
+	/* 탭(File / URL) 하단 강조 바 */
+	.toastui-editor-popup .te-tab-item.active,
+	.toastui-editor-popup .tab-item.active {
+	  border-bottom: 2px solid #1D2F6F !important;
+	  color: #1D2F6F !important;
+	}
+	
+	/* focus 되었을 때 input/textarea 테두리 */
+	.toastui-editor-popup input:focus,
+	.toastui-editor-popup textarea:focus {
+	  outline: none;
+	  border: 1px solid #1D2F6F !important;
+	  box-shadow: 0 0 0 2px rgba(29, 47, 111, 0.2);
+	}
+	
+	/* 에디터 내부 링크 색상 */
+	.toastui-editor-contents a {
+	  color: #1D2F6F !important;
+	}
+	
+	/* 툴바에서 아이콘 선택 시 강조되는 색상 */
+	.toastui-editor-defaultUI-toolbar .toastui-editor-toolbar-icons.active {
+	  background-color: #1D2F6F !important;
+	  color: white !important;
+	}
+	
+	/* WYSIWYG 모드 (우측 입력 영역) */
+.toastui-editor-contents {
+  font-size: 1rem !important;
+}
 
-		<div class="mt-3 text-sm btns w-2/3 mx-auto">
-			<div class="mr-2">
-				<button class="btn btn-ghost" onclick="history.back();">뒤로가기</button>
+/* 마크다운 모드 (좌측 입력 영역) */
+.toastui-editor-md-container textarea {
+  font-size: 1rem !important;
+}
+	
+
+</style>
+
+<section class="modify-section">
+	<div class="modify-box">
+		<div class="table-modifybox">
+			<form action="doModify" method="post" onsubmit="return submitForm(this);">
+			 	<input type="hidden" name="id" value="${article.id}" />
+				<input type="hidden" name="boardId" value="${boardId }" />
+				<input type="hidden" name="memberCategory" value="${memberCategory }" />
+				<input type="hidden" name="memberId" value="${req.getLoginedMember().getId()}">
+				<input type="hidden" name="memberCategory" value="${req.getLoginedMember().getAuthLevel()}">
+				<input type="hidden" name="content" />
+				<div class="profile-modifybox">
+					<div class="profile-modifybox2">
+						<div><img src="/resource/images/userprofile.jpg"/></div>
+						<div class="nickname">${req.getLoginedMember().getNickName()}</div>
+					</div>
+					<button class="save-btn" type="submit">저장</button>
+				</div>
+				<div class="content-modifybox">
+					<div id="editor">
+						<div>${article.getContent() }</div>
+					</div>
+				</div>
+			</form>
+			<div class="exit-box">
+				<div>
+					<button class="exit-btn" onclick="history.back();"><i class="fa-solid fa-angle-left"></i>&nbsp;나가기</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</section> --%>
+</section>
+
+<script>
+
+  const editor = new toastui.Editor({
+    el: document.querySelector('#editor'),
+    height: '500px',
+    initialEditType: 'wysiwyg',
+//     previewStyle: 'vertical',
+    toolbarItems: [
+      ['image', 'link']
+    ]
+  });
+  
+	const submitForm = function (form) {
+		const html = editor.getHTML().trim();
+	
+		if (html.length === 0 || html === '<p><br></p>') {
+			alert('내용을 입력해주세요');
+			editor.focus();
+			return false;
+		}
+	
+		form.content.value = html;
+		return true;
+	}
+
+</script>
 
 <%@ include file="/WEB-INF/jsp/common/footer.jsp"%>

@@ -18,7 +18,7 @@ $(function(){
 		const id = $(this).data('id');
 		const content = $(this).data('content');
 		
-		commentModifyForm(id, comment);
+		commentModifyForm(id, content);
 	})
 	
 	$('#commentArea').on('click', '.deleteBtn', function () {
@@ -146,34 +146,40 @@ const getComments = function () {
 
 	        if (data[idx].memberId == ${req.getLoginedMember().getId()}) {
 	          btnHtml = `
-	            <div class="cm-setting">
-	              <button class="setting-btn">
-	                <i class="fa-solid fa-ellipsis"></i>
-	              </button>
-	              <ul class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-	                <li><button class="modifyBtn" data-id="\${data[idx].id}" data-content="\${data[idx].content}">수정</button></li>
-	                <li><button class="deleteBtn" data-id="\${data[idx].id}">삭제</button></li>
-	              </ul>
-	            </div>
+				<ul>
+					<li class="cm-setting">
+						<button class="cm-setting-btn">
+							<i class="fa-solid fa-ellipsis"></i>
+						</button>
+						<ul class="cm-mnd">
+		                	<li><button class="modifyBtn" data-id="\${data[idx].id}" data-content="\${data[idx].content}">수정</button></li>
+		                	<li><button class="deleteBtn" data-id="\${data[idx].id}">삭제</button></li>
+		              	</ul>
+		            </li>
+				</ul>
 	          `;
 	        }
 
 	        const commentHtml = `
-	          <div id="\${data[idx].id}" class="cm-window">
-	          	<div class="cm-header">
-		            <div class="cm-writer">
-		            	<div class="cm-profile">
-		          			<div><img src="https://www.studiopeople.kr/common/img/default_profile.png"/></div></a></div>
-			              	<div class="cm-nickname">\${data[idx].nickName}</div>
-		              	</div>
-		              	\${btnHtml}
+				<div id="\${data[idx].id}" class="cm-window">
+					<div class="cm-header">
+						<div class="cm-writer">
+							<div class="cm-profile">
+								<div><img src="/resource/images/userprofile.jpg"/></div>
+								<div class="cm-nickname">\${data[idx].nickName}</div>
+							</div>
+							\${btnHtml}
+						</div>
+					</div>
+					<div class="cm-footer">
+						<div class="cm-contentbox">
+		            		<div class="cm-content">\${data[idx].content}</div>
+		            	</div>
+		            	<div class="cm-datebox">
+		            		<div class="cm-date">\${data[idx].updateDate.substring(2, 16)}</div>
+		            	</div>		            
 	            	</div>
-	            </div>
-	            <div class="cm-footer">
-		            <div class="cm-content">\${data[idx].content}</div>
-		            <div class="cm-date">\${data[idx].updateDate}</div>
-	            </div>
-	            </div>
+	         	</div>
 	        `;
 
 	        $('#commentArea').append(commentHtml);
@@ -195,22 +201,35 @@ const addComments = function (id, method) {
 		dataType : 'json',
 		success : function (data) {
 				let addHtml = `
-					<div id="\${data.id }" class="py-2 border-b-2 border-gray-200 pl-20">
-						<div class="flex justify-between items-center">
-							<div class="font-semibold">\${data.loginId }</div>
-							<div class="dropdown dropdown-bottom dropdown-end mr-4">
-							  <button tabindex="0" class="btn btn-circle btn-ghost btn-xs">
-						        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block h-5 w-5 stroke-current"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path> </svg>
-						      </button>
-							  <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-							    <li class="w-14"><button class="modifyBtn" data-id="\${data.id }" data-content="\${data.content}">수정</button></li>
-							    <li class="w-14"><button class="deleteBtn" data-id="\${data.id }">삭제</button></li>
-							  </ul>
+					<div id="\${data.id}" class="cm-window">
+						<div class="cm-header">
+							<div class="cm-writer">
+								<div class="cm-profile">
+									<div><img src="/resource/images/userprofile.jpg"/></div>
+									<div class="cm-nickname">\${data.nickName}</div>
+								</div>
+								<ul>
+									<li class="cm-setting">
+										<button tabindex="0" class="cm-setting-btn">
+											<i class="fa-solid fa-ellipsis"></i>
+										</button>
+										<ul class="cm-mnd">
+						                	<li><button class="modifyBtn" data-id="\${data.id}" data-content="\${data.content}">수정</button></li>
+						                	<li><button class="deleteBtn" data-id="\${data.id}">삭제</button></li>
+						              	</ul>
+					            	</li>
+								</ul>
 							</div>
 						</div>
-						<div class="text-lg my-1 ml-2">\${data.content }</div>
-						<div class="text-xs text-gray-400">\${data.updateDate }</div>
-					</div>
+						<div class="cm-footer">
+							<div class="cm-contentbox">
+			            		<div class="cm-content">\${data.content }</div>
+			            	</div>
+		            	<div class="cm-datebox">
+		            		<div class="cm-date">\${data.updateDate.substring(2, 16)}</div>
+		            	</div>
+	         		</div>
+							
 				`;
 				
 				if (method == 'write') {
@@ -264,7 +283,7 @@ const modifyComment = async function (id) {
 let originalForm = null;
 let originalId = null;
 
-const commentModifyForm = function (id, Content) {
+const commentModifyForm = function (id, content) {
 	
 	if (originalForm != null) {
 		commentModifyCancle(originalId);
@@ -276,13 +295,13 @@ const commentModifyForm = function (id, Content) {
 	originalId = id;
 	
 	let addHtml = `
-		<div>
-			<div class="border-2 border-gray-200 rounded-xl px-4 mt-2">
-				<div class="mt-3 mb-2 font-semibold text-sm loginedMemberLoginId"></div>
-				<textarea style="width: 100%; resize: none;" id="commmentModifyContent" class="textarea">\${content}</textarea>
-				<div class="flex justify-end my-2">
-					<button id="commentModifyCancleBtn" data-id="\${id}" class="btn btn-neutral btn-outline btn-xs mr-2">취소</button>
-					<button id="modifyCommentyBtn" data-id="\${id}" class="btn btn-neutral btn-outline btn-xs">수정</button>
+		<div class="cm-domodify">
+			<div class="cm-domodifybox">
+				<div class="m-nickname loginedMemberLoginId"></div>
+				<textarea type="text" id="commentModifyContent" class="modify-text">\${content}</textarea>
+				<div class="cm-cnm">
+					<button id="commentModifyCancleBtn" data-id="\${id}" class="modify-cnl">취소</button>
+					<button id="modifyCommentBtn" data-id="\${id}" class="cm-domodify-btn">수정</button>
 				</div>
 			</div>
 		</div>
@@ -310,23 +329,34 @@ const commentModifyCancle = function(id) {
 			<div class="article-detailbox">
 				<div class="profile-detailbox">
 					<div class="profile-detailbox2">
-						<div><img src="https://www.studiopeople.kr/common/img/default_profile.png"/></div>
+						<div><img src="/resource/images/userprofile.jpg"/></div>
 						<div class="nickname">${article.getNickName() }</div>
 					</div>
 					<div class="detail-modify">
+						<a class="show-list" href="/usr/article/list?boardId=${article.getBoardId() }&memberCategory=${article.getMemberCategory() }">목록보기</a>
 						<ul>
 							<li>
-								<button class="setting-btn"><i class="fa-solid fa-ellipsis"></i></button>
-								<ul class="setting-a">
-									<li><a href="/usr/article/modify">수정</a></li>
-									<li><a href="/usr/article/delete">삭제</a></li>
-								</ul>
+								<c:if test="${article.getMemberId() == req.getLoginedMember().getId() }">
+									<button class="setting-btn"><i class="fa-solid fa-ellipsis"></i></button>
+									<ul class="setting-a">
+										<li><a href="/usr/article/modify?id=${article.getId() }">수정</a></li>
+										<li><a href="/usr/article/delete?id=${article.getId() }&boardId=${article.getBoardId() }&memberCategory=${article.getMemberCategory() }" onclick="if(confirm('게시물을 삭제하시겠습니까?') == false) return false;">삭제</a></li>
+									</ul>
+								</c:if>
 							</li>						
 						</ul>
 					</div>
 				</div>
+				<style>
+					p > img {
+						width: 200px;
+						height: 200px;
+					}
+				</style>
 				<div class="content-detailbox">
-					<div class="content">${article.getContent() }</div>
+					<div class="content">
+						${article.getContent() }
+					</div>
 				</div>
 				<div class="cnt-detailbox">
 					<div class="like">

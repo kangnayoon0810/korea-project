@@ -277,3 +277,28 @@ const eMailDupChk = function(el) {
 		}
 	})
 }
+
+$(document).ready(function () {
+  // 댓글의 ... 버튼 눌렀을 때 토글 메뉴 열기/닫기
+  $(document).on('click', '.memberprofile-box', function (e) {
+    e.stopPropagation(); // 문서 클릭 이벤트 방지
+
+    const $menu = $(this).siblings('.memberprofile-btn');
+
+    // 다른 열려 있는 메뉴 닫기
+    $('.memberprofile-btn').not($menu).hide();
+
+    // 현재 메뉴 토글
+    $menu.toggle();
+  });
+
+  // 메뉴 바깥 클릭 시 모두 닫기
+  $(document).on('click', function () {
+    $('.memberprofile-btn').hide();
+  });
+
+  // 메뉴 안쪽 클릭 시 닫히는 것 방지
+  $(document).on('click', '.memberprofile-btn', function (e) {
+    e.stopPropagation();
+  });
+});

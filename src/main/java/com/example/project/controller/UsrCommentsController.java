@@ -2,8 +2,6 @@ package com.example.project.controller;
 
 import java.util.List;
 
-import javax.xml.stream.events.Comment;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,11 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.project.dto.Comments;
-import com.example.project.dto.LikePoint;
 import com.example.project.dto.Req;
-import com.example.project.dto.ResultData;
-import com.example.project.service.ArticleService;
-import com.example.project.service.BoardService;
 import com.example.project.service.CommentsService;
 
 @Controller
@@ -41,7 +35,7 @@ public class UsrCommentsController {
 
 	@GetMapping("/usr/comments/getComment")
 	@ResponseBody
-	public Comment getComment(int id) {
+	public Comments getComment(int id) {
 		return this.commentsService.getCommentById(id);
 	}
 

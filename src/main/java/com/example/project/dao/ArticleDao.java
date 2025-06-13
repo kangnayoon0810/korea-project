@@ -25,13 +25,19 @@ public interface ArticleDao {
 	public void writeArticle(String content, int loginedMemberId, int boardId, int memberCategory);
 
 	@Select("""
-			SELECT a.*, m.nickName, COUNT(c.id) `commentCnt`
-			    FROM article a
-			    INNER JOIN `member` m
-			    ON a.memberId = m.id
-			    LEFT JOIN comments c
-			 	ON a.id = c.relId
-			 	AND c.relTypeCode = 'article'
+			SELECT a.*, 
+					m.nickName
+					, COUNT(DISTINCT c.id) AS commentCnt
+					, COUNT(DISTINCT l.memberId) AS likeCnt
+				FROM article a
+				INNER JOIN `member` m
+				ON a.memberId = m.id
+				LEFT JOIN comments c
+				ON a.id = c.relId
+				AND c.relTypeCode = 'article'
+				LEFT JOIN likePoint l
+				ON a.id = l.relId
+				AND l.relTypeCode = 'article'
 			    WHERE boardId = #{boardId}
 				AND a.content LIKE CONCAT('%', #{keyWord}, '%')
 				GROUP BY a.id

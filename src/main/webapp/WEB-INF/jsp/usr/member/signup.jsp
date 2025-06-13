@@ -12,10 +12,10 @@
 			<input type="hidden" value="${authLevel }" name="authLevel" />
 			<fieldset class="signup-fieldset">
 				<c:if test="${authLevel == 1 }">
-					<legend class="fieldset-legend">회원가입</legend>
+					<div class="fieldset-legend">회원가입</div>
 				</c:if>
 				<c:if test="${authLevel == 2 }">
-					<legend class="fieldset-legend">트레이너 가입</legend>
+					<div class="fieldset-legend">트레이너 가입</div>
 				</c:if>
  
 				<div class="name-box">

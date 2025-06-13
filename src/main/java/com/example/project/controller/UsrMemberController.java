@@ -117,7 +117,7 @@ public class UsrMemberController {
 			return Util.jsReplace("비밀번호가 일치하지 않습니다", "login");
 		}
 
-		this.req.login(new LoginedMember(member.getId(), member.getAuthLevel(), member.getNickName()));
+		this.req.login(new LoginedMember(member.getId(), member.getAuthLevel(), member.getNickName(), member.getEMail()));
 
 		return Util.jsReplace(String.format("[ %s ] 님 환영합니다", member.getNickName()), "/");
 	}

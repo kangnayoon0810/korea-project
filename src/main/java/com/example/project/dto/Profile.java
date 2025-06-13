@@ -7,9 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginedMember {
+public class Profile {
 	private int id;
-	private int authLevel;
-	private String nickName;
-	private String eMail;
+	private int memberId;
+	private Integer profileImageId;
+	private String intro;
+	private String address;
+	private String tag;
 }

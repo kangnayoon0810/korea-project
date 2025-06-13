@@ -2,8 +2,6 @@ package com.example.project.service;
 
 import java.util.List;
 
-import javax.xml.stream.events.Comment;
-
 import org.springframework.stereotype.Service;
 
 import com.example.project.dao.CommentsDao;
@@ -29,7 +27,7 @@ public class CommentsService {
 		return this.commentsDao.getLastInsertCommentId();
 	}
 	
-	public Comment getCommentById(int id) {
+	public Comments getCommentById(int id) {
 		return this.commentsDao.getCommentById(id);
 	}
 	
