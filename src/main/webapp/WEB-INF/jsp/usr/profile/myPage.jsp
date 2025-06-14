@@ -15,11 +15,11 @@
 				<form action="/usr/common/upload" method="post" enctype="multipart/form-data">
 					<label for="profileInput">
 						<c:choose>
-							<c:when test="${not empty profile.profileImageId() }">
-								<img src="/upload/profile/${profile.profileImageUrl }" alt="프로필" />
+							<c:when test="${not empty profile.profileImageId }">
+								<img src="${profileImageUrl}" alt="프로필" />
 							</c:when>
 							<c:otherwise>
-								<img src="/resource/images/default-profile.jpg" alt="기본 프로필" />
+								<img src="//gen/default-profile.jpg" alt="기본 프로필" />
 							</c:otherwise>
 						</c:choose>
 					</label>

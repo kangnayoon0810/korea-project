@@ -38,13 +38,13 @@ public class WebConfig implements WebMvcConfigurer {
 	}
 	
 	 @Value("${custom.file.dir}")
-	    private String uploadDir;
+	    private String fileDir;
 
 	    @Override
 	    public void addResourceHandlers(ResourceHandlerRegistry registry) {
 	        // /gen/으로 시작하는 URL 요청을 실제 로컬 폴더와 연결
 	        registry.addResourceHandler("/gen/**")
-	                .addResourceLocations("file:///" + uploadDir + "/");
+	                .addResourceLocations("file:///" + fileDir + "/");
 	    }
 
 }

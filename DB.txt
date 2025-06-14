@@ -8,11 +8,6 @@ CREATE TABLE board (
   , boardName VARCHAR(20) NOT NULL
 );
 
-INSERT INTO board SET boardName = 'memberArticle';
-INSERT INTO board SET boardName = 'trainerArticle';
-
-SELECT * FROM board;
-
 CREATE TABLE `member` (
   id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
   , regDate DATETIME NOT NULL
@@ -27,20 +22,6 @@ CREATE TABLE `member` (
   , authLevel INT UNSIGNED NOT NULL COMMENT '관리자는 = 0, 회원 = 1, 트레이너 = 2'
 );
 
-drop table `member`;
-
-INSERT INTO `member`
-    SET regDate = now()
-        , updateDate = now()
-        , `name` =
-        , nickName =
-        , phoneNumber =
-        , loginId = 
-        , loginPw = 
-        , eMail = 
-        
-select * from `member`;
-
 CREATE TABLE article (
   id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
   , boardId INT UNSIGNED NOT NULL
@@ -48,31 +29,16 @@ CREATE TABLE article (
   , updateDate DATETIME NOT NULL
   , memberId INT UNSIGNED NOT NULL
   , content TEXT NOT NULL
-  , `area` varchar(50)
+  , `area` VARCHAR(50)
   , viewCnt INT UNSIGNED NOT NULL DEFAULT 0
-  , memberCategory int UNSIGNED NOT NULL COMMENT '관리자는 = 0, 회원 = 1, 트레이너 = 2'
+  , memberCategory INT UNSIGNED NOT NULL COMMENT '관리자는 = 0, 회원 = 1, 트레이너 = 2'
 );
 
-insert into article
-    set boardId = 1
-        , regDate = now()
-        , updateDate = now()
-        , memberId = 1
-        , content = '테스트용 게시글'
-        , viewCnt = 0
-        , memberCategory = 1;
-        
-INSERT INTO article
-    SET boardId = 1
-        , regDate = NOW()
-        , updateDate = NOW()
-        , memberId = 1
-        , content = '테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글'
-        , viewCnt = 0
-        , memberCategory = 1;
-    
-
-drop table article;
+CREATE TABLE likePoint (
+  memberId INT UNSIGNED NOT NULL
+  , relTypeCode VARCHAR(20) NOT NULL
+  , relId INT UNSIGNED NOT NULL
+);
 
 CREATE TABLE comments (
   id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
@@ -84,66 +50,88 @@ CREATE TABLE comments (
   , content TEXT NOT NULL
 );
 
-select count(id)
-    from comments
-    where relId = 2
-    and relTypeCode = 'article';
-    
-SELECT COUNT(c.id)
-			 	FROM article a
-			 	INNER JOIN comments c
-			 	ON a.id = c.relId
-			 	WHERE c.relid = 2
-			 	AND c.relTypeCode = 'article'
-
-select * from comments;
-
-SELECT * FROM comments
-WHERE relTypeCode = 'article'
-AND relId = 2;
-
-DROP TABLE `comment`;
-
-insert into comments (regDate, updateDate, memberId, relTypeCode, relId, content)
-value (now(), now(), 1, 'article', 1, '테스트용 댓글');
-
-CREATE TABLE likePoint (
-  memberId INT UNSIGNED NOT NULL
-  , relTypeCode VARCHAR(20) NOT NULL
-  , relId INT UNSIGNED NOT NULL
+CREATE TABLE `file` (
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
+    , regDate DATETIME NOT NULL
+    , originName VARCHAR(50) NOT NULL
+    , savaName VARCHAR(100) NOT NULL
+    , savedPath VARCHAR(100) NOT NULL
 );
 
-select * from trainer;
+CREATE TABLE `profile`(
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
+    , memberId INT UNSIGNED NOT NULL
+    , profileImageId INT
+    , intro TEXT
+    , address TEXT
+    , tag VARCHAR(100)
+);
 
-SELECT DATABASE();
+CREATE TABLE trainer_info (
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
+    , memberId INT UNSIGNED NOT NULL
+    , gymName VARCHAR(100)
+    , career TEXT
+    , license TEXT
+    , availableRegion VARCHAR(100)
+);
 
+INSERT INTO board SET boardName = 'memberArticle';
+INSERT INTO board SET boardName = 'trainerArticle';
 
-SELECT a.*, m.nickName
-			    FROM article a
-			    INNER JOIN `member` m
-			    ON a.memberId = m.id
-			    WHERE boardId = 1
-			    
-				ORDER BY a.id DESC
-				
-				
-SELECT a.*, m.nickName, COUNT(c.id) `commentCnt`
-			    FROM article a
-			    INNER JOIN `member` m
-			    ON a.memberId = m.id
-			    LEFT JOIN comments c
-			 	ON a.id = c.relId
-			 	AND c.relTypeCode = 'article'
-			    WHERE boardId = 1
-				GROUP BY a.id
-				ORDER BY a.id DESC
-select * from  article;
+INSERT INTO `member`
+    SET regDate = NOW()
+        , updateDate = NOW()
+        , `name` = '강나윤 '
+        , nickName = '재이'
+        , phoneNumber = 01012341234
+        , loginId = '7skdbs'
+        , loginPw = '1111'
+        , eMail = '7skdbs@naver.com'
+        , authLevel = 1;
+        
+INSERT INTO `member`
+    SET regDate = NOW()
+        , updateDate = NOW()
+        , `name` = '야옹이 '
+        , nickName = '호이'
+        , phoneNumber = 1045674567
+        , loginId = 'skdbs7'
+        , loginPw = '1111'
+        , eMail = 'skdbs7@naver.com'
+        , authLevel = 2;
+        
+INSERT INTO article
+    SET boardId = 1
+        , regDate = NOW()
+        , updateDate = NOW()
+        , memberId = 1
+        , content = '테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글'
+        , viewCnt = 0
+        , memberCategory = 1;
+        
+INSERT INTO article
+    SET boardId = 2
+        , regDate = NOW()
+        , updateDate = NOW()
+        , memberId = 2
+        , content = '테스트용 게시글'
+        , viewCnt = 0
+        , memberCategory = 2;
 
-SELECT a.*, m.nickName, COUNT(c.id) `commentCnt`
-			 	FROM article a
-			 	INNER JOIN `member` m
-			 	ON a.memberId = m.id
-			 	LEFT JOIN comments c
-			 	ON a.id = c.relId
-			 	and c.relTypeCode = 'article'
-			 	WHERE a.id = 2
+INSERT INTO comments (regDate, updateDate, memberId, relTypeCode, relId, content)
+VALUE (NOW(), NOW(), 2, 'article', 1, '테스트용 댓글')
+      , (NOW(), NOW(), 1, 'article', 1, '테스트용 댓글')
+      , (NOW(), NOW(), 2, 'article', 2, '테스트용 댓글')
+      , (NOW(), NOW(), 1, 'article', 3, '테스트용 댓글')
+      , (NOW(), NOW(), 2, 'article', 3, '테스트용 댓글');
+
+INSERT INTO `file` (regDate, originName, savedName, savedPath)
+VALUE (NOW(), 'default-profile.jpg', 'default-profile.jpg', 'default-profile.jpg');
+
+SELECT * FROM board;
+SELECT * FROM  article;
+SELECT * FROM comments;
+SELECT * FROM `file`;
+SELECT * FROM `profile`;
+SELECT * FROM trainer_info;

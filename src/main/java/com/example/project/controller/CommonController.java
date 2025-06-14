@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -32,10 +33,10 @@ public class CommonController {
 	
 	@PostMapping("/usr/common/upload")
 	@ResponseBody
-	public String upload(MultipartFile file) {
-		if (file.isEmpty()) {
-			return Util.jsReplace("파일이 선택되지 않았습니다", null);
-		}
+	public String upload(@RequestParam("profileImg") MultipartFile file) {
+		if (file == null || file.isEmpty()) {
+	        return Util.jsReplace("파일이 선택되지 않았습니다", null);
+	    }
 		
 		try {
 			fileService.saveFile(file);
@@ -44,7 +45,7 @@ public class CommonController {
 			return Util.jsReplace("이미지를 업로드 하는데 문제가 발생했습니다", null);
 		}
 		
-		return "/usr/profile/myPage";
+		return Util.jsReplace("프로필 이미지가 업로드되었습니다", "/usr/profile/myPage");
 	}
 	
 	@GetMapping("/usr/common/view")

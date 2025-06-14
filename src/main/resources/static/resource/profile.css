@@ -31,7 +31,7 @@
 }
 
 .chg-profile {
-	width: 30%;
+	width: 40%;
 	border: 1px solid blue;
 	margin: 40px 30px 20px 30px;
 }
@@ -41,4 +41,5 @@
 	width: 250px;
 	height: 250px;
 	margin: 20px auto;
+	object-fit: cover;
 }
