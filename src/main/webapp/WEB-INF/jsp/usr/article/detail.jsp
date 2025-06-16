@@ -165,7 +165,7 @@ const getComments = function () {
 					<div class="cm-header">
 						<div class="cm-writer">
 							<div class="cm-profile">
-								<div><img src="/resource/images/userprofile.jpg"/></div>
+								<div><img src="/usr/profile/image/\${data[idx].profileId }" alt="프로필" /></div>
 								<div class="cm-nickname">\${data[idx].nickName}</div>
 							</div>
 							\${btnHtml}
@@ -205,7 +205,7 @@ const addComments = function (id, method) {
 						<div class="cm-header">
 							<div class="cm-writer">
 								<div class="cm-profile">
-									<div><img src="/resource/images/userprofile.jpg"/></div>
+									<div><img src="/usr/profile/image/\${data.profileId }" alt="프로필" /></div>
 									<div class="cm-nickname">\${data.nickName}</div>
 								</div>
 								<ul>
@@ -329,7 +329,7 @@ const commentModifyCancle = function(id) {
 			<div class="article-detailbox">
 				<div class="profile-detailbox">
 					<div class="profile-detailbox2">
-						<div><img src="/resource/images/userprofile.jpg"/></div>
+						<div><img src="/usr/profile/image/${article.getProfileId() }" alt="프로필" /></div>
 						<div class="nickname">${article.getNickName() }</div>
 					</div>
 					<div class="detail-modify">

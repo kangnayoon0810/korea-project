@@ -39,6 +39,10 @@ public class UsrMemberController {
 
 		this.memberService.signupMember(name, sex, nickName, phoneNumber, loginId, loginPw, eMail, authLevel);
 		
+		int memberId = this.memberService.getLastInsertId();
+		
+		this.memberService.insertDefaultProfileImg(memberId);
+		
 		if (authLevel == 2) {
 			return Util.jsReplace(String.format("[ %s ] 님의 트레이너 가입이 완료되었습니다", nickName), "/");
 		}
@@ -117,7 +121,7 @@ public class UsrMemberController {
 			return Util.jsReplace("비밀번호가 일치하지 않습니다", "login");
 		}
 
-		this.req.login(new LoginedMember(member.getId(), member.getAuthLevel(), member.getNickName(), member.getEMail()));
+		this.req.login(new LoginedMember(member.getId(), member.getAuthLevel(), member.getNickName(), member.getName(),member.getEMail()));
 
 		return Util.jsReplace(String.format("[ %s ] 님 환영합니다", member.getNickName()), "/");
 	}

@@ -73,4 +73,20 @@ public interface MemberDao {
 			""")
 	String getNickName(String nickName);
 
+	@Select("""
+			SELECT LAST_INSERT_ID()
+			""")
+	int getLastInsertId();
+
+	@Insert("""
+			INSERT INTO `profile`
+			    SET memberId = #{memberId}
+			    , profileImagePath = 'D:/nayoon/upload/default-profile.jpg'
+			    , intro = ''
+			    , address = ''
+			    , tag = ''
+			
+			""")
+	void insertDefaultProfileImg(int memberId);
+
 }

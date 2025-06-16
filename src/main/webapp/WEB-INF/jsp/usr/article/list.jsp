@@ -40,7 +40,7 @@
 				<c:if test="${memberCategory == 1 }">
 					<c:forEach items="${articles }" var="article">
 						<div class="profile-box">
-							<div><img src="/resource/images/userprofile.jpg"/></div>
+							<div><img src="/usr/profile/image/${article.getProfileId() }" alt="프로필" /></div>
 							<div class="nickname">${article.getNickName() }</div>
 						</div>
 						<style>
@@ -72,7 +72,7 @@
 				<c:if test="${memberCategory == 2 }">
 					<c:forEach items="${articles }" var="article">
 						<div class="profile-box">
-							<div><img src="/resource/images/userprofile.jpg"/></div>
+							<div><img src="/usr/profile/image/${article.getProfileId() }" alt="프로필" /></div>
 							<div class="nickname">${article.getNickName() }</div>
 						</div>
 						<div class="content-box">

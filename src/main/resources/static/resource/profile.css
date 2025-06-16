@@ -8,38 +8,105 @@
 
 .start-greetings {
 	width: 60%;
-	height: 50px;
+	height: 60px;
 	margin: 0 auto;
-	border: 1px solid pink;
+/* 	border: 1px solid pink; */
 	margin-bottom: 10px;
 	text-align: center;
 	font-family: Paperlogy-8ExtraBold;
 	color: #1B9AAA;
 	font-size: 1.6rem;
-	line-height: 50px;
+	line-height: 60px;
 	word-spacing: 10px
 }
 .start-greetings > span {
 	color: black;
+/* 	font-family: 'PyeojinGothic-Bold'; */
 }
 
 .myprofile-box {
 	width: 60%;
-	height: 700px;
-	border: 1px solid red;
+	height: 650px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
 	margin: 0 auto;
+	border-radius: 30px;
+	box-shadow: 0 2px 3px #A0ACAD;
 }
 
 .chg-profile {
-	width: 40%;
-	border: 1px solid blue;
-	margin: 40px 30px 20px 30px;
+	width: 300px;
+/* 	border: 1px solid blue; */
+/* 	margin: 80px 60px; */
+	display: flex;
+	align-items: center;
+	flex-flow: column;
+	margin-top: 100px;
+	margin-left: 50px;
+}
+
+.my-img label {
+	position: relative;
+	display: inline-block;
+	width: 250px;
+	height: 250px;
+	cursor: pointer;
 }
 
 .my-img img {
 	border-radius: 50%;
 	width: 250px;
 	height: 250px;
-	margin: 20px auto;
 	object-fit: cover;
+	display: block;
+	border: 5px solid #DDDBCB;
+}
+
+/* ✅ 이미지 위에 투명 회색 오버레이 + 텍스트 */
+.my-img label::after {
+	content: "이미지 업로드";
+	position: absolute;
+	top: 0; left: 0;
+	width: 250px; height: 250px;
+	background-color: rgba(0, 0, 0, 0.4);
+	color: white;
+	font-size: 18px;
+	font-weight: bold;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	transition: opacity 0.3s;
+	border-radius: 50%;
+}
+
+.my-img label:hover::after {
+	opacity: 1;
+}
+
+.pim {
+	width: 250px;
+	height: 130px;
+	margin-top: 30px;
+	display: flex;
+	align-items: center;
+	background-color: #F5F1E3;
+	border-radius: 20px;
+}
+
+.pim > table {
+	width: 250px;
+	height: 100px;
+/* 	border: solid 1px black; */
+	margin: 0 auto;
+	text-align: center;
+}
+
+.pim-nickname {
+/* 	border: 1px solid blue; */
+	font-size: 1.2rem;
+	font-family: 'Paperlogy-8ExtraBold';
+}
+
+.pim-email {
+	font-size: 1rem;
 }

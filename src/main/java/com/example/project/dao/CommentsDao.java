@@ -25,12 +25,14 @@ public interface CommentsDao {
 	public void writeComment(String relTypeCode, int loginedMemberId, int relId, String content);
 	
 	@Select("""
-			SELECT c.*, m.nickName
-			FROM comments c
-			INNER JOIN `member` m
-			ON c.memberId = m.id
-			WHERE c.relId = #{relId}
-			AND c.relTypeCode = #{relTypeCode}
+			SELECT c.*, m.nickName, p.id AS profileId
+			 	FROM comments c
+			    INNER JOIN `member` m
+			    ON c.memberId = m.id
+			    INNER JOIN `profile` p
+			    ON m.id = p.memberId
+				WHERE c.relId = #{relId}
+				AND c.relTypeCode = #{relTypeCode}
 			""")
 	public List<Comments> getComments(int relId, String relTypeCode);
 	
@@ -40,11 +42,13 @@ public interface CommentsDao {
 	int getLastInsertCommentId();
 	
 	@Select("""
-			SELECT c.*, m.nickName
-				FROM comments c
+			SELECT c.*, m.nickName, p.id AS profileId
+			 	FROM comments c
 			    INNER JOIN `member` m
 			    ON c.memberId = m.id
-				WHERE c.id = #{id}
+			    INNER JOIN `profile` p
+			    ON m.id = p.memberId
+			    WHERE c.id = #{id}
 			""")
 	Comments getCommentById(int id);
 

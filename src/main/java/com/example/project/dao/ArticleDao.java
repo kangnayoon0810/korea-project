@@ -29,9 +29,12 @@ public interface ArticleDao {
 					m.nickName
 					, COUNT(DISTINCT c.id) AS commentCnt
 					, COUNT(DISTINCT l.memberId) AS likeCnt
+					, p.id AS profileId
 				FROM article a
 				INNER JOIN `member` m
 				ON a.memberId = m.id
+				INNER JOIN profile p
+				ON m.id = p.memberId
 				LEFT JOIN comments c
 				ON a.id = c.relId
 				AND c.relTypeCode = 'article'
@@ -55,10 +58,12 @@ public interface ArticleDao {
 	public int getArticlesCnt(int boardId, String keyWord);
 	
 	@Select("""
-			SELECT a.*, m.nickName, COUNT(c.id) `commentCnt`
+			SELECT a.*, m.nickName, COUNT(c.id) `commentCnt`, p.id `profileId`
 			 	FROM article a
 			 	INNER JOIN `member` m
 			 	ON a.memberId = m.id
+			 	INNER JOIN profile p
+			 	ON m.id = p.memberId
 			 	LEFT JOIN comments c
 			 	ON a.id = c.relId
 			 	AND c.relTypeCode = 'article'

@@ -22,4 +22,5 @@ public class Article {
 	private int likeCnt;
 	private int commentCnt;
 	private String nickName;
+	private int profileId;
 }

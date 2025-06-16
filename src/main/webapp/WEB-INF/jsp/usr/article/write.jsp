@@ -74,7 +74,7 @@
 				<input type="hidden" name="content" />
 				<div class="profile-writebox">
 					<div class="profile-writebox2">
-						<div><img src="/resource/images/userprofile.jpg"/></div>
+						<div><img src="/usr/profile/image/${profile.getId() }" alt="프로필" /></div>
 						<div class="nickname">${req.getLoginedMember().getNickName()}</div>
 					</div>
 					<button class="save-btn" type="submit">저장</button>

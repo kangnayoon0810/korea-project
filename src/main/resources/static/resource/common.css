@@ -18,14 +18,11 @@
 	font-style: normal;
 }
 
-html * {
-	font-family: 'PyeojinGothic-Bold';
-}
-
 body {
 	width: 100%;
 	height: 100vh;
 	margin: 0 auto;
+	font-family: 'PyeojinGothic-Bold';
 }
 
 a {
@@ -50,13 +47,13 @@ input:focus {
 
 .topbar>.topbar-box {
 	margin: 15px auto;
-	width: 1150px;
+	width: 60%;
 	display: flex;
 	align-items: center;
 }
 
 .topbar>.topbar-box>.topbar-start a {
-	padding: 20px;
+	padding: 15px;
 	font-size: 2rem;
 	font-family: Paperlogy-8ExtraBold;
 	color: #1D2F6F;
@@ -93,7 +90,7 @@ input:focus {
 	align-items: center;
 }
 
-.login-signup ul {
+.login-signup .sign-page {
   display: flex;
   align-items: center;
   list-style: none;
@@ -101,7 +98,7 @@ input:focus {
   margin: 0;
 }
 
-.login-signup ul li a {
+.login-signup .sign-page a {
   text-decoration: none;
   font-size: 0.9rem;
   color: #333;
@@ -109,12 +106,12 @@ input:focus {
 }
 
 /* 트레이너 가입 버튼만 살짝 스타일 강조 */
-.login-signup ul li a.tranier-signup {
+.login-signup .sign-page li a.tranier-signup {
   background-color: #1D2F6F;
   border-radius: 10px;
 }
 
-.topbar >.topbar-box >.topbar-end >.sign-box > .login-signup a {
+.login-signup .sign-page a {
 	font-size: 1.1rem;
 	display: block;
 	padding: 5px 20px;
@@ -142,6 +139,7 @@ input:focus {
 	align-items: center;
 	z-index: 1;
 	position: relative;
+	margin-right: 15px;
 }
 
 /* ▶ 아바타 이미지 박스 */
@@ -151,12 +149,12 @@ input:focus {
 }
 
 /* ▶ 상위 li (포지션 필요) */
-.my-page ul > li {
+.my-page > li {
 	position: relative;
 }
 
 /* ▶ 아바타 이미지 */
-.my-page ul > li > img {
+.my-page > li > img {
 	width: 45px;
 	height: 45px;
 	border-radius: 50%;
@@ -164,7 +162,7 @@ input:focus {
 }
 
 /* ▶ 드롭다운 메뉴 박스 */
-.my-page ul ul.memberprofile-btn {
+.my-page ul.memberprofile-btn {
 	right: 0;
 	width: 250px;
 	border: 1px solid rgba(0, 0, 0, 0.2);

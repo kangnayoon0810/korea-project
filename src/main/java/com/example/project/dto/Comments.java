@@ -16,5 +16,5 @@ public class Comments {
 	private int relId;
 	private String content;
 	private String nickName;
-	
+	private int profileId;
 }

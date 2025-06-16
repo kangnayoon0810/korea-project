@@ -50,18 +50,10 @@ CREATE TABLE comments (
   , content TEXT NOT NULL
 );
 
-CREATE TABLE `file` (
-    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
-    , regDate DATETIME NOT NULL
-    , originName VARCHAR(50) NOT NULL
-    , savaName VARCHAR(100) NOT NULL
-    , savedPath VARCHAR(100) NOT NULL
-);
-
 CREATE TABLE `profile`(
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
     , memberId INT UNSIGNED NOT NULL
-    , profileImageId INT
+    , profileImagePath VARCHAR(100) NOT NULL
     , intro TEXT
     , address TEXT
     , tag VARCHAR(100)
@@ -86,7 +78,7 @@ INSERT INTO `member`
         , nickName = '재이'
         , phoneNumber = 01012341234
         , loginId = '7skdbs'
-        , loginPw = '1111'
+        , loginPw = '11111'
         , eMail = '7skdbs@naver.com'
         , authLevel = 1;
         
@@ -97,7 +89,7 @@ INSERT INTO `member`
         , nickName = '호이'
         , phoneNumber = 1045674567
         , loginId = 'skdbs7'
-        , loginPw = '1111'
+        , loginPw = '11111'
         , eMail = 'skdbs7@naver.com'
         , authLevel = 2;
         
@@ -123,15 +115,66 @@ INSERT INTO comments (regDate, updateDate, memberId, relTypeCode, relId, content
 VALUE (NOW(), NOW(), 2, 'article', 1, '테스트용 댓글')
       , (NOW(), NOW(), 1, 'article', 1, '테스트용 댓글')
       , (NOW(), NOW(), 2, 'article', 2, '테스트용 댓글')
-      , (NOW(), NOW(), 1, 'article', 3, '테스트용 댓글')
-      , (NOW(), NOW(), 2, 'article', 3, '테스트용 댓글');
+      , (NOW(), NOW(), 1, 'article', 1, '테스트용 댓글')
+      , (NOW(), NOW(), 2, 'article', 2, '테스트용 댓글');
 
-INSERT INTO `file` (regDate, originName, savedName, savedPath)
-VALUE (NOW(), 'default-profile.jpg', 'default-profile.jpg', 'default-profile.jpg');
+INSERT INTO `profile`
+    SET memberId = 1
+    , profileImagePath = 'D:/nayoon/upload/default-profile.jpg'
+    , intro = ''
+    , address = ''
+    , tag = '';
+
+INSERT INTO `profile`
+    SET memberId = 2
+    , profileImagePath = 'D:/nayoon/upload/default-profile.jpg'
+    , intro = ''
+    , address = ''
+    , tag = '';
 
 SELECT * FROM board;
 SELECT * FROM  article;
+SELECT * FROM  `member`;
 SELECT * FROM comments;
-SELECT * FROM `file`;
 SELECT * FROM `profile`;
 SELECT * FROM trainer_info;
+
+SELECT m.id, m.nickname, p.profileImageId 
+    FROM `member` m
+    INNER JOIN `profile`p
+    ON m.id = p.memberId
+    WHERE m.id = 1;
+    
+    DELETE FROM PROFILE WHERE memberId = 1 AND id != 2;
+
+SELECT c.*, m.nickName
+    FROM comments c
+    INNER JOIN `member` m
+    ON c.memberId = m.id
+    WHERE c.relId = 1
+    
+SELECT m.*, p.profileImageId 
+    FROM `member` m
+    INNER JOIN `profile`p
+    ON m.id = p.memberId
+    WHERE m.id = 2;
+    
+    
+INSERT INTO `profile`
+    SET memberId = 1
+    , profileImagePath = 'D:/nayoon/upload/default-profile.jpg'
+    , intro = ''
+    , address = ''
+    , tag = ''
+    
+UPDATE `profile`
+    SET memberId = 
+        , profileImagePath = 
+     
+SELECT c.*, m.nickName, p.id profileId
+    FROM comments c
+    INNER JOIN `member` m
+    ON c.memberId = m.id
+    INNER JOIN `profile` p
+    ON m.id = p.memberId
+    WHERE c.id = 1

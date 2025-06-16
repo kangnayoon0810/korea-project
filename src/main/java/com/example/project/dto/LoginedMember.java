@@ -11,5 +11,6 @@ public class LoginedMember {
 	private int id;
 	private int authLevel;
 	private String nickName;
+	private String name;
 	private String eMail;
 }

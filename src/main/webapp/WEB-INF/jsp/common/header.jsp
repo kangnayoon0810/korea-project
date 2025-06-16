@@ -41,22 +41,20 @@
 				<ul class="sign-box">
 					<li class="login-signup">
 						<c:if test="${req.getLoginedMember().getId() == 0 }">
-							<ul>
+							<ul class="sign-page">
 								<li><a class="login-button" href="/usr/member/login">로그인</a></li>
 								<li><a class="member-signup" href="/usr/member/signup?authLevel=1">회원가입</a></li>
 								<li><a class="tranier-signup" href="/usr/member/signup?authLevel=2">트레이너 가입</a></li>
 							</ul>						
 						</c:if>
-					</li>
-					<li class="my-page">
 						<c:if test="${req.getLoginedMember().getId() != 0 }">
-							<ul>
+							<ul class="my-page">
 								<li>
-									<img class="memberprofile-box" src="/resource/images/userprofile.jpg" />
+									<img class="memberprofile-box" src="/usr/profile/image/${req.getLoginedMember().getId() }" alt="프로필" />
 									<ul class="memberprofile-btn">
 										<li class="my-info">
 											<div class="info-box">
-												<img src="/resource/images/userprofile.jpg" />
+												<img src="/usr/profile/image/${req.getLoginedMember().getId() }" alt="프로필" />
 												<p>${req.getLoginedMember().getNickName() }</p>
 												<p>${req.getLoginedMember().getEMail() }</p>
 											</div>

@@ -12,19 +12,22 @@
 	<div class="myprofile-box">
 		<div class="chg-profile">
 			<div class="my-img">
-				<form action="/usr/common/upload" method="post" enctype="multipart/form-data">
+				<form action="/usr/profile/upload" method="post" enctype="multipart/form-data">
 					<label for="profileInput">
-						<c:choose>
-							<c:when test="${not empty profile.profileImageId }">
-								<img src="${profileImageUrl}" alt="프로필" />
-							</c:when>
-							<c:otherwise>
-								<img src="//gen/default-profile.jpg" alt="기본 프로필" />
-							</c:otherwise>
-						</c:choose>
+						<img src="/usr/profile/image/${profile.getId() }" alt="프로필" />
 					</label>
 					<input type="file" name="profileImg" accept="image/*" id="profileInput" onchange="this.form.submit();"  style="display: none;" />
 				</form>
+			</div>
+			<div class="pim">
+				<table>
+					 <tr class="pim-nickname">
+					 	<td>${req.getLoginedMember().getName() }</td>
+					 </tr>
+					 <tr class="pim-email">
+					 	<td>${req.getLoginedMember().getEMail() }</td>
+					 </tr>
+				</table>
 			</div>
 			<div class="chg-myinfo">
 			</div>

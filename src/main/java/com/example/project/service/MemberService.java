@@ -46,4 +46,12 @@ public class MemberService {
 		return this.memberDao.getNickName(nickName);
 	}
 
+	public int getLastInsertId() {
+		return this.memberDao.getLastInsertId();
+	}
+
+	public void insertDefaultProfileImg(int memberId) {
+		this.memberDao.insertDefaultProfileImg(memberId);
+	}
+
 }
