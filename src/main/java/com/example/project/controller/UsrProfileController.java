@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.project.dto.Article;
 import com.example.project.dto.Board;
 import com.example.project.dto.Member;
 import com.example.project.dto.ProfileDto;
@@ -29,7 +30,7 @@ public class UsrProfileController {
 	private MemberService memberService;
 	private Req req;
 
-	public UsrProfileController(ProfileService profileService, TrainerInfoService trainerInfoService, MemberService memberService, Req req) {
+	public UsrProfileController(ProfileService profileService, TrainerInfoService trainerInfoService,MemberService memberService,  Req req) {
 		this.profileService = profileService;
 		this.trainerInfoService = trainerInfoService;
 		this.memberService = memberService;
@@ -41,6 +42,8 @@ public class UsrProfileController {
 		int loginedMemberId = req.getLoginedMember().getId();
 		
 	    ProfileDto profile = profileService.getProfileByMemberId(req.getLoginedMember().getId());
+	    
+	    Member member = memberService.getMemberById(this.req.getLoginedMember().getId());
 
 	    // 트레이너 정보 가져오기
 	    if (req.getLoginedMember().getAuthLevel() == 2) {
@@ -49,8 +52,32 @@ public class UsrProfileController {
 	    }
 	    
 	    model.addAttribute("profile", profile);
+	    model.addAttribute("member", member);
 
 	    return "usr/profile/myPage";
+	}
+	
+	@GetMapping("/usr/profile/modify")
+	String modify(int id, String nickName, String phoneNumber, String email, int memberId, String address, String intro) {
+		
+		this.memberService.modifyMember(id, nickName, phoneNumber, email);
+		this.profileService.modifyInfo(memberId, address, intro);
+		
+		return "redirect:/usr/profile/myPage";
+	}
+	
+	@GetMapping("/usr/profile/modifyPwPop")
+	public String modifyPwPop() {
+		return "usr/profile/modifyPwPop";
+	}
+	
+	@PostMapping("/usr/profile/doModifyPw")
+	@ResponseBody
+	public String doModifyPw(String loginPw) {
+		
+		this.memberService.modifyPassword(req.getLoginedMember().getId(), Util.encryptSHA256(loginPw));
+		
+		return "비밀번호 변경이 완료되었습니다";
 	}
 	
 	@PostMapping("/usr/profile/upload")

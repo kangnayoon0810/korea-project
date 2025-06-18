@@ -8,19 +8,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.project.dto.LoginedMember;
 import com.example.project.dto.Member;
+import com.example.project.dto.ProfileDto;
 import com.example.project.dto.Req;
 import com.example.project.dto.ResultData;
 import com.example.project.service.MemberService;
+import com.example.project.service.ProfileService;
 import com.example.project.util.Util;
 
 @Controller
 public class UsrMemberController {
 
 	private MemberService memberService;
+	private ProfileService profileService;
 	private Req req;
 
-	public UsrMemberController(MemberService memberService, Req req) {
+	public UsrMemberController(MemberService memberService, ProfileService profileService, Req req) {
 		this.memberService = memberService;
+		this.profileService = profileService;
 		this.req = req;
 
 	}
@@ -35,9 +39,9 @@ public class UsrMemberController {
 
 	@PostMapping("/usr/member/doSignUp")
 	@ResponseBody
-	public String doSignUp(String name, int sex, String nickName, int phoneNumber, String loginId, String loginPw, String eMail, int authLevel) {
+	public String doSignUp(String name, int sex, String nickName, String phoneNumber, String loginId, String loginPw, String eMail, int authLevel) {
 
-		this.memberService.signupMember(name, sex, nickName, phoneNumber, loginId, loginPw, eMail, authLevel);
+		this.memberService.signupMember(name, sex, nickName, phoneNumber, loginId, Util.encryptSHA256(loginPw), eMail, authLevel);
 		
 		int memberId = this.memberService.getLastInsertId();
 		
@@ -55,7 +59,7 @@ public class UsrMemberController {
 	public ResultData nickNameDupChk(String nickName) {
 
 		Member member = this.memberService.getMemberByNickName(nickName);
-
+		
 		if (member != null) {
 			return ResultData.from("F-1", String.format("[ %s ] 은(는) 이미 사용중인 닉네임입니다", nickName));
 		}
@@ -65,15 +69,15 @@ public class UsrMemberController {
 
 	@GetMapping("/usr/member/phoneNumberDupChk")
 	@ResponseBody
-	public ResultData phoneNumberDupChk(int phoneNumber) {
-
+	public ResultData phoneNumberDupChk(String phoneNumber) {
+		
 		Member member = this.memberService.getMemberByPhoneNumber(phoneNumber);
-
+		
 		if (member != null) {
-			return ResultData.from("F-1", String.format("[ %d ] 은(는) 이미 가입된 번호입니다", phoneNumber));
+			return ResultData.from("F-1", String.format("[ %s ] 은(는) 이미 가입된 번호입니다", phoneNumber));
 		}
 
-		return ResultData.from("S-1", String.format("[ %d ] 은(는) 사용가능한 번호입니다", phoneNumber));
+		return ResultData.from("S-1", String.format("[ %s ] 은(는) 사용가능한 번호입니다", phoneNumber));
 	}
 
 	@GetMapping("/usr/member/loginIdDupChk")
@@ -117,11 +121,13 @@ public class UsrMemberController {
 			return Util.jsReplace(String.format("[ %s ] 은(는) 존재하지 않는 아이디입니다", loginId), "login");
 		}
 
-		if (member.getLoginPw().equals(loginPw) == false) {
+		if (member.getLoginPw().equals(Util.encryptSHA256(loginPw)) == false) {
 			return Util.jsReplace("비밀번호가 일치하지 않습니다", "login");
 		}
 
-		this.req.login(new LoginedMember(member.getId(), member.getAuthLevel(), member.getNickName(), member.getName(),member.getEMail()));
+		ProfileDto profileDto = this.profileService.getProfileByMemberId(member.getId());
+		
+		this.req.login(new LoginedMember(member.getId(), member.getAuthLevel(), member.getNickName(), member.getEMail(), profileDto.getAddress()));
 
 		return Util.jsReplace(String.format("[ %s ] 님 환영합니다", member.getNickName()), "/");
 	}

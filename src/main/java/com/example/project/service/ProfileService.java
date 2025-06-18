@@ -40,4 +40,8 @@ public class ProfileService {
 	public ProfileDto getProfileById(int id) {
 		return this.profileDao.getProfileById(id);
 	}
+
+	public void modifyInfo(int memberId, String address, String intro) {
+		this.profileDao.modifyInfo(memberId, address, intro);
+	}
 }

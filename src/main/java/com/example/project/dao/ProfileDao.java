@@ -30,4 +30,12 @@ public interface ProfileDao {
 			""")
 	ProfileDto getProfileById(int id);
 
+	@Update("""
+			UPDATE `profile`
+			 	SET intro = #{intro}
+			     , address = #{address}
+			 	WHERE memberId = #{memberId}
+			""")
+	void modifyInfo(int memberId, String address, String intro);
+
 }

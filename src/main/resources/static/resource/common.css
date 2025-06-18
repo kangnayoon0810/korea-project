@@ -39,9 +39,25 @@ input:focus {
   outline: none;
 }
 
+.main-tb {
+	width: 100%;
+}
+
+.sub-deco {
+	width: 100%;
+	background-color: #1D2F6F;
+	height: 50px;
+}
+
 .topbar {
 	width: 100%;
-	box-shadow: 0 2px 3px #A0ACAD;
+	display: flex;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
+}
+
+.topbar > .topbar {
+	border: 1px solid red;
+	height: 30px;
 	display: flex;
 }
 
@@ -137,7 +153,7 @@ input:focus {
 .my-page {
 	display: flex;
 	align-items: center;
-	z-index: 1;
+	z-index: 99;
 	position: relative;
 	margin-right: 15px;
 }
@@ -250,4 +266,114 @@ input:focus {
 
 .info-profilebox > div:last-child {
 	border-top: 1px solid rgba(0, 0, 0, 0.2)
+}
+
+/* ▶ 아바타 위치 전체 감싸는 영역 */
+.member-page {
+	display: flex;
+	align-items: center;
+	z-index: 1;
+	position: relative;
+	margin-right: 15px;
+}
+
+/* ▶ 아바타 이미지 박스 */
+.member-page ul {
+	width: 45px;
+	position: absolute;
+}
+
+/* ▶ 상위 li (포지션 필요) */
+.member-page > li {
+	position: relative;
+}
+
+/* ▶ 아바타 이미지 */
+.member-page > li > img {
+	width: 45px;
+	height: 45px;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+/* ▶ 드롭다운 메뉴 박스 */
+.member-page ul.memberprofile-btn {
+	right: 0;
+	width: 250px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 10px;
+	margin-top: 10px;
+	background-color: white;
+	display: none;
+}
+
+/* ▶ 프로필 박스 영역 (배경 사각형) */
+.member-info {
+	display: block;
+}
+
+/* ▶ 내부 실제 박스 */
+.member-info .info-box {
+	width: 220px;
+	background-color: #F5F1E3;
+	border-radius: 10px;
+	padding: 20px 0;
+	margin: 15px auto 15px auto;
+}
+
+/* ▶ 프로필 이미지 */
+.member-info .info-box img {
+	width: 45px;
+	height: 45px;
+	border-radius: 50%;
+	margin-bottom: 10px;
+	margin: 0 auto;
+}
+
+/* ▶ 닉네임 / 이메일 */
+.member-info .info-box p {
+	width: 100%;
+	text-align: center;
+	margin: 3px 0;
+	font-size: 1rem;
+	text-align: center;
+}
+
+.member-info .info-box p:last-child {
+	font-size: 0.9rem;
+	font-family: none;
+}
+
+.info-profilebox {
+	text-align: center;
+	width: 100%;
+	font-size: 0.8rem;
+	color: rgba(0, 0, 0, 0.6);
+}
+
+.info-profilebox div:not(:last-child) {
+	width: 200px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	margin: 10px auto;
+	border-radius: 10px;
+}
+
+.info-profilebox div:last-child {
+	padding: 10px 0;
+}
+
+.member-profile {
+	display: block;
+	padding: 7px 0;
+}
+
+.member-Favorites {
+	display: block;
+	padding: 7px 0;
+	
+}
+
+.member-chat {
+	display: block;
+	padding: 7px 0;
 }

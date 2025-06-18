@@ -1,0 +1,180 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.main-window {
+	width: 100%;
+	min-height: 100hv;
+}
+
+.main-menu {
+	
+}
+
+.trainer-banner {
+  background-color: #1B9AAA; /* 나윤이 팔레트 중 청록색 */
+  padding: 100px 20px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.banner-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.banner-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  line-height: 1.4;
+  font-family: 'Paperlogy-8ExtraBold';
+}
+
+.banner-subtitle {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  color: #F5F1E3; /* 나윤이 팔레트 중 밝은 베이지 */
+   font-family: 'GmarketSansMedium';
+}
+
+.banner-btn {
+  display: inline-block;
+  background-color: #F5F1E3;
+  color: #1B9AAA;
+  padding: 12px 30px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.banner-btn:hover {
+  background-color: #DDDBCB; /* hover 시 살짝 어두운 톤 */
+}
+
+/* 플랫폼 소개 영역 */
+.platform-info {
+  background-color: #F5F1E3;
+  padding: 80px 20px;
+}
+
+.info-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.info-text {
+  max-width: 500px;
+  color: #1D2F6F;
+}
+
+.info-text h2 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.info-text p {
+  font-size: 16px;
+  margin-bottom: 20px;
+  font-family: 'GmarketSansMedium';
+}
+
+.info-buttons a {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 10px 20px;
+  border: 2px solid #1D2F6F;
+  border-radius: 30px;
+  background-color: white;
+  color: #1D2F6F;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.info-buttons a:hover {
+  background-color: #1D2F6F;
+  color: white;
+}
+
+.info-image img {
+  max-width: 300px;
+}
+
+/* 커뮤니티 소개 카드 */
+.community-intro {
+  background-color: white;
+  width: 100%;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.community-card {
+  border: 3px solid #1B9AAA;
+  border-radius: 20px;
+  width: 400px;
+/*   height: 200px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #1D2F6F;
+  background-color: #F5F1E3;
+}
+
+.card-box {
+	display: block;
+  text-align: center;
+  padding: 40px 60px;
+	
+}
+
+.community-card .icon {
+  font-size: 3.5rem;
+  color: #1B9AAA;
+  display: block;
+}
+
+
+.community-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  display: block;
+}
+
+.community-card p {
+  font-size: 14px;
+  padding: 3px;
+  display: block;
+  margin-bottom: 10px;
+  font-family: 'GmarketSansMedium';
+}
+
+.community-card a {
+  color: #1B9AAA;
+  border: 2px solid #1B9AAA;
+  padding: 10px 15px;
+  border-radius: 12px;
+  font-size: 1rem;
+  display: block;
+}
+
+.community-card a:hover {
+  background-color: #1B9AAA;
+  color: white;
+}

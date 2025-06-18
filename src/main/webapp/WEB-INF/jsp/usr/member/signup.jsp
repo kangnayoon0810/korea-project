@@ -5,6 +5,19 @@
 <c:set var="pageTitle" value="SignUp" />
 
 <%@ include file="/WEB-INF/jsp/common/header.jsp"%>
+<link rel="stylesheet" href="/resource/member.css" />
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+function Postcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+        	var addr = data.address;
+        	document.getElementById("address").value = addr;
+        }
+    }).open();
+}
+</script>
 
 <section class="signup-section">
 	<div class="signup-box">
@@ -40,7 +53,7 @@
 
 				<div class="phoneNumber-box">
 					<label>핸드폰 번호 <span id="phoneNumberDupChkMsg"></span></label> 
-					<input type="text" name="phoneNumber" onblur="phoneNumberDupChk(this);" placeholder="ex) 01012341234" />
+					<input type="text" name="phoneNumber" onblur="phoneNumberDupChk(this);" placeholder="ex) 010-1234-1234" />
 					<input type="hidden" name="phoneNumberChk" />
 				</div>
 
@@ -63,6 +76,14 @@
 					<label>이메일 <span id="eMailDupChkMsg"></span></label> 
 					<input type="email" name="eMail" onblur="eMailDupChk(this);" placeholder="ex) example@designfit.com" />
 					<input type="hidden" name="eMailChk" />
+				</div>
+				
+				<div class="address-box">
+					<label>주소</label>
+					<div>
+						<input type="text" id="address" placeholder="주소 검색" />
+						<button class="search-btn" type="button" onclick="Postcode()">검색</button>
+					</div>
 				</div>
 
 				<div class="dosignup">

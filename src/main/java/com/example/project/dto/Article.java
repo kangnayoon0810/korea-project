@@ -23,4 +23,5 @@ public class Article {
 	private int commentCnt;
 	private String nickName;
 	private int profileId;
+	private String eMail;
 }

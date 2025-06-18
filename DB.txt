@@ -15,12 +15,14 @@ CREATE TABLE `member` (
   , `name` VARCHAR(50) NOT NULL
   , sex INT UNSIGNED NOT NULL DEFAULT 1 COMMENT '남자 = 0, 여자 = 1'
   , nickName VARCHAR(50) UNIQUE NOT NULL
-  , phoneNumber INT UNSIGNED UNIQUE NOT NULL
+  , phoneNumber VARCHAR(50) UNIQUE NOT NULL
   , loginId VARCHAR(50) UNIQUE NOT NULL
   , loginPw VARCHAR(100) NOT NULL
   , eMail VARCHAR(50) UNIQUE NOT NULL
   , authLevel INT UNSIGNED NOT NULL COMMENT '관리자는 = 0, 회원 = 1, 트레이너 = 2'
 );
+
+
 
 CREATE TABLE article (
   id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
@@ -76,9 +78,9 @@ INSERT INTO `member`
         , updateDate = NOW()
         , `name` = '강나윤 '
         , nickName = '재이'
-        , phoneNumber = 01012341234
+        , phoneNumber = '010-1234-1234'
         , loginId = '7skdbs'
-        , loginPw = '11111'
+        , loginPw = SHA2('11111', 256)
         , eMail = '7skdbs@naver.com'
         , authLevel = 1;
         
@@ -87,11 +89,22 @@ INSERT INTO `member`
         , updateDate = NOW()
         , `name` = '야옹이 '
         , nickName = '호이'
-        , phoneNumber = 1045674567
+        , phoneNumber = '010-4567-4567'
         , loginId = 'skdbs7'
-        , loginPw = '11111'
+        , loginPw = SHA2('11111', 256)
         , eMail = 'skdbs7@naver.com'
         , authLevel = 2;
+        
+INSERT INTO `member`
+    SET regDate = NOW()
+        , updateDate = NOW()
+        , `name` = '냥냥이'
+        , nickName = '니코'
+        , phoneNumber = '010-9422-1369'
+        , loginId = 'skdbs'
+        , loginPw = SHA2('11111', 256)
+        , eMail = 'skdbs@naver.com'
+        , authLevel = 1;
         
 INSERT INTO article
     SET boardId = 1
@@ -121,12 +134,19 @@ VALUE (NOW(), NOW(), 2, 'article', 1, '테스트용 댓글')
 INSERT INTO `profile`
     SET memberId = 1
     , profileImagePath = 'D:/nayoon/upload/default-profile.jpg'
-    , intro = ''
-    , address = ''
+    , intro = '안녕하세요'
+    , address = '대전'
     , tag = '';
 
 INSERT INTO `profile`
     SET memberId = 2
+    , profileImagePath = 'D:/nayoon/upload/default-profile.jpg'
+    , intro = ''
+    , address = ''
+    , tag = '';
+    
+INSERT INTO `profile`
+    SET memberId = 3
     , profileImagePath = 'D:/nayoon/upload/default-profile.jpg'
     , intro = ''
     , address = ''
@@ -168,8 +188,9 @@ INSERT INTO `profile`
     , tag = ''
     
 UPDATE `profile`
-    SET memberId = 
-        , profileImagePath = 
+    SET intro = '안녕하세요'
+        , address = '대전'
+    WHERE memberId = 1;
      
 SELECT c.*, m.nickName, p.id profileId
     FROM comments c
@@ -178,3 +199,19 @@ SELECT c.*, m.nickName, p.id profileId
     INNER JOIN `profile` p
     ON m.id = p.memberId
     WHERE c.id = 1
+    
+SELECT *
+    FROM `profile`
+    WHERE memberId = 1
+    
+DROP TABLE PROFILE;
+DROP TABLE MEMBER;
+
+UPDATE `profile`
+    SET intro = '안녕하세요'
+        , address = '대전'
+    WHERE memberId = 1;
+    
+SELECT *
+    FROM `member`
+    WHERE authLevel = 2

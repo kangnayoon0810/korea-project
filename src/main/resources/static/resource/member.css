@@ -113,14 +113,14 @@
 .signup-section > .signup-box div {
 	margin: 0 auto;
 	z-index: 1;
-	width: 260px;
+	width: 300px;
 }
 
 .signup-section > .signup-box .signup-fieldset > .fieldset-legend {
 	font-family: Paperlogy-8ExtraBold;
 	font-size: 1.1rem;
 	color: #1D2F6F;
-	width: 260px;
+	width: 270px;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.20);
 	padding-top: 20px;
 }
@@ -132,13 +132,13 @@
 .signup-section > .signup-box .signup-fieldset > .sex-box .sex-select {
 	display: flex;
 	justify-content: space-between;
-	width: 260px;
+	width: 270px;
 	color: rgba(0, 0, 0, 0.40);
 	margin-bottom: 5px;
 }
 
 .signup-section > .signup-box .signup-fieldset > .sex-box .sex-btn {
-	width: 125px;
+	width: 130px;
 	height: 30px;
 	border: 1px solid rgba(0, 0, 0, 0.40);
 	border-radius: 3px;
@@ -159,11 +159,11 @@
 .signup-section > .signup-box .signup-fieldset label {
 	font-size: 0.9rem;
 	color: rgba(0, 0, 0, 0.50);
-	margin-left: 5px;
+	margin-left: 25px;
 }
 
 .signup-section > .signup-box .signup-fieldset input {
-	width: 260px;
+	width: 270px;
 	height: 30px;
 	border: 1px solid rgba(0, 0, 0, 0.40);
 	border-radius: 5px;
@@ -171,6 +171,36 @@
 	margin: 0 auto 5px auto;
 	font-size: 0.9rem;
 	font-family: none;
+	background-color: white;
+}
+
+.address-box {
+	display: block;
+}
+
+.address-box > div {
+	display: flex;
+	justify-content: space-around;
+	margin: 0 auto  5px auto;
+}
+
+.address-box > div > #address {
+	display: flex;
+	justify-content: flex-start;
+	width: 230px;
+	height: 30px;
+	border: 1px solid rgba(0, 0, 0, 0.40);
+	border-radius: 5px;
+	font-size: 0.9rem;
+	font-family: none;
+}
+
+.address-box .search-btn {
+	width: 40px;
+	height: 30px;
+	border-radius: 5px;
+	display: block;
+	border: 1px solid rgba(0, 0, 0, 0.40);
 }
 
 .signup-section > .signup-box .signup-fieldset .dosignup {
@@ -183,7 +213,7 @@
 	color: white;
 	font-size: 0.9rem;
 	border-radius: 5px;
-	width: 257.34px;
+	width: 267.34px;
 	height: 32.8px;
 }
 
@@ -192,14 +222,9 @@
 	cursor: pointer;
 }
 
-.signup-section > .signup-box .signup-fieldset .login-box {
-	margin: 0px auto 3px auto;
-	width: 260px;
-}
-
 .signup-section > .signup-box .signup-fieldset .login-box > p {
 	font-size: 0.8rem;
-	margin: 7px 5px 5px 5px;
+	margin: 7px 5px 5px 22.5px;
 }
 
 .signup-section > .signup-box .signup-fieldset .login-box > .login-btn {
@@ -211,7 +236,7 @@
 	background-color: #1D2F6F;
 	color: white;
 	font-size: 0.9rem;
-	padding: 8px 110px;
+	padding: 8px 115px;
 	border-radius: 5px;
 }
 

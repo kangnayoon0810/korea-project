@@ -5,6 +5,7 @@
 <c:set var="pageTitle" value="Detail Content View" />
 
 <%@ include file="/WEB-INF/jsp/common/header.jsp"%>
+<link rel="stylesheet" href="/resource/article.css" />
 
 <script src="/resource/article.js"></script>
 

@@ -27,6 +27,7 @@ public interface ArticleDao {
 	@Select("""
 			SELECT a.*, 
 					m.nickName
+					, m.eMail
 					, COUNT(DISTINCT c.id) AS commentCnt
 					, COUNT(DISTINCT l.memberId) AS likeCnt
 					, p.id AS profileId

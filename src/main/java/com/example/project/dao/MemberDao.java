@@ -3,6 +3,7 @@ package com.example.project.dao;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.example.project.dto.Member;
 
@@ -22,7 +23,7 @@ public interface MemberDao {
 			     	, eMail = #{eMail}
 			     	, authLevel = #{authLevel}
 			""")
-	void signupMember(String name, int sex, String nickName, int phoneNumber, String loginId, String loginPw, String eMail, int authLevel);
+	void signupMember(String name, int sex, String nickName, String phoneNumber, String loginId, String loginPw, String eMail, int authLevel);
 
 	@Select("""
 			SELECT *
@@ -36,7 +37,7 @@ public interface MemberDao {
 			FROM `member`
 			WHERE phoneNumber = #{phoneNumber}
 			""")
-	Member getMemberByPhoneNumber(int phoneNumber);
+	Member getMemberByPhoneNumber(String phoneNumber);
 
 	@Select("""
 			SELECT *
@@ -88,5 +89,37 @@ public interface MemberDao {
 			
 			""")
 	void insertDefaultProfileImg(int memberId);
+
+	@Select("""
+			SELECT *
+				FROM `member`
+				WHERE id = #{id}
+			""")
+	Member getMemberById(int id);
+
+	@Update("""
+			UPDATE `member`
+				SET updateDate = NOW()
+					, nickName = #{nickName}
+					, phoneNumber = #{phoneNumber}
+					, email = #{email}
+				WHERE id = #{id}
+			""")
+	void modifyMember(int id, String nickName, String phoneNumber, String email);
+
+	@Update("""
+			UPDATE `member`
+				SET updateDate = NOW()
+					, loginPw = #{loginPw}
+				WHERE id = #{id}
+			""")
+	void modifyPassword(int id, String loginPw);
+
+	@Select("""
+			SELECT *
+			 	FROM `member`
+			 	WHERE authLevel = #{authLevel}
+			""")
+	Member getTrainerById(int authLevel);
 
 }

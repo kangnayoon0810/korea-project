@@ -9,6 +9,7 @@
 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 
 <%@ include file="/WEB-INF/jsp/common/header.jsp"%>
+<link rel="stylesheet" href="/resource/article.css" />
 
 <style>
     /* OK 버튼 */

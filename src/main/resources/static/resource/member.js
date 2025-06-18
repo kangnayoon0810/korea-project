@@ -166,7 +166,6 @@ const nickNameDupChk = function(el) {
 
 const phoneNumberDupChk = function(el) {
 	el.value = el.value.trim();
-
 	let phoneNumberDupChkMsg = $('#phoneNumberDupChkMsg');
 
 	if (el.value.length == 0) {

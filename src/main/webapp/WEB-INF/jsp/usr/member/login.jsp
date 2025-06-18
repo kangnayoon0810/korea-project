@@ -5,6 +5,7 @@
 <c:set var="pageTitle" value="Login" />
 
 <%@ include file="/WEB-INF/jsp/common/header.jsp"%>
+<link rel="stylesheet" href="/resource/member.css" />
 
 	<section class="login-section">
 		<div class="dologin">

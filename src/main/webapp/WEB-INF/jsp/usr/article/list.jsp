@@ -5,6 +5,7 @@
 <c:set var="pageTitle" value="${board.getBoardName() }" />
 
 <%@ include file="/WEB-INF/jsp/common/header.jsp"%>
+<link rel="stylesheet" href="/resource/article.css" />
 
 <script src="/resource/article.js"></script>
 
@@ -40,7 +41,24 @@
 				<c:if test="${memberCategory == 1 }">
 					<c:forEach items="${articles }" var="article">
 						<div class="profile-box">
-							<div><img src="/usr/profile/image/${article.getProfileId() }" alt="프로필" /></div>
+							<ul class="member-page">
+								<li>
+									<img class="memberprofile-box" src="/usr/profile/image/${article.getProfileId() }" alt="프로필" />
+									<ul class="memberprofile-btn">
+										<li class="member-info">
+											<div class="info-box">
+												<img src="/usr/profile/image/${article.getProfileId() }" alt="프로필" />
+												<p>${article.getNickName() }</p>
+												<p>${article.getEMail() }</p>
+											</div>
+											<div class="info-profilebox">
+												<div><a class="member-profile" href="/usr/profile/myPage"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;프로필</a></div>
+												<div><a class="member-chat" href="/usr/profile/myPage"><i class="fa-solid fa-comments"></i>&nbsp;&nbsp;핏 채팅</a></div>
+											</div>
+										</li>
+									</ul>
+								</li>
+							</ul>
 							<div class="nickname">${article.getNickName() }</div>
 						</div>
 						<style>
@@ -72,7 +90,24 @@
 				<c:if test="${memberCategory == 2 }">
 					<c:forEach items="${articles }" var="article">
 						<div class="profile-box">
-							<div><img src="/usr/profile/image/${article.getProfileId() }" alt="프로필" /></div>
+							<ul class="member-page">
+								<li>
+									<img class="memberprofile-box" src="/usr/profile/image/${article.getProfileId() }" alt="프로필" />
+									<ul class="memberprofile-btn">
+										<li class="member-info">
+											<div class="info-box">
+												<img src="/usr/profile/image/${article.getProfileId() }" alt="프로필" />
+												<p>${article.getNickName() }</p>
+												<p>${article.getEMail() }</p>
+											</div>
+											<div class="info-profilebox">
+												<div><a class="member-profile" href="/usr/profile/myPage"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;프로필</a></div>
+												<div><a class="member-chat" href="/usr/profile/myPage"><i class="fa-solid fa-comments"></i>&nbsp;&nbsp;핏 채팅</a></div>
+											</div>
+										</li>
+									</ul>
+								</li>
+							</ul>
 							<div class="nickname">${article.getNickName() }</div>
 						</div>
 						<div class="content-box">
