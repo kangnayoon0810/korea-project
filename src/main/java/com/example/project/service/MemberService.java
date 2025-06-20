@@ -14,8 +14,8 @@ public class MemberService {
 		this.memberDao = memberDao;
 	}
 
-	public void signupMember(String name, int sex, String nickName, String phoneNumber, String loginId, String loginPw, String eMail, int authLevel) {
-		this.memberDao.signupMember(name, sex, nickName, phoneNumber, loginId, loginPw, eMail, authLevel);
+	public void signupMember(String name, int sex, String nickName, String phoneNumber, String loginId, String loginPw, String eMail, String address, int authLevel) {
+		this.memberDao.signupMember(name, sex, nickName, phoneNumber, loginId, loginPw, eMail, address, authLevel);
 	}
 
 	public Member getMemberByNickName(String nickName) {
@@ -50,16 +50,12 @@ public class MemberService {
 		return this.memberDao.getLastInsertId();
 	}
 
-	public void insertDefaultProfileImg(int memberId) {
-		this.memberDao.insertDefaultProfileImg(memberId);
-	}
-
 	public Member getMemberById(int id) {
 		return this.memberDao.getMemberById(id);
 	}
 
-	public void modifyMember(int id, String nickName, String phoneNumber, String email) {
-		this.memberDao.modifyMember(id, nickName, phoneNumber, email);
+	public void modifyMember(int id, String nickName, String phoneNumber, String eMail, String address) {
+		this.memberDao.modifyMember(id, nickName, phoneNumber, eMail, address);
 	}
 
 	public void modifyPassword(int id, String loginPw) {
@@ -69,5 +65,5 @@ public class MemberService {
 	public Member getTrainerById(int authLevel) {
 		return this.memberDao.getTrainerById(authLevel);
 	}
-
+	
 }

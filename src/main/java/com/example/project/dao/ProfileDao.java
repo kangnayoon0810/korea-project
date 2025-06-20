@@ -1,5 +1,6 @@
 package com.example.project.dao;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -33,9 +34,18 @@ public interface ProfileDao {
 	@Update("""
 			UPDATE `profile`
 			 	SET intro = #{intro}
-			     , address = #{address}
 			 	WHERE memberId = #{memberId}
 			""")
-	void modifyInfo(int memberId, String address, String intro);
+	void modifyInfo(int memberId, String intro);
+
+	@Insert("""
+			INSERT INTO `profile`
+			    SET memberId = #{memberId}
+			    , profileImagePath = 'D:/nayoon/upload/default-profile.jpg'
+			    , intro = ''
+			    , tag = ''
+			
+			""")
+	void insertDefaultProfileImg(int memberId);
 
 }

@@ -1,0 +1,99 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.favorite-trainer-page {
+  width: 650px;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+h2 {
+	font-size: 1.5rem;
+	text-align: center;
+	font-family: 'Paperlogy-8ExtraBold';
+}
+
+h2 > span {
+	color: #1B9AAA;
+}
+.trainer-list {
+  display: block;
+  margin-top: 20px;
+}
+.trainer-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 15px;
+  background: #fff;
+}
+
+.trainer-card .trainer-card-set {
+	padding: 15px;
+	margin-left: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start; 
+}
+
+.favorite-toggle {
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: #facc15; /* yellow-400 */
+  cursor: pointer;
+  margin-right: 10px;
+}
+.trainer-info {
+  display: flex;
+  align-items: center;
+}
+
+.profile-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 10px;
+}
+
+.trainer-text .email {
+	font-size: 0.85rem;
+	font-family: none;
+	color: rgba(0, 0, 0, 0.6);
+}
+
+.trainer-card-btn {
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 20px;	
+}
+
+.trainer-buttons {
+	color: white;
+}
+
+.trainer-buttons a {
+	display: block;
+	background-color: #1D2F6F;
+	margin: 5px 5px;
+	border-radius: 5px;
+	width: 120px;
+	height: 27px;
+	text-align: center;
+	line-height: 27px;
+	font-size: 0.9rem;
+	
+}
+
+.trainer-buttons a:hover {
+	cursor: pointer;
+	background-color: #1B9AAA;
+}

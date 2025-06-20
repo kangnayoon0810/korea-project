@@ -41,7 +41,11 @@ public class ProfileService {
 		return this.profileDao.getProfileById(id);
 	}
 
-	public void modifyInfo(int memberId, String address, String intro) {
-		this.profileDao.modifyInfo(memberId, address, intro);
+	public void modifyInfo(int memberId, String intro) {
+		this.profileDao.modifyInfo(memberId, intro);
+	}
+
+	public void insertDefaultProfileImg(int memberId) {
+		this.profileDao.insertDefaultProfileImg(memberId);
 	}
 }

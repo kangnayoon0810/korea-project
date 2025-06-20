@@ -34,6 +34,7 @@ const signupFormChk = function(form) {
 	form.loginPwChk.value = form.loginPwChk.value.trim();
 	form.eMail.value = form.eMail.value.trim();
 	form.eMailChk.value = form.eMailChk.value.trim();
+	form.address.value = form.address.value.trim();
 
 	if (form.name.value.length == 0) {
 		alert('이름을 입력 해주세요');
@@ -111,6 +112,12 @@ const signupFormChk = function(form) {
 		form.eMail.value = '';
 		form.eMail.focus();
 		return false;
+	}
+	
+	if (form.address.value.length == 0) {
+			alert('주소를 입력 해주세요');
+			form.address.focus();
+			return false;
 	}
 
 	return true;

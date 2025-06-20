@@ -7,7 +7,22 @@
 <%@ include file="/WEB-INF/jsp/common/header.jsp"%>
 <link rel="stylesheet" href="/resource/profile.css" />
 
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+
+function openJusoPopup() {
+    new daum.Postcode({
+      oncomplete: function(data) {
+        const address = data.roadAddress || data.jibunAddress;
+        const activeInput = document.querySelectorAll('input[name="address"], input[name="availableRegion"]');
+        activeInput.forEach(input => {
+          if (document.activeElement === input || input.value === "") {
+            input.value = address;
+          }
+        });
+      }
+    }).open();
+  }
 		const accessMember = '${member }';
 		
 		if (accessMember == '') {
@@ -47,22 +62,29 @@
 		}
 		
 		const modifyBtn = function () {
+			
+			
+			
 			let member = {
 				id: '${member.getId() }',
 				nickName: '${member.getNickName() }',
 				phoneNumber: '${member.getPhoneNumber() }',
 				eMail: '${member.getEMail() }',
+				address: '${member.getAddress() }',
 				memberId: '${profile.getMemberId() }',
-				address: '${profile.getAddress() }',
-				intro: '${profile.getIntro() }'
-				
+				intro: '${profile.getIntro() }',
+				gymName: '${trainerInfo.getGymName() }',
+				career: `${trainerInfo.getCareer() }`,
+				license: `${trainerInfo.getLicense() }`,
+				availableRegion: '${trainerInfo.getAvailableRegion() }'
 			};
 			
 			let formHtml = `
-				<form action="modify" onsubmit="return modifyFormChk(this);">
+				<form class="modify-info-from" action="modify" onsubmit="return modifyFormChk(this);">
 					<input type="hidden" name="id" value="\${member.id }" />
 					<input type="hidden" name="memberId" value="\${member.memberId }" />
-					<table>
+					<input type="hidden" name="id" value="\${member.id }" />
+					<table class="from-in-memberm">
 						<tr>
 							<td class="pim-title">닉네임</td>
 						</tr>
@@ -79,22 +101,22 @@
 							<td class="pim-title">이메일</td>
 						</tr>
 						<tr>
-							<td class="pim-content"><input type="text" name="email" value="\${member.eMail }" /></td>
+							<td class="pim-content"><input type="text" name="eMail" value="\${member.eMail }" /></td>
 						</tr>
 						<tr>
-							<td class="pim-title">지역</td>
+							<td class="pim-title">주소</td>
 						</tr>
 						<tr>
 							<td class="pim-content">
-								<input type="text" id="roadFullAddr" placeholder="도로명 주소" readonly />
-								<button type="button" onclick="openJusoPopup();">주소 검색</button>
+								<input class="address-input" type="text" id="roadFullAddr" name="address" placeholder="도로명 주소" value="\${member.address }"/>
+								<button type="button" onclick="openJusoPopup();">검색</button>
 							</td>
 						</tr>
 						<tr>
 							<td class="pim-title">소개</td>
 						</tr>
 						<tr>
-							<td class="pim-content"><input type="text" name="intro" value="\${member.intro }" /></td>
+							<td class="pim-content"><textarea class="pim-intro" name="intro">\${member.intro }</textarea></td>
 						</tr>
 						<tr>
 							<td class="pim-title">비밀번호</td>
@@ -102,10 +124,46 @@
 						<tr>
 							<td class="pim-content modifypw"><button type="button" class="modifypw-btn" onclick="modifyPwPop();">비밀번호 변경</button></td>
 						</tr>
+						<c:if test="${member.getAuthLevel() == 1 }">
+							<tr>
+								<td class="authleble1"><div colspan="2" class="modifyinfo"><button class="modifyinfo-btn">저장</button></div></td>
+							</tr>
+						</c:if>
 					</table>
-					<div>
-						<div colspan="2" class="modifyinfo"><button class="modifyinfo-btn">저장</button></div>
-					</div>
+					<c:if test="${member.getAuthLevel() == 2 }">
+						<table>
+							<tr>
+								<td class="pim-title">소속</td>
+							</tr>
+							<tr>
+								<td class="pim-content"><input type="text" name="gymName" value="\${member.gymName }" /></td>
+							</tr>
+							<tr>
+								<td class="pim-title">경력</td>
+							</tr>
+							<tr>
+								<td class="pim-content"><textarea class="pim-career" name="career">\${member.career }</textarea></td>
+							</tr>
+							<tr>
+								<td class="pim-title">수상내역</td>
+							</tr>
+							<tr>
+								<td class="pim-content"><textarea class="pim-license" name="license">\${member.license }</textarea></td>
+							</tr>
+							<tr>
+								<td class="pim-title">활동가능 지역</td>
+							</tr>
+							<tr>
+								<td class="pim-content">
+									<input class="address-input" type="text" id="roadFullAddr" name="availableRegion" placeholder="도로명 주소" value="\${member.availableRegion }"/>
+									<button type="button" onclick="openJusoPopup();">검색</button>
+								</td>
+							</tr>
+							<tr>
+								<td class="authleble2"><div colspan="2" class="modifyinfo"><button class="modifyinfo-btn">저장</button></div></td>
+							</tr>
+						</table>
+					</c:if>
 				</form>
 			`;
 			
@@ -127,16 +185,35 @@
 </script>
 
 <section class="myprofile-section">
-	<div class="start-greetings">${req.getLoginedMember().getNickName() }<span>님 환영합니다</span></div>
+	<div class="start-greetings">
+		<c:if test="${req.getLoginedMember().getId() == member.getId() }">
+			${member.getNickName() }<span>님 환영합니다</span>
+		</c:if>
+		<c:if test="${req.getLoginedMember().getId() != member.getId() }">
+			${member.getNickName() }<span>님의 프로필</span>
+		</c:if>
+	</div>
 	<div class="myprofile-box">
 		<div class="chg-profile">
 			<div class="my-img">
 				<form action="/usr/profile/upload" method="post" enctype="multipart/form-data">
-					<label for="profileInput">
-						<img src="/usr/profile/image/${profile.getId() }" alt="프로필" />
-					</label>
-					<input type="file" name="profileImg" accept="image/*" id="profileInput" onchange="this.form.submit();"  style="display: none;" />
+					<c:if test="${req.getLoginedMember().getId() == member.getId() }">
+						<label class="img-upload-label" for="profileInput">
+							<img src="/usr/profile/image/${profile.getId() }" alt="프로필" />
+						</label>
+						<input type="file" name="profileImg" accept="image/*" id="profileInput" onchange="this.form.submit();"  style="display: none;" />
+					</c:if>
+					<c:if test="${req.getLoginedMember().getId() != member.getId() }">
+						<label for="profileInput">
+							<img src="/usr/profile/image/${profile.getId() }" alt="프로필" />
+						</label>
+					</c:if>
 				</form>
+				<c:if test="${req.getLoginedMember().getId() == member.getId() }">
+					<div class="chg-myinfo">
+						<div id="modifyPim"><button onclick="modifyBtn();">회원정보 수정</button></div>
+					</div>
+				</c:if>
 			</div>
 			<div class="pim">
 				<table>
@@ -152,9 +229,11 @@
 					 <tr>
 					 	<td class="pim-content">${member.getName() }</td>
 					 </tr>
-					 <tr>
-					 	<td class="pim-title">전화번호</td>
-					 </tr>
+					 <c:if test="${req.getLoginedMember().getId() == member.getId() }">
+						 <tr>
+						 	<td class="pim-title">전화번호</td>
+						 </tr>
+					 </c:if>
 					 <tr>
 					 	<td class="pim-content">${member.getPhoneNumber() }</td>
 					 </tr>
@@ -164,11 +243,13 @@
 					 <tr>
 					 	<td class="pim-content">${member.getEMail() }</td>
 					 </tr>
+					 <c:if test="${req.getLoginedMember().getId() == member.getId() }">
+						 <tr>
+						 	<td class="pim-title">주소</td>
+						 </tr>
+					 </c:if>
 					 <tr>
-					 	<td class="pim-title">지역</td>
-					 </tr>
-					 <tr>
-					 	<td class="pim-content">${profile.getAddress() }</td>
+					 	<td class="pim-content">${member.getAddress() }</td>
 					 </tr>
 					 <tr>
 					 	<td class="pim-title">소개</td>
@@ -177,9 +258,34 @@
 					 	<td class="pim-content">${profile.getIntro() }</td>
 					 </tr>
 				</table>
-				<div class="chg-myinfo">
-					<div id="modifyPim"><button onclick="modifyBtn();">회원정보 수정</button></div>
-				</div>
+				<c:if test="${member.getAuthLevel() == 2 }">			 
+					<table>
+						<tr>
+							<td class="pim-title">소속</td>
+						</tr>
+						<tr>
+							<td class="pim-content">${trainerInfo.getGymName() }</td>
+						</tr>
+						<tr>
+							<td class="pim-title">경력</td>
+						</tr>
+						<tr>
+							<td class="pim-content">${trainerInfo.getForPrintCareer() }</td>
+						</tr>
+						<tr>
+							<td class="pim-title">수상내역</td>
+						</tr>
+						<tr>
+							<td class="pim-content">${trainerInfo.getForPrintLicense() }</td>
+						</tr>
+						<tr>
+							<td class="pim-title">활동가능 지역</td>
+						</tr>
+						<tr>
+							<td class="pim-content">${trainerInfo.getAvailableRegion() }</td>
+						</tr>
+					</table>
+				</c:if>
 			</div>
 		</div>
 	</div>

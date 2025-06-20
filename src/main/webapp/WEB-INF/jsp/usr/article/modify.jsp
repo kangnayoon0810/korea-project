@@ -75,7 +75,7 @@
 				<input type="hidden" name="content" />
 				<div class="profile-modifybox">
 					<div class="profile-modifybox2">
-						<div><img src="/usr/profile/image/${profile.getId() }" alt="프로필" /></div>
+						<div><img src="/usr/profile/image/${article.getProfileId() }" alt="프로필" /></div>
 						<div class="nickname">${req.getLoginedMember().getNickName()}</div>
 					</div>
 					<button class="save-btn" type="submit">저장</button>

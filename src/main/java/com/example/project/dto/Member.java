@@ -20,5 +20,7 @@ public class Member {
 	private String loginId;
 	private String loginPw;
 	private String eMail;
+	private String address;
 	private int authLevel;
+	private int profileId;
 }

@@ -24,21 +24,24 @@
 <link rel="shortcut icon" href="/resource/images/favicon.ico" />
 </head>
 <body>
+<div class="header-topbar">
 	<div class="sub-tb">
 		<div class="sub-deco"></div>
 	</div>
-	<div class="topbar" style="width:100%">
+	<div class="topbar">
 		<div class="topbar-box">
-			<div class="topbar-start">
-				<ul class="logo-box">
-					<li><a href="/">DesignFit</a></li>
-				</ul>
-			</div>
-			<div class="topbar-center">
-				<ul class="article-box">
-					<li><a class="member-article" href="/usr/article/list?boardId=1&memberCategory=1">회원 커뮤니티</a></li>
-					<li><a class="trainer-article" href="/usr/article/list?boardId=2&memberCategory=2">트레이너 커뮤니티</a></li>
-				</ul>
+			<div class="topbar-start1">
+				<div class="topbar-start">
+					<ul class="logo-box">
+						<li><a href="/">DesignFit</a></li>
+					</ul>
+				</div>
+				<div class="topbar-center">
+					<ul class="article-box">
+						<li><a class="member-article" href="/usr/article/list?boardId=1&memberCategory=1">회원 커뮤니티</a></li>
+						<li><a class="trainer-article" href="/usr/article/list?boardId=2&memberCategory=2">트레이너 커뮤니티</a></li>
+					</ul>
+				</div>
 			</div>
 			<div class="topbar-end">
 				<ul class="sign-box">
@@ -51,6 +54,15 @@
 							</ul>						
 						</c:if>
 						<c:if test="${req.getLoginedMember().getId() != 0 }">
+							<div class="menu-icon1" onclick="toggleMenuMember()">
+					  			<i class="fas fa-bars"></i>
+							</div>
+				    <!-- 모바일 메뉴 -->
+						    <div class="mobile-menu1" id="mobileMenuMember">
+								<h4>커뮤니티</h4>
+								<p><a href="/usr/article/list?boardId=1&memberCategory=1">회원 커뮤니티</a></p>
+								<p><a href="/usr/article/list?boardId=2&memberCategory=2">트레이너 커뮤니티</a></p>
+						    </div>
 							<ul class="my-page">
 								<li>
 									<img class="memberprofile-box" src="/usr/profile/image/${req.getLoginedMember().getId() }" alt="프로필" />
@@ -62,9 +74,10 @@
 												<p>${req.getLoginedMember().getEMail() }</p>
 											</div>
 											<div class="info-profilebox">
-												<div><a class="member-profile" href="/usr/profile/myPage"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;프로필</a></div>
-												<div><a class="member-Favorites" href="/usr/profile/myPage"><i class="fa-solid fa-star"></i>&nbsp;&nbsp;즐겨찾기</a></div>
-												<div><a class="member-chat" href="/usr/profile/myPage"><i class="fa-solid fa-comments"></i>&nbsp;&nbsp;핏 채팅</a></div>
+												<div><a class="member-profile" href="/usr/profile/myPage?id=${req.getLoginedMember().getId() }">&nbsp;&nbsp;프로필</a></div>
+												<div><a class="member-Favorites" href="/usr/favoriteTrainer/list">&nbsp;&nbsp;즐겨찾기</a></div>
+												<div><a class="member-trainerfind" href="/usr/trainer/find">&nbsp;&nbsp;나의 트레이너 찾기</a></div>
+												<div><a class="member-chat" href="/usr/profile/myPage">&nbsp;&nbsp;핏 채팅</a></div>
 												<div><a class="logout-button" href="/usr/member/logout"><i class="fa-solid fa-right-from-bracket"></i>&nbsp;&nbsp;로그아웃</a></div>
 											</div>
 										</li>
@@ -75,5 +88,58 @@
 					</li>
 				</ul>
 			</div>
+			
+			<c:if test="${req.getLoginedMember().getId() == 0 }">
+				<div class="menu-icon" onclick="toggleMenuGuest()">
+		  			<i class="fas fa-bars"></i>
+				</div>
+	    <!-- 모바일 메뉴 -->
+			    <div class="mobile-menu" id="mobileMenuGuest">
+					<h4>커뮤니티</h4>
+					<p><a href="/usr/article/list?boardId=1&memberCategory=1">회원 커뮤니티</a></p>
+					<p><a href="/usr/article/list?boardId=2&memberCategory=2">트레이너 커뮤니티</a></p>
+					<h4>로그인 서비스</h4>
+					<p><a href="/usr/member/login">로그인</a></p>
+					<p><a href="/usr/member/signup?authLevel=1">회원가입</a></p>
+					<p><a href="/usr/member/signup?authLevel=2">트레이너 가입</a></p>
+			    </div>
+		  	</c:if>
 		</div>
 	</div>
+</div>
+
+<script>
+  // 로그인 X 상태용
+  function toggleMenuGuest() {
+    const menu = document.getElementById('mobileMenuGuest');
+    if (menu) menu.classList.toggle('show');
+  }
+
+  // 로그인 O 상태용
+  function toggleMenuMember() {
+    const menu = document.getElementById('mobileMenuMember');
+    if (menu) menu.classList.toggle('show');
+  }
+
+  // 닫기 처리 (공통)
+  document.addEventListener('click', function (event) {
+    const guestMenu = document.getElementById('mobileMenuGuest');
+    const guestBtn = document.querySelector('.menu-icon');
+    const memberMenu = document.getElementById('mobileMenuMember');
+    const memberBtn = document.querySelector('.menu-icon1');
+
+    // 게스트 닫기
+    if (guestMenu && guestMenu.classList.contains('show') &&
+        !guestMenu.contains(event.target) &&
+        !guestBtn.contains(event.target)) {
+      guestMenu.classList.remove('show');
+    }
+
+    // 멤버 닫기
+    if (memberMenu && memberMenu.classList.contains('show') &&
+        !memberMenu.contains(event.target) &&
+        !memberBtn.contains(event.target)) {
+      memberMenu.classList.remove('show');
+    }
+  });
+</script>

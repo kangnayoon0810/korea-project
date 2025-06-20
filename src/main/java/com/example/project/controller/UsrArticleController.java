@@ -14,6 +14,7 @@ import com.example.project.dto.Board;
 import com.example.project.dto.Req;
 import com.example.project.service.ArticleService;
 import com.example.project.service.BoardService;
+import com.example.project.service.FavoriteTrainerService;
 import com.example.project.service.MemberService;
 import com.example.project.util.Util;
 
@@ -27,12 +28,14 @@ public class UsrArticleController {
 	private ArticleService articleService;
 	private MemberService memberService;
 	private BoardService boardService;
+	private FavoriteTrainerService favoriteTrainerService;
 	private Req req;
 
-	public UsrArticleController(ArticleService articleService, MemberService memberService, BoardService boardService, Req req) {
+	public UsrArticleController(ArticleService articleService, MemberService memberService, BoardService boardService, FavoriteTrainerService favoriteTrainerService, Req req) {
 		this.articleService = articleService;
 		this.memberService = memberService;
 		this.boardService = boardService;
+		this.favoriteTrainerService = favoriteTrainerService;
 		this.req = req;
 	}
 
@@ -56,7 +59,7 @@ public class UsrArticleController {
 	
 	
 	@GetMapping("/usr/article/list")
-	public String list(Model model, int boardId, @RequestParam int memberCategory, @RequestParam(defaultValue = "1") int cPage, @RequestParam(defaultValue = "") String keyWord) {
+	public String list(Model model, int boardId, @RequestParam int memberCategory, @RequestParam(defaultValue = "1") int cPage, @RequestParam(defaultValue = "") String keyWord, @RequestParam(defaultValue = "latest") String sortType) {
 		
 		int articlesInPage = 10;
 		int limitFrom = (cPage - 1) * articlesInPage;
@@ -73,7 +76,18 @@ public class UsrArticleController {
 		}
 		
 		Board board = this.boardService.getBoard(boardId);
-		List<Article> articles = this.articleService.getArticles(keyWord, boardId, articlesInPage, limitFrom);
+		List<Article> articles = this.articleService.getArticles(keyWord, boardId, articlesInPage, limitFrom, sortType);
+		
+		 // ✅ 여기 추가!!!
+	    if (req.isLogined() && req.getLoginedMember().getAuthLevel() == 1) {
+	        int loginedMemberId = req.getLoginedMember().getId();
+
+	        for (Article article : articles) {
+	            boolean favorited = favoriteTrainerService.isFavorited(loginedMemberId, article.getMemberId());
+	            article.setFavorited(favorited);
+	        }
+	    }
+
 		
 		model.addAttribute("memberCategory", memberCategory);
 		model.addAttribute("keyWord", keyWord);
@@ -84,6 +98,7 @@ public class UsrArticleController {
 		model.addAttribute("board", board);
 		model.addAttribute("articlesCnt", articlesCnt);
 		model.addAttribute("pagesCnt", pagesCnt);
+		model.addAttribute("sortType", sortType);
 
 		return "usr/article/list";
 	}
@@ -111,6 +126,13 @@ public class UsrArticleController {
 		}
 		
 		Article article = this.articleService.getArticleById(id);
+		
+		// ✅ 즐겨찾기 상태 추가
+		if (req.isLogined() && req.getLoginedMember().getAuthLevel() == 1) {
+	        int loginedMemberId = req.getLoginedMember().getId();
+	        boolean favorited = favoriteTrainerService.isFavorited(loginedMemberId, article.getMemberId());
+	        article.setFavorited(favorited);
+	    }
 		
 		model.addAttribute("article", article);
 

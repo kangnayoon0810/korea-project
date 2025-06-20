@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProfileDto {
+public class FavoriteTrainer {
 	private int id;
 	private int memberId;
-	private String profileImagePath;
-	private String intro;
-	private String tag;
+	private int trainerId;
+	private String regDate;
+	private boolean favorited;
 }

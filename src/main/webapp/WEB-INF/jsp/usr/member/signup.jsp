@@ -81,7 +81,7 @@ function Postcode() {
 				<div class="address-box">
 					<label>주소</label>
 					<div>
-						<input type="text" id="address" placeholder="주소 검색" />
+						<input type="text" id="address" name="address" placeholder="주소 검색" />
 						<button class="search-btn" type="button" onclick="Postcode()">검색</button>
 					</div>
 				</div>

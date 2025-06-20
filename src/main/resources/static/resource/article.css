@@ -54,11 +54,72 @@
 	align-items: center;
 }
 
+.search {
+	display: flex;
+}
+
+.custom-select-wrapper {
+  position: relative;
+  width: 130px;
+  font-size: 0.9rem;
+  font-family: 'PyeojinGothic-Bold';
+}
+
+.custom-select {
+  background-color: white;
+  border: 1px solid rgba(0,0,0,0.4);
+  border-radius: 50px;
+  padding: 8px 15px;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  margin-right: 5px;
+}
+
+.custom-select > i {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+  color: #555;
+}
+
+
+.select-options {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;               /* 옵션 간격만 살짝 조절 */
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  display: none;
+  background-color: white;
+  position: absolute;
+  top: 100%;                     /* 바로 아래에 붙도록 */
+  left: 0;                       /* 왼쪽 기준 맞춤 */
+  width: 100%;                   /* select와 동일 너비 */
+  box-sizing: border-box;       /* border까지 포함해서 정확히 맞춤 */
+  z-index: 10;
+}
+
+
+.select-options.show {
+  display: block;
+}
+
+.select-options li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+
 .search input {
 	width: 280px;
 	height: 40px;
 	display: flex;
-	border: 1px solid #A0ACAD;
+	border: 1px solid rgba(0, 0, 0, 0.4);
 	border-radius: 50px
 }
 
@@ -203,6 +264,128 @@
 .profile-detailbox2 {
 	display: flex;
 	align-items: center;
+}
+
+.profile-detailbox2 > li > div {
+	display: flex;
+	align-items: center;
+}
+
+.profile-detailbox2 .detail-member-profile-box {
+	width: 45px;
+	height: 45px;
+	border-radius: 50px;
+	margin: 0 15px 0 10px;
+	cursor: pointer;
+}
+
+/* ▶ 아바타 위치 전체 감싸는 영역 */
+.profile-detailbox2 {
+	display: flex;
+	align-items: center;
+	z-index: 99;
+	position: relative;
+	margin-right: 15px;
+}
+
+/* ▶ 아바타 이미지 박스 */
+.profile-detailbox2 ul {
+	width: 45px;
+	position: absolute;
+}
+
+/* ▶ 상위 li (포지션 필요) */
+.profile-detailbox2 > li {
+	position: relative;
+}
+
+/* ▶ 아바타 이미지 */
+.profile-detailbox2 > li > img {
+	width: 45px;
+	height: 45px;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+/* ▶ 드롭다운 메뉴 박스 */
+.profile-detailbox2 ul.detail-memberprofile-btn {
+	right: 42.5px;
+	width: 250px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 10px;
+	margin-top: 10px;
+	background-color: white;
+	display: none;
+}
+
+/* ▶ 프로필 박스 영역 (배경 사각형) */
+.profile-detailbox2 {
+	display: block;
+}
+
+/* ▶ 내부 실제 박스 */
+.profile-detailbox2 .detail-info-box {
+	width: 220px;
+	background-color: #F5F1E3;
+	border-radius: 10px;
+	padding: 20px 0;
+	margin: 15px auto 15px auto;
+}
+
+/* ▶ 프로필 이미지 */
+.profile-detailbox2 .detail-info-box img {
+	width: 45px;
+	height: 45px;
+	border-radius: 50%;
+	margin-bottom: 10px;
+	margin: 0 auto;
+}
+
+/* ▶ 닉네임 / 이메일 */
+.profile-detailbox2 .detail-info-box p {
+	width: 100%;
+	text-align: center;
+	margin: 3px 0;
+	font-size: 1rem;
+	text-align: center;
+}
+
+.profile-detailbox2 .detail-info-box p:last-child {
+	font-size: 0.9rem;
+	font-family: none;
+}
+
+.detail-info-profilebox {
+	text-align: center;
+	width: 100%;
+	font-size: 0.8rem;
+	color: rgba(0, 0, 0, 0.6);
+}
+
+.detail-info-profilebox div:not(:last-child) {
+	width: 200px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	margin: 10px auto;
+	border-radius: 10px;
+}
+
+.detail-info-profilebox div:last-child {
+	padding: 10px 0;
+}
+
+.detail-member-profile {
+	display: block;
+	padding: 7px 0;
+}
+
+.detail-member-Favorites {
+	display: block;
+	padding: 7px 0;
+	
+}
+
+.detail-info-profilebox > div:last-child {
+	border-top: 1px solid rgba(0, 0, 0, 0.2)
 }
 
 .detail-modify {
@@ -496,7 +679,7 @@
 	display: block;
 }
 
-.m-nickname {
+.cm-nickname {
 	display: block;
 	margin: 10px 0 5px 10px;
 }
@@ -510,6 +693,10 @@
 	font-size: 0.9rem;
 	padding: 10px;
 	resize: none;
+}
+
+.modify-text:focus {
+  outline: none;
 }
 
 .cm-cnm {
@@ -593,13 +780,6 @@
 	align-items: center;
 }
 
-.profile-modifybox2 img {
-	width: 40px;
-	height: 40px;
-	border-radius: 50px;
-	margin: 0 5px 0 10px;
-}
-
 .save-btn {
 	background-color: #1B9AAA;
 	color: white;
@@ -632,4 +812,24 @@
 	color: #1D2F6F;
 	border-color: #1D2F6F;
 	cursor: pointer;
+}
+
+.member-Favorites {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.favorite-btn {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+}
+.favorite-btn i {
+  font-size: 1rem;
 }

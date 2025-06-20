@@ -9,6 +9,97 @@
 
 <script src="/resource/article.js"></script>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const customSelect = document.querySelector(".custom-select");
+    const selectedOption = customSelect.querySelector(".selected-option");
+    const optionList = customSelect.querySelector(".select-options");
+    const hiddenInput = document.querySelector("input[name='sortType']");
+    const options = optionList.querySelectorAll("li");
+
+    // 클릭 시 옵션 보이기/숨기기
+    customSelect.addEventListener("click", function (e) {
+      optionList.classList.toggle("show");
+    });
+
+    // 옵션 선택 시 hidden input 값 바꾸고 form 제출
+    options.forEach(function (option) {
+      option.addEventListener("click", function (e) {
+        const value = e.target.getAttribute("data-value");
+        const text = e.target.textContent;
+
+        selectedOption.textContent = text;
+        hiddenInput.value = value;
+
+        optionList.classList.remove("show");
+
+        document.getElementById("sortFrom").submit();
+      });
+    });
+
+    // 바깥 클릭 시 옵션 닫기
+    document.addEventListener("click", function (e) {
+      if (!customSelect.contains(e.target)) {
+        optionList.classList.remove("show");
+      }
+    });
+  });
+  
+  document.addEventListener('DOMContentLoaded', function () {
+	    const sortType = '${sortType}';
+
+	    const selectedOptionSpan = document.querySelector('.selected-option');
+	    const hiddenInput = document.querySelector('input[name="sortType"]');
+
+	    if (selectedOptionSpan && hiddenInput) {
+	    	  if (sortType === 'likes') {
+	    	    selectedOptionSpan.textContent = '좋아요순';
+	    	    hiddenInput.value = 'likes';
+	    	  } else if (sortType === 'views') {
+	    	    selectedOptionSpan.textContent = '조회순';
+	    	    hiddenInput.value = 'views';
+	    	  } else {
+	    	    selectedOptionSpan.textContent = '최신순';
+	    	    hiddenInput.value = 'latest';
+	    	  }
+	    	}
+
+	      document.querySelectorAll('.select-options li').forEach(function (option) {
+	        option.addEventListener('click', function () {
+	          const value = this.getAttribute('data-value');
+	          hiddenInput.value = value;
+	          selectedOptionSpan.textContent = this.textContent;
+	          document.querySelector('.select-options').classList.remove('show');
+	        });
+	      });
+	  });
+  
+  function toggleFavoriteTrainer(trainerId, btnEl) {
+	  $.ajax({
+	    url: '/usr/favoriteTrainer/toggle',
+	    type: 'POST',
+	    data: { trainerId: trainerId },
+	    success: function (result) {
+	      const icon = btnEl.querySelector('i');
+
+	      if (result === 'add') {
+	        icon.classList.remove('fa-regular');
+	        icon.classList.add('fa-solid', 'text-yellow-400');
+	      } else {
+	        icon.classList.remove('fa-solid', 'text-yellow-400');
+	        icon.classList.add('fa-regular');
+	      }
+	    },
+	    error: function () {
+	      alert('즐겨찾기 처리 실패 🥲');
+	    }
+	  });
+	}
+
+
+</script>
+
+
 <section class="list-section">
 	<div class="list-box">
 		<div class="search-box">
@@ -20,10 +111,23 @@
 					<div>트레이너 커뮤니티</div>
 				</c:if>
 			</div>
-			<form action="list" method="get">
+			<form action="list" method="get" id="sortFrom">
+			<input type="hidden" name="memberCategory"  value="${memberCategory}"/>
 				<div class="search-bar">
-					<div class="search">
-						<div>
+					<div>
+						<div class="search">
+							<div class="custom-select-wrapper">
+								<div class="custom-select" tabindex="0">
+									<span class="selected-option">최신순</span>
+									<i class="fa-solid fa-angle-down"></i>
+									<ul class="select-options">
+										<li data-value="latest">최신순</li>
+										<li data-value="likes">좋아요순</li>
+										<li data-value="views">조회순</li>
+									</ul>
+ 								</div>
+								<input type="hidden" name="sortType" value="latest" />
+							</div>
 							<div>
 								<input type="hidden" name="boardId" value="${board.getId() }"/>
 								<input type="text" name="keyWord" value="${keyWord }" placeholder="검색어를 입력하세요" />
@@ -52,8 +156,8 @@
 												<p>${article.getEMail() }</p>
 											</div>
 											<div class="info-profilebox">
-												<div><a class="member-profile" href="/usr/profile/myPage"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;프로필</a></div>
-												<div><a class="member-chat" href="/usr/profile/myPage"><i class="fa-solid fa-comments"></i>&nbsp;&nbsp;핏 채팅</a></div>
+												<div><a class="member-profile" href="/usr/profile/myPage?id=${article.getMemberId() }">&nbsp;&nbsp;프로필</a></div>
+												<div><a class="member-chat" href="/usr/profile/myPage">&nbsp;&nbsp;핏 채팅</a></div>
 											</div>
 										</li>
 									</ul>
@@ -101,8 +205,16 @@
 												<p>${article.getEMail() }</p>
 											</div>
 											<div class="info-profilebox">
-												<div><a class="member-profile" href="/usr/profile/myPage"><i class="fa-solid fa-user"></i>&nbsp;&nbsp;프로필</a></div>
-												<div><a class="member-chat" href="/usr/profile/myPage"><i class="fa-solid fa-comments"></i>&nbsp;&nbsp;핏 채팅</a></div>
+												<div><a class="member-profile" href="/usr/profile/myPage?id=${article.getMemberId() }">&nbsp;&nbsp;프로필</a></div>
+													<c:if test="${req.getLoginedMember().getAuthLevel() == 1}">
+														<div class="member-Favorites">
+															<button class="favorite-btn" onclick="toggleFavoriteTrainer(${article.getMemberId()}, this)">
+																<i class="fa-star ${article.isFavorited() ? 'fa-solid text-yellow-400' : 'fa-regular'}"></i>
+																즐겨찾기
+															</button>
+														</div>
+													</c:if>
+												<div><a class="member-chat" href="/usr/profile/myPage">&nbsp;&nbsp;핏 채팅</a></div>
 											</div>
 										</li>
 									</ul>
@@ -165,6 +277,5 @@
 		
 	</div>
 </section>
-
 
 <%@ include file="/WEB-INF/jsp/common/footer.jsp"%>

@@ -9,7 +9,7 @@
 }
 
 .dologin {
-	width: 320px;
+	width: 340px;
 	display: flex;
 	justify-content: center;
 	border: 1px solid rgba(0, 0, 0, 0.2);
@@ -20,7 +20,7 @@
 	font-family: Paperlogy-8ExtraBold;
 	font-size: 1.2rem;
 	color: #1D2F6F;
-	width: 230px;
+	width: 260px;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.20);
 	padding-top: 20px;
 	padding-left: 10px;
@@ -35,12 +35,12 @@
 	display: block;
 	padding: 2px 2px;
 	color: rgba(0, 0, 0, 0.50);
-	margin-left: 10px;
+	margin-left: 5px;
 }
 
 .login-fieldset input {
-	width: 230px;
-	height: 30px;
+	width: 260px;
+	height: 35px;
 	border: 1px solid rgba(0, 0, 0, 0.40);
 	border-radius: 5px;
 	display: block;
@@ -59,8 +59,8 @@
 	color: white;
 	font-size: 0.9rem;
 	border-radius: 5px;
-	width: 230px;
-	height: 33.61px;
+	width: 260px;
+	height: 35px;
 }
 
 .dologin-box > button:hover {
@@ -87,7 +87,7 @@
 	border-radius: 5px;
 	background-color: #1D2F6F;
 	margin-bottom: 5px;
-	padding: 6px 0;
+	padding: 6.5px 0;
 }
 
 .dosignup-box a:hover {
@@ -103,7 +103,7 @@
 }
 
 .signup-section > .signup-box {
-	width: 360px;
+	width: 400px;
 	display: flex;
 	justify-content: center;
 	border: 1px solid rgba(0, 0, 0, 0.20);
@@ -120,7 +120,7 @@
 	font-family: Paperlogy-8ExtraBold;
 	font-size: 1.1rem;
 	color: #1D2F6F;
-	width: 270px;
+	width: 300px;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.20);
 	padding-top: 20px;
 }
@@ -132,13 +132,13 @@
 .signup-section > .signup-box .signup-fieldset > .sex-box .sex-select {
 	display: flex;
 	justify-content: space-between;
-	width: 270px;
+	width: 300px;
 	color: rgba(0, 0, 0, 0.40);
 	margin-bottom: 5px;
 }
 
 .signup-section > .signup-box .signup-fieldset > .sex-box .sex-btn {
-	width: 130px;
+	width: 145px;
 	height: 30px;
 	border: 1px solid rgba(0, 0, 0, 0.40);
 	border-radius: 3px;
@@ -159,12 +159,12 @@
 .signup-section > .signup-box .signup-fieldset label {
 	font-size: 0.9rem;
 	color: rgba(0, 0, 0, 0.50);
-	margin-left: 25px;
+	margin-left: 10px;
 }
 
 .signup-section > .signup-box .signup-fieldset input {
-	width: 270px;
-	height: 30px;
+	width: 300px;
+	height: 35px;
 	border: 1px solid rgba(0, 0, 0, 0.40);
 	border-radius: 5px;
 	display: block;
@@ -180,27 +180,36 @@
 
 .address-box > div {
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	margin: 0 auto  5px auto;
 }
 
 .address-box > div > #address {
 	display: flex;
 	justify-content: flex-start;
-	width: 230px;
-	height: 30px;
+	width: 250px;
+	height: 35px;
 	border: 1px solid rgba(0, 0, 0, 0.40);
 	border-radius: 5px;
 	font-size: 0.9rem;
 	font-family: none;
+	margin-left: 0;
 }
 
 .address-box .search-btn {
-	width: 40px;
-	height: 30px;
+	width: 45px;
+	height: 35px;
 	border-radius: 5px;
 	display: block;
 	border: 1px solid rgba(0, 0, 0, 0.40);
+	color: rgba(0, 0, 0, 0.60);
+	font-size: 0.9rem;
+}
+
+.address-box .search-btn:hover {
+	background-color: #1D2F6F;
+	color: white;
+	cursor: pointer;
 }
 
 .signup-section > .signup-box .signup-fieldset .dosignup {
@@ -213,8 +222,8 @@
 	color: white;
 	font-size: 0.9rem;
 	border-radius: 5px;
-	width: 267.34px;
-	height: 32.8px;
+	width: 297.34px;
+	height: 37px;
 }
 
 .signup-section > .signup-box .signup-fieldset .dosignup:hover .dosignup-btn {
@@ -236,7 +245,7 @@
 	background-color: #1D2F6F;
 	color: white;
 	font-size: 0.9rem;
-	padding: 8px 115px;
+	padding: 10px 130px;
 	border-radius: 5px;
 }
 

@@ -17,5 +17,13 @@ public class TrainerInfoService {
 	public TrainerInfo getTrainerInfoByProfileId(int id) {
 		return this.trainerInfoDao.getTrainerInfoByProfileId(id);
 	}
+
+	public void insertDefaultInfo(int memberId) {
+		this.trainerInfoDao.insertDefaultInfo(memberId);
+	}
+
+	public void modifyInfo(int memberId, String gymName, String career, String license, String availableRegion) {
+		this.trainerInfoDao.modifyInfo(memberId, gymName, career, license, availableRegion);
+	}
 	
 }

@@ -19,6 +19,7 @@ CREATE TABLE `member` (
   , loginId VARCHAR(50) UNIQUE NOT NULL
   , loginPw VARCHAR(100) NOT NULL
   , eMail VARCHAR(50) UNIQUE NOT NULL
+  , address TEXT
   , authLevel INT UNSIGNED NOT NULL COMMENT '관리자는 = 0, 회원 = 1, 트레이너 = 2'
 );
 
@@ -57,7 +58,6 @@ CREATE TABLE `profile`(
     , memberId INT UNSIGNED NOT NULL
     , profileImagePath VARCHAR(100) NOT NULL
     , intro TEXT
-    , address TEXT
     , tag VARCHAR(100)
 );
 
@@ -69,6 +69,15 @@ CREATE TABLE trainer_info (
     , license TEXT
     , availableRegion VARCHAR(100)
 );
+
+CREATE TABLE favorite_trainer (
+  id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT
+  , memberId INT UNSIGNED NOT NULL
+  , trainerId INT UNSIGNED NOT NULL
+  , regDate DATETIME DEFAULT NOW()
+  , UNIQUE (memberId, trainerId)
+);
+
 
 INSERT INTO board SET boardName = 'memberArticle';
 INSERT INTO board SET boardName = 'trainerArticle';
@@ -135,22 +144,25 @@ INSERT INTO `profile`
     SET memberId = 1
     , profileImagePath = 'D:/nayoon/upload/default-profile.jpg'
     , intro = '안녕하세요'
-    , address = '대전'
     , tag = '';
 
 INSERT INTO `profile`
     SET memberId = 2
     , profileImagePath = 'D:/nayoon/upload/default-profile.jpg'
     , intro = ''
-    , address = ''
     , tag = '';
     
 INSERT INTO `profile`
     SET memberId = 3
     , profileImagePath = 'D:/nayoon/upload/default-profile.jpg'
     , intro = ''
-    , address = ''
     , tag = '';
+    
+INSERT INTO trainer_info
+    SET memberId = 1;
+
+INSERT INTO trainer_info
+    SET memberId = 2;
 
 SELECT * FROM board;
 SELECT * FROM  article;
@@ -158,6 +170,8 @@ SELECT * FROM  `member`;
 SELECT * FROM comments;
 SELECT * FROM `profile`;
 SELECT * FROM trainer_info;
+
+ALTER TABLE `profile` DROP COLUMN `address`;
 
 SELECT m.id, m.nickname, p.profileImageId 
     FROM `member` m
@@ -184,7 +198,6 @@ INSERT INTO `profile`
     SET memberId = 1
     , profileImagePath = 'D:/nayoon/upload/default-profile.jpg'
     , intro = ''
-    , address = ''
     , tag = ''
     
 UPDATE `profile`
@@ -206,6 +219,7 @@ SELECT *
     
 DROP TABLE PROFILE;
 DROP TABLE MEMBER;
+DROP TABLE trainer_info;
 
 UPDATE `profile`
     SET intro = '안녕하세요'
@@ -215,3 +229,29 @@ UPDATE `profile`
 SELECT *
     FROM `member`
     WHERE authLevel = 2
+    
+    DELETE FROM MEMBER WHERE id = 3;
+    
+SELECT p.id
+    FROM `member` m
+    INNER JOIN `profile` p
+    ON m.id = p.memberId
+    WHERE memberId = 1
+    
+UPDATE trainer_Info
+    SET career = ''
+        , license = ''
+    WHERE id = 2;
+
+SELECT * FROM  article;
+SELECT * FROM  `member`;
+SELECT a.*, m.nickName, m.eMail, COUNT(c.id) `commentCnt`, p.id `profileId`, m.authLevel
+    FROM article a
+    INNER JOIN `member` m
+    ON a.memberId = m.id
+    INNER JOIN PROFILE p
+    ON m.id = p.memberId
+    LEFT JOIN comments c
+    ON a.id = c.relId
+    AND c.relTypeCode = 'article'
+    GROUP BY a.id

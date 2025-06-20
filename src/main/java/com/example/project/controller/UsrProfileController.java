@@ -38,16 +38,15 @@ public class UsrProfileController {
 	}
 	
 	@GetMapping("/usr/profile/myPage")
-	public String showMyProfile(Model model) {
-		int loginedMemberId = req.getLoginedMember().getId();
+	public String showMyProfile(Model model, int id) {
 		
-	    ProfileDto profile = profileService.getProfileByMemberId(req.getLoginedMember().getId());
+	    ProfileDto profile = profileService.getProfileByMemberId(id);
 	    
-	    Member member = memberService.getMemberById(this.req.getLoginedMember().getId());
+	    Member member = memberService.getMemberById(id);
 
 	    // 트레이너 정보 가져오기
 	    if (req.getLoginedMember().getAuthLevel() == 2) {
-	        TrainerInfo trainerInfo = trainerInfoService.getTrainerInfoByProfileId(loginedMemberId);
+	        TrainerInfo trainerInfo = trainerInfoService.getTrainerInfoByProfileId(id);
 	        model.addAttribute("trainerInfo", trainerInfo);
 	    }
 	    
@@ -58,12 +57,16 @@ public class UsrProfileController {
 	}
 	
 	@GetMapping("/usr/profile/modify")
-	String modify(int id, String nickName, String phoneNumber, String email, int memberId, String address, String intro) {
+	String modify(int id, String nickName, String phoneNumber, String eMail, String address, int memberId, String intro, String gymName, String career, String license, String availableRegion) {
 		
-		this.memberService.modifyMember(id, nickName, phoneNumber, email);
-		this.profileService.modifyInfo(memberId, address, intro);
+		this.memberService.modifyMember(id, nickName, phoneNumber, eMail, address);
+		this.profileService.modifyInfo(memberId, intro);
 		
-		return "redirect:/usr/profile/myPage";
+		if (gymName != null || career != null || license != null || availableRegion != null) {
+			this.trainerInfoService.modifyInfo(memberId, gymName, career, license, availableRegion);
+		}
+		
+		return String.format("redirect:/usr/profile/myPage?id=%d", id);
 	}
 	
 	@GetMapping("/usr/profile/modifyPwPop")
@@ -88,7 +91,7 @@ public class UsrProfileController {
 		}
 		this.profileService.updateProfileImg(profileImg, req.getLoginedMember().getId());
 		
-		return "redirect:/usr/profile/myPage";
+		return String.format("redirect:/usr/profile/myPage?id=%d", req.getLoginedMember().getId());
 	}
 	
 	@GetMapping("/usr/profile/image/{profileId}")
@@ -98,6 +101,26 @@ public class UsrProfileController {
 		ProfileDto profileDto = profileService.getProfileById(profileId);
 		
 		return new UrlResource("file:" + profileDto.getProfileImagePath());
+	}
+	
+	@GetMapping("/usr/profile/memberPage")
+	public String showMemberProfile(Model model) {
+		int loginedMemberId = req.getLoginedMember().getId();
+		
+	    ProfileDto profile = profileService.getProfileByMemberId(req.getLoginedMember().getId());
+	    
+	    Member member = memberService.getMemberById(this.req.getLoginedMember().getId());
+
+	    // 트레이너 정보 가져오기
+	    if (req.getLoginedMember().getAuthLevel() == 2) {
+	        TrainerInfo trainerInfo = trainerInfoService.getTrainerInfoByProfileId(loginedMemberId);
+	        model.addAttribute("trainerInfo", trainerInfo);
+	    }
+	    
+	    model.addAttribute("profile", profile);
+	    model.addAttribute("member", member);
+
+	    return "usr/profile/myPage";
 	}
 	
 }

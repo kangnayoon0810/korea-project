@@ -25,9 +25,10 @@ public interface ArticleDao {
 	public void writeArticle(String content, int loginedMemberId, int boardId, int memberCategory);
 
 	@Select("""
-			SELECT a.*, 
-					m.nickName
+			SELECT a.*
+					, m.nickName
 					, m.eMail
+					, m.authLevel
 					, COUNT(DISTINCT c.id) AS commentCnt
 					, COUNT(DISTINCT l.memberId) AS likeCnt
 					, p.id AS profileId
@@ -45,10 +46,15 @@ public interface ArticleDao {
 			    WHERE boardId = #{boardId}
 				AND a.content LIKE CONCAT('%', #{keyWord}, '%')
 				GROUP BY a.id
-				ORDER BY a.id DESC
+				ORDER BY 
+					CASE
+						WHEN #{sortType} = 'likes' THEN COUNT(DISTINCT l.memberId)
+						WHEN #{sortType} = 'views' THEN a.viewCnt
+						ELSE a.id
+					END DESC
 				LIMIT #{limitFrom}, #{articlesInPage}
 			""")
-	public List<Article> getArticles(String keyWord, int boardId, int articlesInPage, int limitFrom);
+	public List<Article> getArticles(String keyWord, int boardId, int articlesInPage, int limitFrom, String sortType);
 
 	@Select("""
 			SELECT COUNT(id)
@@ -59,7 +65,7 @@ public interface ArticleDao {
 	public int getArticlesCnt(int boardId, String keyWord);
 	
 	@Select("""
-			SELECT a.*, m.nickName, COUNT(c.id) `commentCnt`, p.id `profileId`
+			SELECT a.*, m.nickName, m.eMail, m.authLevel, COUNT(c.id) `commentCnt`, p.id `profileId`
 			 	FROM article a
 			 	INNER JOIN `member` m
 			 	ON a.memberId = m.id
@@ -104,6 +110,5 @@ public interface ArticleDao {
 				WHERE memberCategory = #{memberCategory}
 			""")
 	public Article getArticleByMemberCategory(int memberCategory);
-
 
 }

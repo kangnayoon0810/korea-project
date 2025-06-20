@@ -10,6 +10,46 @@
 <script src="/resource/article.js"></script>
 
 <script>
+document.addEventListener("DOMContentLoaded", function () {
+	  const customSelect = document.querySelector(".custom-select");
+
+	  // ✅ .custom-select 요소가 존재할 때만 실행
+	  if (!customSelect) return;
+
+	  const selectedOption = customSelect.querySelector(".selected-option");
+	  const optionList = customSelect.querySelector(".select-options");
+	  const hiddenInput = document.querySelector("input[name='sortType']");
+	  const options = optionList.querySelectorAll("li");
+
+	  // 클릭 시 옵션 보이기/숨기기
+	  customSelect.addEventListener("click", function (e) {
+	    optionList.classList.toggle("show");
+	  });
+
+	  // 옵션 클릭 시 값 세팅 및 폼 제출
+	  options.forEach(function (option) {
+	    option.addEventListener("click", function (e) {
+	      const value = e.target.getAttribute("data-value");
+	      const text = e.target.textContent;
+
+	      selectedOption.textContent = text;
+	      hiddenInput.value = value;
+
+	      optionList.classList.remove("show");
+
+	      document.getElementById("sortFrom").submit();
+	    });
+	  });
+
+	  // 바깥 클릭 시 옵션 닫기
+	  document.addEventListener("click", function (e) {
+	    if (!customSelect.contains(e.target)) {
+	      optionList.classList.remove("show");
+	    }
+	  });
+	});
+
+
 $(function(){
 	getLikePoint();
 	getComments();
@@ -321,6 +361,29 @@ const commentModifyCancle = function(id) {
 	originalForm = null;
 	originalId = null;
 }
+
+function toggleFavoriteTrainer(trainerId, btnEl) {
+	  $.ajax({
+	    url: '/usr/favoriteTrainer/toggle',
+	    type: 'POST',
+	    data: { trainerId: trainerId },
+	    success: function (result) {
+	      const icon = btnEl.querySelector('i');
+
+	      if (result === 'add') {
+	        icon.classList.remove('fa-regular');
+	        icon.classList.add('fa-solid', 'text-yellow-400');
+	      } else {
+	        icon.classList.remove('fa-solid', 'text-yellow-400');
+	        icon.classList.add('fa-regular');
+	      }
+	    },
+	    error: function () {
+	      alert('즐겨찾기 처리 중 오류가 발생했어요 😢');
+	    }
+	  });
+	}
+
 		
 	</script>
 
@@ -329,10 +392,37 @@ const commentModifyCancle = function(id) {
 		<div class="table-detailbox">
 			<div class="article-detailbox">
 				<div class="profile-detailbox">
-					<div class="profile-detailbox2">
-						<div><img src="/usr/profile/image/${article.getProfileId() }" alt="프로필" /></div>
-						<div class="nickname">${article.getNickName() }</div>
-					</div>
+					<ul class="profile-detailbox2">
+						<li>
+							<div>
+								<img class="detail-member-profile-box" src="/usr/profile/image/${article.getProfileId() }" alt="프로필" />
+								<span>${article.getNickName() }</span>
+							</div>
+							<ul class="detail-memberprofile-btn">
+								<li class="detail-member-info">
+									<div class="detail-info-box">
+										<img src="/usr/profile/image/${article.getProfileId() }" alt="프로필" />
+										<p>${article.getNickName() }</p>
+										<p>${article.getEMail() }</p>
+									</div>
+									<div class="detail-info-profilebox">
+										<div><a class="detail-member-profile" href="/usr/profile/myPage?id=${article.getMemberId() }">&nbsp;&nbsp;프로필</a></div>
+										<c:if test="${req.getLoginedMember().getAuthLevel() == 1}">
+											<c:if test="${article.getAuthLevel() == 2 }">
+												<div class="member-Favorites">
+													<button class="favorite-btn" onclick="toggleFavoriteTrainer(${article.getMemberId()}, this)">
+														<i class="fa-star ${article.isFavorited() ? 'fa-solid text-yellow-400' : 'fa-regular'}"></i>
+														즐겨찾기
+													</button>
+												</div>
+											</c:if>
+										</c:if>
+										<div><a class="detail-member-chat" href="/usr/profile/myPage">&nbsp;&nbsp;핏 채팅</a></div>
+									</div>
+								</li>
+							</ul>
+						</li>
+					</ul>
 					<div class="detail-modify">
 						<a class="show-list" href="/usr/article/list?boardId=${article.getBoardId() }&memberCategory=${article.getMemberCategory() }">목록보기</a>
 						<ul>
@@ -402,5 +492,26 @@ const commentModifyCancle = function(id) {
 		</div>
 	</div>
 </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const profileImg = document.querySelector('.detail-member-profile-box');
+    const profileMenu = document.querySelector('.detail-memberprofile-btn');
+
+    if (profileImg && profileMenu) {
+      profileImg.addEventListener('click', function (e) {
+        e.stopPropagation();
+        profileMenu.style.display = (profileMenu.style.display === 'block') ? 'none' : 'block';
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!profileMenu.contains(e.target) && !profileImg.contains(e.target)) {
+          profileMenu.style.display = 'none';
+        }
+      });
+    }
+  });
+</script>
+
 
 <%@ include file="/WEB-INF/jsp/common/footer.jsp"%>

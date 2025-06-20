@@ -15,6 +15,7 @@ public class Article {
 	private String regDate;
 	private String updateDate;
 	private int memberId;
+	private int authLevel;
 	private String content;
 	private int viewCnt;
 	private int memberCategory;
@@ -24,4 +25,16 @@ public class Article {
 	private String nickName;
 	private int profileId;
 	private String eMail;
+	
+	private boolean favorited;
+
+	public boolean isFavorited() {
+	    return favorited;
+	}
+
+	public void setFavorited(boolean favorited) {
+	    this.favorited = favorited;
+	}
+
+
 }

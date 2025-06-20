@@ -21,9 +21,10 @@ public interface MemberDao {
 			     	, loginId = #{loginId}
 			     	, loginPw = #{loginPw}
 			     	, eMail = #{eMail}
+			     	, address = #{address}
 			     	, authLevel = #{authLevel}
 			""")
-	void signupMember(String name, int sex, String nickName, String phoneNumber, String loginId, String loginPw, String eMail, int authLevel);
+	void signupMember(String name, int sex, String nickName, String phoneNumber, String loginId, String loginPw, String eMail, String address, int authLevel);
 
 	@Select("""
 			SELECT *
@@ -79,17 +80,6 @@ public interface MemberDao {
 			""")
 	int getLastInsertId();
 
-	@Insert("""
-			INSERT INTO `profile`
-			    SET memberId = #{memberId}
-			    , profileImagePath = 'D:/nayoon/upload/default-profile.jpg'
-			    , intro = ''
-			    , address = ''
-			    , tag = ''
-			
-			""")
-	void insertDefaultProfileImg(int memberId);
-
 	@Select("""
 			SELECT *
 				FROM `member`
@@ -102,10 +92,11 @@ public interface MemberDao {
 				SET updateDate = NOW()
 					, nickName = #{nickName}
 					, phoneNumber = #{phoneNumber}
-					, email = #{email}
+					, eMail = #{eMail}
+					, address = #{address}
 				WHERE id = #{id}
 			""")
-	void modifyMember(int id, String nickName, String phoneNumber, String email);
+	void modifyMember(int id, String nickName, String phoneNumber, String eMail, String address);
 
 	@Update("""
 			UPDATE `member`
@@ -121,5 +112,6 @@ public interface MemberDao {
 			 	WHERE authLevel = #{authLevel}
 			""")
 	Member getTrainerById(int authLevel);
+
 
 }
