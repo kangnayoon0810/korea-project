@@ -158,6 +158,40 @@
 	border-radius: 50px;
 }
 
+.list-info-profilebox {
+	text-align: center;
+	width: 100%;
+	font-size: 0.8rem;
+	color: rgba(0, 0, 0, 0.6);
+}
+
+.list-info-profilebox div:not(:last-child) {
+	width: 200px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	margin: 10px auto;
+	border-radius: 10px;
+}
+
+.list-info-profilebox div:last-child {
+	padding: 10px 0;
+}
+
+.list-member-profile {
+	display: block;
+	padding: 7px 0;
+}
+
+.list-member-Favorites {
+	display: block;
+	padding: 7px 0;
+	
+}
+
+.list-info-profilebox > div:last-child {
+	border-top: 1px solid rgba(0, 0, 0, 0.2);
+	text-align: center;
+}
+
 .nickname {
 	margin-left: 10px;
 }
@@ -385,7 +419,8 @@
 }
 
 .detail-info-profilebox > div:last-child {
-	border-top: 1px solid rgba(0, 0, 0, 0.2)
+	border-top: 1px solid rgba(0, 0, 0, 0.2);
+	text-align: center;
 }
 
 .detail-modify {
@@ -780,16 +815,24 @@
 	align-items: center;
 }
 
+.profile-modifybox2 img {
+	width: 40px;
+	height: 40px;
+	border-radius: 100%;
+}
+
 .save-btn {
-	background-color: #1B9AAA;
-	color: white;
+	background-color: white;
+	color: #1B9AAA;
+	border: 2px solid #1B9AAA;
 	padding: 5px 15px;
 	border-radius: 10px;
 	font-size: 0.9rem;
 }
 
 .save-btn:hover {
-	background-color: #1D2F6F;
+	background-color: #1B9AAA;
+	color: white;
 	cursor: pointer;
 }
 
@@ -797,20 +840,20 @@
 	display: block;
 	margin-left: 5px;
 	font-size: 0.9rem;
-	margin-top: 5px;
+	margin-top: 10px;
 }
 
 .exit-btn {
 	color: #1B9AAA;
-	padding: 4px 8px;
+	padding: 5px 8px;
 	border: 2px solid #1B9AAA;
 	border-radius: 10px;
 	background-color: white;
 }
 
 .exit-btn:hover {
-	color: #1D2F6F;
-	border-color: #1D2F6F;
+	color: white;
+	background-color: #1B9AAA;
 	cursor: pointer;
 }
 

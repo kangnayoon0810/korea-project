@@ -26,11 +26,13 @@ public class UsrCommentsController {
 
 	@PostMapping("/usr/comments/doWrite")
 	@ResponseBody
-	public String doWrite(@RequestParam int relId, @RequestParam String relTypeCode, @RequestParam String content) {
+	public int doWrite(@RequestParam int relId, @RequestParam String relTypeCode, @RequestParam String content) {
 
 		this.commentsService.writeComment(relTypeCode, this.req.getLoginedMember().getId(), relId, content);
-
-		return "댓글이 등록되었습니다";
+		
+		int commentsId = this.commentsService.getLastInsertCommentId();
+		
+		return commentsId;
 	}
 
 	@GetMapping("/usr/comments/getComment")

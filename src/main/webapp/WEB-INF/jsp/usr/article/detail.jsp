@@ -158,7 +158,7 @@ const writeComment = async function () {
 			content : commentsContent.val()
 		},
 		success : function (data) {
-			replyId = data;
+			commentsId = data;
 		},
 		error : function (xhr, status, error) {
 			console.log(error);
@@ -406,7 +406,7 @@ function toggleFavoriteTrainer(trainerId, btnEl) {
 										<p>${article.getEMail() }</p>
 									</div>
 									<div class="detail-info-profilebox">
-										<div><a class="detail-member-profile" href="/usr/profile/myPage?id=${article.getMemberId() }">&nbsp;&nbsp;프로필</a></div>
+										<div><a class="detail-member-profile" href="/usr/profile/myPage?id=${article.getMemberId() }">프로필</a></div>
 										<c:if test="${req.getLoginedMember().getAuthLevel() == 1}">
 											<c:if test="${article.getAuthLevel() == 2 }">
 												<div class="member-Favorites">
@@ -417,7 +417,7 @@ function toggleFavoriteTrainer(trainerId, btnEl) {
 												</div>
 											</c:if>
 										</c:if>
-										<div><a class="detail-member-chat" href="/usr/profile/myPage">&nbsp;&nbsp;핏 채팅</a></div>
+										<div><a href="/usr/chat/room?roomId=${roomId}&partnerNickName=${trainer.nickName}&partnerProfileId=${trainer.profileId}">핏채팅</a></div>
 									</div>
 								</li>
 							</ul>

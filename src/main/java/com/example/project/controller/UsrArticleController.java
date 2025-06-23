@@ -10,12 +10,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.project.dto.Article;
+import com.example.project.dto.Member;
 import com.example.project.dto.Board;
+import com.example.project.dto.ProfileDto;
 import com.example.project.dto.Req;
 import com.example.project.service.ArticleService;
+import com.example.project.service.MemberService;
 import com.example.project.service.BoardService;
 import com.example.project.service.FavoriteTrainerService;
-import com.example.project.service.MemberService;
+import com.example.project.service.ProfileService;
 import com.example.project.util.Util;
 
 import jakarta.servlet.http.Cookie;
@@ -27,13 +30,15 @@ public class UsrArticleController {
 
 	private ArticleService articleService;
 	private MemberService memberService;
+	private ProfileService profileService;
 	private BoardService boardService;
 	private FavoriteTrainerService favoriteTrainerService;
 	private Req req;
 
-	public UsrArticleController(ArticleService articleService, MemberService memberService, BoardService boardService, FavoriteTrainerService favoriteTrainerService, Req req) {
+	public UsrArticleController(ArticleService articleService, MemberService memberService, ProfileService profileService, BoardService boardService, FavoriteTrainerService favoriteTrainerService, Req req) {
 		this.articleService = articleService;
 		this.memberService = memberService;
+		this.profileService = profileService;
 		this.boardService = boardService;
 		this.favoriteTrainerService = favoriteTrainerService;
 		this.req = req;
@@ -41,6 +46,10 @@ public class UsrArticleController {
 
 	@GetMapping("/usr/article/write")
 	public String write(Model model, int boardId, int memberCategory) {
+		
+		ProfileDto profileDto = this.profileService.getProfileByMemberId(req.getLoginedMember().getId());
+		
+		model.addAttribute("profileId", profileDto.getId());
 		model.addAttribute("boardId", boardId);
 		model.addAttribute("memberCategory", memberCategory);
 		return "usr/article/write";

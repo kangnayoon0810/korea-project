@@ -1,0 +1,193 @@
+@charset "UTF-8";
+
+.fit-chating {
+	width: 100%;
+	height: 100hv;
+	margin: 0 auto;
+}
+
+.chat-and-room {
+	width: 1000px;
+	height: 750px;
+	margin: 25px auto; 
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	/* border-radius: 30px;
+	background-color: white;
+	border: 3px solid #1D2F6F; */
+}
+
+.chat-room {
+	width: 640px;
+	height: 750px;
+	border: 3px solid #1D2F6F;
+	border-radius: 30px;
+	background-color: white;
+}
+
+.chat-header {
+	text-align: center;
+	display: flex;
+	justify-content: center;
+}
+
+.chat-header-name {
+	font-size: 1rem;
+	padding: 10px;
+}
+
+.do-chat {
+	display: block;
+}
+
+
+/* 내 메시지 */
+.my-msg {
+  text-align: right;
+  margin: 12px 10PX;
+}
+
+.my-msg .msg-content {
+  display: inline-block;
+  background-color: #DDDBCB;
+  color: #333;
+  padding: 8px 14px;
+  border-radius: 18px;
+  max-width: 65%;
+  text-align: left;
+  word-break: break-word;
+  font-size: 0.8rem;
+  font-family: none;
+}
+
+.my-msg .msg-time {
+  font-size: 11px;
+  color: #999;
+  margin-top: 4px;
+}
+
+/* 상대방 메시지 */
+.partner-msg {
+  text-align: left;
+  margin: 12px 0;
+}
+
+.partner-msg .msg-nick {
+  font-size: 11px;
+  color: #666;
+  margin-bottom: 3px;
+}
+
+.partner-msg .msg-content {
+  display: inline-block;
+  background-color: #DDDBCB;
+  color: #333;
+  padding: 10px 14px;
+  border-radius: 18px;
+  max-width: 65%;
+  word-break: break-word;
+}
+
+.partner-msg .msg-time {
+  font-size: 11px;
+  color: #999;
+  margin-top: 4px;
+}
+
+
+.chat-list {
+	display: block;
+    width: 350px;
+    height: 750px;
+    border-radius: 30px;
+	background-color: white;
+	border: 3px solid #1D2F6F;
+}
+
+.chat-list > p {
+	width: 100%;
+	height: 40px;
+/* 	border-bottom: 2px solid #1D2F6F; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 0.9rem;
+	font-family: 'PyeojinGothic-Bold';
+	margin-top: 5px;
+}
+
+.chat-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0 auto;
+	margin-top: 10px;
+	width: 95%;
+	height: 60px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 10px;
+	background-color: white;
+}
+
+.chat-item:hover {
+	background-color: rgba(0, 0, 0, 0.03);
+	cursor: pointer;
+}
+
+.chat-content {
+	display: flex;
+}
+
+.chat-profile {
+	display: block;
+	margin: 0 10px;
+}
+
+.chat-profile > img {
+	width: 40px;
+	height: 40px;
+	border-radius: 100px;
+	border: 1px solid red;
+}
+
+.chat-info {
+	display: block;
+}
+
+.chat-info > .chat-nickname {
+	font-size: 0.9rem;
+}
+
+.chat-info > .chat-preview {
+	font-size: 0.8rem;
+	font-family: none;
+}
+
+.chat-side {
+	display: block;
+	text-align: right;
+}
+
+.chat-side >.chat-date-cnt {
+	font-family: none;
+	margin: 0 10px;
+}
+
+.chat-side .chat-time {
+	font-size: 0.65rem;
+	color: rgba(0, 0, 0, 0.6);
+}
+
+.chat-conting {
+	color: white;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.chat-side .chat-cnt {
+	font-size: 0.85rem;
+	background-color: #1D2F6F;
+	padding: 0 7px;
+	border-radius: 100px;
+}

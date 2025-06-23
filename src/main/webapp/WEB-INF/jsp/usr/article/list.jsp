@@ -155,9 +155,9 @@
 												<p>${article.getNickName() }</p>
 												<p>${article.getEMail() }</p>
 											</div>
-											<div class="info-profilebox">
-												<div><a class="member-profile" href="/usr/profile/myPage?id=${article.getMemberId() }">&nbsp;&nbsp;프로필</a></div>
-												<div><a class="member-chat" href="/usr/profile/myPage">&nbsp;&nbsp;핏 채팅</a></div>
+											<div class="list-info-profilebox">
+												<div><a class="list-member-profile" href="/usr/profile/myPage?id=${article.getMemberId() }">프로필</a></div>
+												<div><a href="/usr/chat/mainListOnly?partnerId=${article.getMemberId() }&partnerNickName=${member.getNickName() }&partnerProfileId=${article.getProfileId() }">핏채팅</a></div>
 											</div>
 										</li>
 									</ul>
@@ -204,8 +204,8 @@
 												<p>${article.getNickName() }</p>
 												<p>${article.getEMail() }</p>
 											</div>
-											<div class="info-profilebox">
-												<div><a class="member-profile" href="/usr/profile/myPage?id=${article.getMemberId() }">&nbsp;&nbsp;프로필</a></div>
+											<div class="list-info-profilebox">
+												<div><a class="list-member-profile" href="/usr/profile/myPage?id=${article.getMemberId() }">프로필</a></div>
 													<c:if test="${req.getLoginedMember().getAuthLevel() == 1}">
 														<div class="member-Favorites">
 															<button class="favorite-btn" onclick="toggleFavoriteTrainer(${article.getMemberId()}, this)">
@@ -214,7 +214,7 @@
 															</button>
 														</div>
 													</c:if>
-												<div><a class="member-chat" href="/usr/profile/myPage">&nbsp;&nbsp;핏 채팅</a></div>
+												<div><a href="/usr/chat/mainListOnly?partnerId=${article.getMemberId() }&partnerNickName=${article.getNickName() }&partnerProfileId=${article.getProfileId() }">핏채팅</a></div>
 											</div>
 										</li>
 									</ul>

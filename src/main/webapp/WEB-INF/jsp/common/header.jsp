@@ -77,7 +77,7 @@
 												<div><a class="member-profile" href="/usr/profile/myPage?id=${req.getLoginedMember().getId() }">&nbsp;&nbsp;프로필</a></div>
 												<div><a class="member-Favorites" href="/usr/favoriteTrainer/list">&nbsp;&nbsp;즐겨찾기</a></div>
 												<div><a class="member-trainerfind" href="/usr/trainer/find">&nbsp;&nbsp;나의 트레이너 찾기</a></div>
-												<div><a class="member-chat" href="/usr/profile/myPage">&nbsp;&nbsp;핏 채팅</a></div>
+												<div><a class="member-chat" href="/usr/chat/mainListOnly">&nbsp;&nbsp;핏 채팅</a></div>
 												<div><a class="logout-button" href="/usr/member/logout"><i class="fa-solid fa-right-from-bracket"></i>&nbsp;&nbsp;로그아웃</a></div>
 											</div>
 										</li>

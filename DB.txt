@@ -1,3 +1,21 @@
+Conversation opened. 1 READ message.
+
+SKIP TO content
+USING Gmail WITH screen readers
+ENABLE desktop notifications FOR Gmail.
+   OK  NO thanks
+1 OF 80
+(NO SUBJECT)
+Inbox
+
+강나윤 <0810nayoon@gmail.com>
+Attachments
+Sun, Jun 22, 6:55 PM (16 hours ago)
+TO me
+
+
+ ONE attachment
+  •  Scanned BY Gmail
 DROP DATABASE IF EXISTS HT_AM;
 CREATE DATABASE HT_AM;
 USE HT_AM;
@@ -78,6 +96,15 @@ CREATE TABLE favorite_trainer (
   , UNIQUE (memberId, trainerId)
 );
 
+CREATE TABLE chat_message (
+    id INT AUTO_INCREMENT PRIMARY KEY
+    , roomId VARCHAR(50) NOT NULL
+    , sender INT NOT NULL
+    , content TEXT NOT NULL
+    , regDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+DROP TABLE chat_message;
 
 INSERT INTO board SET boardName = 'memberArticle';
 INSERT INTO board SET boardName = 'trainerArticle';
@@ -170,6 +197,7 @@ SELECT * FROM  `member`;
 SELECT * FROM comments;
 SELECT * FROM `profile`;
 SELECT * FROM trainer_info;
+SELECT * FROM chat_message;
 
 ALTER TABLE `profile` DROP COLUMN `address`;
 
@@ -255,3 +283,5 @@ SELECT a.*, m.nickName, m.eMail, COUNT(c.id) `commentCnt`, p.id `profileId`, m.a
     ON a.id = c.relId
     AND c.relTypeCode = 'article'
     GROUP BY a.id
+DROP DATABA ... HT_AM;.txt
+Displaying DROP DATABASE IF EXISTS HT_AM;.txt.
