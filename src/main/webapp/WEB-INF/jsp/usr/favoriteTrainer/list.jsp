@@ -33,36 +33,38 @@ function confirmUnfavorite(trainerId, btnEl) {
 
 </script>
 
-<section class="favorite-trainer-page">
-	<h2>내가 <span>즐겨찾기</span>한 트레이너</h2>
-		<div class="trainer-list">
-			<c:forEach var="trainer" items="${favoriteTrainers}">
-				<div class="trainer-card">
-					<div class="trainer-card-set">
-						<!-- ⭐ 별 (삭제용) -->
-						<button class="favorite-toggle" onclick="confirmUnfavorite(${trainer.id}, this)">
-							<i class="fa-solid fa-star text-yellow-400"></i>
-						</button>
-		
-						<!-- 프로필 이미지 + 닉네임 + 이메일 -->
-						<div class="trainer-info">
-							<img class="profile-img" src="/usr/profile/image/${trainer.profileId}" />
-							<div class="trainer-text">
-								<p class="nickname">${trainer.getNickName() }</p>
-								<p class="email">${trainer.getEMail() }</p>
+<div class="favorite-trainer-pick">
+	<section class="favorite-trainer-page">
+		<h2>내가 <span>즐겨찾기</span>한 트레이너</h2>
+			<div class="trainer-list">
+				<c:forEach var="trainer" items="${favoriteTrainers}">
+					<div class="trainer-card">
+						<div class="trainer-card-set">
+							<!-- ⭐ 별 (삭제용) -->
+							<button class="favorite-toggle" onclick="confirmUnfavorite(${trainer.id}, this)">
+								<i class="fa-solid fa-star text-yellow-400"></i>
+							</button>
+			
+							<!-- 프로필 이미지 + 닉네임 + 이메일 -->
+							<div class="trainer-info">
+								<img class="profile-img" src="/usr/profile/image/${trainer.profileId}" />
+								<div class="trainer-text">
+									<p class="nickname">${trainer.getNickName() }</p>
+									<p class="email">${trainer.getEMail() }</p>
+								</div>
+			       			</div>
+			       		</div>
+							<!-- 버튼 영역 -->
+			       		<div class="trainer-card-btn">
+							<div class="trainer-buttons">
+								<a href="/usr/profile/myPage?id=${trainer.id}" class="show-profile-btn">프로필</a>
+								<a href="/usr/profile/myPage" class="fitchat-btn">핏 채팅</a>
 							</div>
-		       			</div>
-		       		</div>
-						<!-- 버튼 영역 -->
-		       		<div class="trainer-card-btn">
-						<div class="trainer-buttons">
-							<a href="/usr/profile/myPage?id=${trainer.id}" class="show-profile-btn">프로필</a>
-							<a href="/usr/profile/myPage" class="fitchat-btn">핏 채팅</a>
 						</div>
 					</div>
-				</div>
-			</c:forEach>
-		</div>
-</section>
+				</c:forEach>
+			</div>
+	</section>
+</div>
 
 <%@ include file="/WEB-INF/jsp/common/footer.jsp"%>

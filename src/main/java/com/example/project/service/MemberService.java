@@ -1,5 +1,7 @@
 package com.example.project.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.example.project.dao.MemberDao;
@@ -62,7 +64,7 @@ public class MemberService {
 		this.memberDao.modifyPassword(id, loginPw);
 	}
 
-	public Member getTrainerById(int authLevel) {
+	public List<Member> getTrainerById(int authLevel) {
 		return this.memberDao.getTrainerById(authLevel);
 	}
 	

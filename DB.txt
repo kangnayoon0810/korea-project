@@ -1,21 +1,3 @@
-Conversation opened. 1 READ message.
-
-SKIP TO content
-USING Gmail WITH screen readers
-ENABLE desktop notifications FOR Gmail.
-   OK  NO thanks
-1 OF 80
-(NO SUBJECT)
-Inbox
-
-강나윤 <0810nayoon@gmail.com>
-Attachments
-Sun, Jun 22, 6:55 PM (16 hours ago)
-TO me
-
-
- ONE attachment
-  •  Scanned BY Gmail
 DROP DATABASE IF EXISTS HT_AM;
 CREATE DATABASE HT_AM;
 USE HT_AM;
@@ -104,8 +86,6 @@ CREATE TABLE chat_message (
     , regDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-DROP TABLE chat_message;
-
 INSERT INTO board SET boardName = 'memberArticle';
 INSERT INTO board SET boardName = 'trainerArticle';
 
@@ -113,59 +93,79 @@ INSERT INTO `member`
     SET regDate = NOW()
         , updateDate = NOW()
         , `name` = '강나윤 '
+        , sex = 2
         , nickName = '재이'
         , phoneNumber = '010-1234-1234'
         , loginId = '7skdbs'
         , loginPw = SHA2('11111', 256)
         , eMail = '7skdbs@naver.com'
+        , address = '대전 서구 둔산동'
         , authLevel = 1;
         
 INSERT INTO `member`
     SET regDate = NOW()
         , updateDate = NOW()
         , `name` = '야옹이 '
+        , sex = 2
         , nickName = '호이'
         , phoneNumber = '010-4567-4567'
         , loginId = 'skdbs7'
         , loginPw = SHA2('11111', 256)
         , eMail = 'skdbs7@naver.com'
+        , address = '대전 서구 둔산동'
         , authLevel = 2;
         
 INSERT INTO `member`
     SET regDate = NOW()
         , updateDate = NOW()
         , `name` = '냥냥이'
+        , sex = 2
         , nickName = '니코'
         , phoneNumber = '010-9422-1369'
         , loginId = 'skdbs'
         , loginPw = SHA2('11111', 256)
         , eMail = 'skdbs@naver.com'
+        , address = '대전 서구 둔산동'
         , authLevel = 1;
         
-INSERT INTO article
-    SET boardId = 1
-        , regDate = NOW()
+INSERT INTO `member`
+    SET regDate = NOW()
         , updateDate = NOW()
-        , memberId = 1
-        , content = '테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글 테스트용 게시글'
-        , viewCnt = 0
-        , memberCategory = 1;
+        , `name` = '여경희'
+        , sex = 2
+        , nickName = '희희'
+        , phoneNumber = '010-6666-6666'
+        , loginId = 'test1'
+        , loginPw = SHA2('11111', 256)
+        , eMail = 'skdbs@naver.com'
+        , address = '대전 서구 전민동'
+        , authLevel = 2;
         
-INSERT INTO article
-    SET boardId = 2
-        , regDate = NOW()
+INSERT INTO `member`
+    SET regDate = NOW()
         , updateDate = NOW()
-        , memberId = 2
-        , content = '테스트용 게시글'
-        , viewCnt = 0
-        , memberCategory = 2;
-
-INSERT INTO comments (regDate, updateDate, memberId, relTypeCode, relId, content)
-VALUE (NOW(), NOW(), 2, 'article', 1, '테스트용 댓글')
-      , (NOW(), NOW(), 1, 'article', 1, '테스트용 댓글')
-      , (NOW(), NOW(), 2, 'article', 2, '테스트용 댓글')
-      , (NOW(), NOW(), 1, 'article', 1, '테스트용 댓글')
-      , (NOW(), NOW(), 2, 'article', 2, '테스트용 댓글');
+        , `name` = '강민창'
+        , sex = 1
+        , nickName = '푸'
+        , phoneNumber = '010-7777-7777'
+        , loginId = 'test2'
+        , loginPw = SHA2('test2', 256)
+        , eMail = 'test2@naver.com'
+        , address = '대전 서구 변동'
+        , authLevel = 2;
+        
+INSERT INTO `member`
+    SET regDate = NOW()
+        , updateDate = NOW()
+        , `name` = '김재민'
+        , sex = 1
+        , nickName = '잼민'
+        , phoneNumber = '010-7777-7777'
+        , loginId = 'test2'
+        , loginPw = SHA2('test2', 256)
+        , eMail = 'test2@naver.com'
+        , address = '대전 중구 은행동'
+        , authLevel = 2;
 
 INSERT INTO `profile`
     SET memberId = 1
@@ -185,11 +185,59 @@ INSERT INTO `profile`
     , intro = ''
     , tag = '';
     
-INSERT INTO trainer_info
-    SET memberId = 1;
+INSERT INTO `profile`
+    SET memberId = 4
+    , profileImagePath = 'D:/nayoon/upload/default-profile.jpg'
+    , intro = '안녕하세요'
+    , tag = '';
 
+INSERT INTO `profile`
+    SET memberId = 5
+    , profileImagePath = 'D:/nayoon/upload/default-profile.jpg'
+    , intro = ''
+    , tag = '';
+    
+INSERT INTO `profile`
+    SET memberId = 6
+    , profileImagePath = 'D:/nayoon/upload/default-profile.jpg'
+    , intro = ''
+    , tag = '';
+    
 INSERT INTO trainer_info
     SET memberId = 2;
+    
+INSERT INTO trainer_info
+    SET memberId = 4;
+
+INSERT INTO trainer_info
+    SET memberId = 5;
+    
+INSERT INTO trainer_info
+    SET memberId = 6;
+    
+UPDATE trainer_Info
+    SET career = ''
+        , license = ''
+        , availableRegion = '대전 서구 둔산동'
+    WHERE memberId = 2;
+    
+UPDATE trainer_Info
+    SET career = ''
+        , license = ''
+        , availableRegion = '대전 서구 전민동'
+    WHERE memberId = 4;
+    
+UPDATE trainer_Info
+    SET career = ''
+        , license = ''
+        , availableRegion = '대전 서구 변동'
+    WHERE memberId = 5;
+    
+UPDATE trainer_Info
+    SET career = ''
+        , license = ''
+        , availableRegion = '대전 서구 은행동'
+    WHERE memberId = 6;
 
 SELECT * FROM board;
 SELECT * FROM  article;
@@ -198,90 +246,3 @@ SELECT * FROM comments;
 SELECT * FROM `profile`;
 SELECT * FROM trainer_info;
 SELECT * FROM chat_message;
-
-ALTER TABLE `profile` DROP COLUMN `address`;
-
-SELECT m.id, m.nickname, p.profileImageId 
-    FROM `member` m
-    INNER JOIN `profile`p
-    ON m.id = p.memberId
-    WHERE m.id = 1;
-    
-    DELETE FROM PROFILE WHERE memberId = 1 AND id != 2;
-
-SELECT c.*, m.nickName
-    FROM comments c
-    INNER JOIN `member` m
-    ON c.memberId = m.id
-    WHERE c.relId = 1
-    
-SELECT m.*, p.profileImageId 
-    FROM `member` m
-    INNER JOIN `profile`p
-    ON m.id = p.memberId
-    WHERE m.id = 2;
-    
-    
-INSERT INTO `profile`
-    SET memberId = 1
-    , profileImagePath = 'D:/nayoon/upload/default-profile.jpg'
-    , intro = ''
-    , tag = ''
-    
-UPDATE `profile`
-    SET intro = '안녕하세요'
-        , address = '대전'
-    WHERE memberId = 1;
-     
-SELECT c.*, m.nickName, p.id profileId
-    FROM comments c
-    INNER JOIN `member` m
-    ON c.memberId = m.id
-    INNER JOIN `profile` p
-    ON m.id = p.memberId
-    WHERE c.id = 1
-    
-SELECT *
-    FROM `profile`
-    WHERE memberId = 1
-    
-DROP TABLE PROFILE;
-DROP TABLE MEMBER;
-DROP TABLE trainer_info;
-
-UPDATE `profile`
-    SET intro = '안녕하세요'
-        , address = '대전'
-    WHERE memberId = 1;
-    
-SELECT *
-    FROM `member`
-    WHERE authLevel = 2
-    
-    DELETE FROM MEMBER WHERE id = 3;
-    
-SELECT p.id
-    FROM `member` m
-    INNER JOIN `profile` p
-    ON m.id = p.memberId
-    WHERE memberId = 1
-    
-UPDATE trainer_Info
-    SET career = ''
-        , license = ''
-    WHERE id = 2;
-
-SELECT * FROM  article;
-SELECT * FROM  `member`;
-SELECT a.*, m.nickName, m.eMail, COUNT(c.id) `commentCnt`, p.id `profileId`, m.authLevel
-    FROM article a
-    INNER JOIN `member` m
-    ON a.memberId = m.id
-    INNER JOIN PROFILE p
-    ON m.id = p.memberId
-    LEFT JOIN comments c
-    ON a.id = c.relId
-    AND c.relTypeCode = 'article'
-    GROUP BY a.id
-DROP DATABA ... HT_AM;.txt
-Displaying DROP DATABASE IF EXISTS HT_AM;.txt.

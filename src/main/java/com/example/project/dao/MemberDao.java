@@ -1,5 +1,7 @@
 package com.example.project.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -107,11 +109,19 @@ public interface MemberDao {
 	void modifyPassword(int id, String loginPw);
 
 	@Select("""
-			SELECT *
-			 	FROM `member`
-			 	WHERE authLevel = #{authLevel}
+			SELECT m.* , p.id AS profileId, COUNT(ft.id) AS favoriteCnt, ti.availableRegion
+			    FROM `member` m
+			    INNER JOIN `profile` p
+			    ON m.id = p.memberId
+			    INNER JOIN favorite_trainer ft
+			    ON ft.trainerId = m.id
+			    INNER JOIN trainer_info ti
+			    ON ti.memberId = m.id
+			    WHERE authLevel = #{authLevel}
+			    GROUP BY m.id
+			    ORDER BY COUNT(ft.id) DESC;
 			""")
-	Member getTrainerById(int authLevel);
+	List<Member> getTrainerById(int authLevel);
 
 
 }

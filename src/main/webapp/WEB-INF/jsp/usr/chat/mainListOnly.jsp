@@ -52,27 +52,27 @@
 		</div>
 		<div class="chat-list">
 			<p>채팅 목록</p>
-			<c:forEach var="chat" items="${chatList}">
+<%-- 			<c:forEach var="chat" items="${chatList}"> --%>
 				<div class="chat-item" data-room-id="${chat.roomId}" data-partner-nick-name="${chat.partnerNickName}" data-partner-profile-id="${chat.partnerProfileId}">
 		            <div class="chat-content">
 			            <div class="chat-profile">
 			                <img src="/usr/profile/image/${chat.partnerProfileId}" alt="프로필 이미지" />
 			            </div>
 			            <div class="chat-info">
-			                <div class="chat-nickname">${chat.partnerNickName}</div>
-			                <div class="chat-preview">${chat.lastMessage}</div>
+			                <div class="chat-nickname">${chat.partnerNickName}호이</div>
+			                <div class="chat-preview">${chat.lastMessage}안녕하세요</div>
 			            </div>
 		            </div>
 		            <div class="chat-side">
 			            <div class="chat-date-cnt">
-				            <div class="chat-time">${chat.lastMessageTime}</div>
+				            <div class="chat-time">${chat.lastMessageTime}12:56</div>
 				            <div class="chat-conting">
-				            	<div class="chat-cnt">${chat.lastMessageTime}</div>
+				            	<div class="chat-cnt">${chat.lastMessageTime}3</div>
 					        </div>
 			            </div>
 		            </div>
 		        </div>
-			</c:forEach>
+<%-- 			</c:forEach> --%>
 	    </div>
 	</div>
 </div>

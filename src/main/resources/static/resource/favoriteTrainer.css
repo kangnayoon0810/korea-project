@@ -7,9 +7,15 @@
     font-style: normal;
 }
 
+.favorite-trainer-pick {
+	margin-top: 50px;
+	margin-bottom: 150px;
+}
+
 .favorite-trainer-page {
   width: 650px;
-  margin: 50px auto;
+  min-height: 100hv;
+  margin: 0 auto;
   padding: 20px;
 }
 
@@ -33,6 +39,7 @@ h2 > span {
   border: 1px solid rgba(0, 0, 0, 0.4);
   border-radius: 15px;
   background: #fff;
+  margin-bottom: 5px;
 }
 
 .trainer-card .trainer-card-set {

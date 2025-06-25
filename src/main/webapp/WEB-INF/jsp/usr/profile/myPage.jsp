@@ -233,10 +233,10 @@ function openJusoPopup() {
 						 <tr>
 						 	<td class="pim-title">전화번호</td>
 						 </tr>
+						 <tr>
+						 	<td class="pim-content">${member.getPhoneNumber() }</td>
+						 </tr>
 					 </c:if>
-					 <tr>
-					 	<td class="pim-content">${member.getPhoneNumber() }</td>
-					 </tr>
 					 <tr>
 					 	<td class="pim-title">이메일</td>
 					 </tr>
@@ -247,10 +247,10 @@ function openJusoPopup() {
 						 <tr>
 						 	<td class="pim-title">주소</td>
 						 </tr>
-					 </c:if>
 					 <tr>
 					 	<td class="pim-content">${member.getAddress() }</td>
 					 </tr>
+					 </c:if>
 					 <tr>
 					 	<td class="pim-title">소개</td>
 					 </tr>

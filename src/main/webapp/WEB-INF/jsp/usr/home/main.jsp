@@ -29,7 +29,7 @@
 						</div>
 					</div>
 					<div class="info-image">
-						<img src="#" alt="피트니스 소개 이미지" />
+						<img src="/resource/images/logo1.png" alt="피트니스 소개 이미지" />
 					</div>
 				</div>
 			</section>

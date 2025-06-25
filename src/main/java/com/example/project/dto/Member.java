@@ -21,6 +21,8 @@ public class Member {
 	private String loginPw;
 	private String eMail;
 	private String address;
+	private String availableRegion;
 	private int authLevel;
 	private int profileId;
+	private int favoriteCnt;
 }

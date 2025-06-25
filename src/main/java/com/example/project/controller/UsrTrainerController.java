@@ -38,7 +38,7 @@ public class UsrTrainerController {
 	public String trainerFind(Model model, @RequestParam(defaultValue = "2") int authLevel) {
 		int loginedMemberId = req.getLoginedMember().getId();
 
-	    Member member = memberService.getTrainerById(authLevel);
+	    List<Member> member = memberService.getTrainerById(authLevel);
 
 	    // 트레이너 정보 가져오기
 	    if (req.getLoginedMember().getAuthLevel() == 2) {
